@@ -13,4 +13,4 @@ I'm a simple person and I prefer, no demand, simple explanations. Anything of co
  
  Welcome to my journey of learning. Here I will write about things I find interesting and share information I have found useful.
  
-[1][https://www.youtube.com/watch?v=NV3sBlRgzTI]
+[1]: [https://www.youtube.com/watch?v=NV3sBlRgzTI]

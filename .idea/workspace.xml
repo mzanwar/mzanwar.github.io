@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="267a14b8-027d-4792-b199-cdafeed1b2fe" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_includes/google-analytics.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_config.yml" afterPath="$PROJECT_DIR$/_config.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/about.md" afterPath="$PROJECT_DIR$/about.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,8 +18,8 @@
         <entry file="file://$PROJECT_DIR$/about.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="323">
-                <caret line="13" column="128" lean-forward="false" selection-start-line="13" selection-start-column="128" selection-end-line="13" selection-end-column="128" />
+              <first_editor relative-caret-position="255">
+                <caret line="11" column="203" lean-forward="false" selection-start-line="11" selection-start-column="203" selection-end-line="11" selection-end-column="203" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -769,12 +766,12 @@
       <workItem from="1503025083685" duration="11773000" />
       <workItem from="1503327636239" duration="1160000" />
       <workItem from="1503419861988" duration="907000" />
-      <workItem from="1503465045647" duration="1619000" />
+      <workItem from="1503465045647" duration="2049000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16118000" />
+    <option name="totallyTimeSpent" value="16548000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="99" y="60" width="1440" height="873" extended-state="0" />
@@ -866,16 +863,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="51">
-            <caret line="3" column="7" lean-forward="false" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="66" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_sass/custom.scss" />
     <entry file="file://$PROJECT_DIR$/_layouts/post.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -937,16 +924,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2017-08-21-Java-8.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="272">
-            <caret line="15" column="35" lean-forward="false" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -1026,11 +1003,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/favicon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2017-08-21-Java-8.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-1476">
+            <caret line="15" column="35" lean-forward="false" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+            <folding>
+              <marker date="1503328099000" expanded="true" signature="375:382" ph=" { " />
+              <marker date="1503328099000" expanded="true" signature="422:426" ph=" }" />
+              <marker date="1503328099000" expanded="true" signature="2997:3017" ph="{...}" />
+              <marker date="1503328099000" expanded="true" signature="3074:3099" ph="{...}" />
+              <marker date="1503328099000" expanded="true" signature="3217:3235" ph="{...}" />
+              <marker date="1503328099000" expanded="true" signature="3293:3316" ph="{...}" />
+              <marker date="1503328099000" expanded="true" signature="3480:3499" ph="{...}" />
+              <marker date="1503328099000" expanded="true" signature="3557:3581" ph="{...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2017-08-17-soft-skills.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="509">
-            <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+          <first_editor relative-caret-position="374">
+            <caret line="24" column="19" lean-forward="false" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1042,16 +1044,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/favicon.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/index.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="51">
+            <caret line="3" column="7" lean-forward="false" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="66" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/about.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="323">
-            <caret line="13" column="128" lean-forward="false" selection-start-line="13" selection-start-column="128" selection-end-line="13" selection-end-column="128" />
+          <first_editor relative-caret-position="255">
+            <caret line="11" column="203" lean-forward="false" selection-start-line="11" selection-start-column="203" selection-end-line="11" selection-end-column="203" />
             <folding />
           </first_editor>
           <second_editor />
