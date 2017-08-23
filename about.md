@@ -7,6 +7,10 @@ permalink: /about/
 $ whoami
 {% endhighlight %}
 
-Hey, my name is Zeshan. I'm a simple person. After many years of procrastination, deliberation, and hesitation, I've finally decided to start a blog.
-Here I will write about things I find interesting and share information I have found useful. I want to take you along with me; on my journey of learning.
-I hope you enjoy the musings of a programmer!
+Hi, I'm Zeshan and this is my blog. I'm a software engineer at Bazaarvoice, working towards building the world's smartest network.
+
+I'm a simple person and I prefer, no demand, simple explanations. Anything of complexity can be broken down into smaller, simpler components. I'm also a big proponent on reasoning from first principles; removing facades to expose bare fundamental truths. Here is [Elon Musk][1] talking a bit about that.
+ 
+ Welcome to my journey of learning. Here I will write about things I find interesting and share information I have found useful.
+ 
+[1][https://www.youtube.com/watch?v=NV3sBlRgzTI]
