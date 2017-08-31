@@ -7,7 +7,7 @@ summary: "We all have gaps in our knowledge; things we don't know we don't know.
 categories: learning productivity growth
 ---
 
-> He that knows not, and knows not that he knows not is a fool - Arabic Proverb
+> He that knows not, and knows not that he knows not is a fool
 
 We all have weaknesses. The faster we can acknowledge that, the quicker we can start planning to remove them. We all have gaps in our knowledge that prevent us from doing things as efficiently as possible.
 
