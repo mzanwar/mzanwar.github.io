@@ -5,7 +5,7 @@ date: "2017-09-07 21:20:56 -0500"
 author: "Zeshan Anwar"
 ---
 
-Late one night I needed to shove a bunch of `json` documents into my local Elasticsearch cluster. I was setting up a demo for work and why I had left the most demo-worthy part of it till the end, I don't know. Nevertheless, I was able to accomplish that with just two lines of bash! Lets take a look here:
+Late one night I needed to shove a several thousand `json` documents into my local Elasticsearch cluster. I was setting up a demo for work and why I had left the most demo-worthy part of it till the end, I don't know. Nevertheless, I was able to accomplish that with just two lines of bash! Lets take a look here:
 
 {% highlight sh %}
 # A.
