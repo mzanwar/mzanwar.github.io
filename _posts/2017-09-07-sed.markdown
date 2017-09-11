@@ -1,0 +1,147 @@
+---
+layout: post
+title: "Enough sed!"
+date: "2017-09-07 21:20:56 -0500"
+author: "Zeshan Anwar"
+---
+
+Late one night I needed to shove a bunch of `json` documents into my local Elasticsearch cluster. I was setting up a demo for work and why I had left the most demo-worthy part of it till the end, I don't know. Nevertheless, I was able to accomplish that with just two lines of bash! Lets take a look here:
+
+{% highlight sh %}
+# A.
+sed 's/^/{ "index" : {} }\
+/' jsonFile > bulkReady.json
+
+# B.
+curl -s -XPOST http://localhost:9200/index/type/_bulk --data-binary @bulkReady.json
+{% endhighlight %}
+
+### Explanation:
+
+Time to break this down! My file had a bunch of json documents, i.e.
+```bash
+  {
+  "document": "one"
+  "title":{}
+  }
+  {
+  "document": "two"
+  "title":{}
+  }
+  {
+  "document": "three"
+  "title":{}
+  }
+  {
+  "document": "four"
+  "title":{}
+  }
+.
+.
+.
+
+```
+
+I needed a way to index all of these into my node Elasticsearch node. I knew Elasticsearch offered a basic `Index API` which would solve my problem, but I'd have to send each document one by one.
+
+For example:
+```bash
+# First document
+curl -XPUT 'localhost:9200/index/type/1?pretty' -H 'Content-Type: application/json' -d'
+{
+"document": "one"
+"title":{}
+}
+'
+# Second document
+curl -XPUT 'localhost:9200/index/type/1?pretty' -H 'Content-Type: application/json' -d'
+{
+"document": "two"
+"title":{}
+}
+'
+```
+I thought I'd put together a simple bash script that would run through my documents and `curl` them to my ES node. But, I knew there had to be a better way. I had heard about the `Bulk API` interface that ES offered but I hadn't had a chance to use it - until now.
+
+After looking into the `Bulk API` interface, I realized that it was actually pretty simple to use. I could simple use the command:
+
+```bash
+curl -s -XPOST http://localhost:9200/_bulk --data-binary @bulkReady.json
+```
+
+But my `json` file needed to be in a special format! Every json document needed to have a some metadata associated with it. So I needed to massage my file into something like this:
+
+```bash
+{ "index" : { "_index" : "test", "_type" : "type1", "_id" : "1" } }
+```
+
+
+
+Since I already knew the index and type of my documents, I could remove them from the metadata. I also wanted Elasticsearch to automatically assign an id. Thus, I needed a document looking like thus:
+
+
+```bash
+  { "index" : {} }
+  {
+  "document": "one"
+  "title":{}
+  }
+  { "index" : {} }
+  {
+  "document": "two"
+  "title":{}
+  }
+  { "index" : {} }
+  {
+  "document": "three"
+  "title":{}
+  }
+  { "index" : {} }
+  {
+  "document": "four"
+  "title":{}
+  }
+```
+
+I was back to where I started. Damn, I was so close but now I'll need to add some metadata to each document anyways so why not just use my initial approach of writing that bash script. That is when I discovered the substitution capability of `sed`; an extremely powerful command line Stream EDitor.
+
+### sed substitution
+
+```bash
+
+# sed processes each line of a file and applies some substitution if it matches a regex
+# the syntax is sed 's/regex/replacement/'
+# s - substitution
+# / are delimiters - you need three after s/a/b/ - replaces a with b
+
+echo sunday | sed 's/day/night/'
+# => sunnight
+
+echo Monday Sunday | sed 's/day/night/'
+# => Monnight Sunday - only processes first match
+
+echo Monday Sunday | sed 's/day/night/g'
+# => Monnight Sunnight - a g parameter at the end tell sed to act globally
+
+```
+
+
+This is all I needed to solve my bulk format problem. I needed to add some metadata before every document. `^` is regex for start of the line. I had some problems adding a new line because \n does not seem to work on my [version][2] of sed. I had to actually add a physical new line to get it to work.
+
+```bash
+sed 's/^/{ "index" : {} }\
+/' jsonFile > bulkReady.json
+```
+
+Once I had my file in the correct format, one simple curl was all I needed:
+
+```bash
+curl -s -XPOST http://localhost:9200/index/type/_bulk --data-binary @bulkReady.json
+```
+
+
+And that is how I was able to upload several thousand json docs in two lines. Makes me wonder how much more productive I'd be if had command of the command line!
+
+
+[1]:http://www.grymoire.com/Unix/Sed.html
+[2]:http://sed.sourceforge.net/sedfaq4.html
