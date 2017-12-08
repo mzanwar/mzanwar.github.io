@@ -49,7 +49,7 @@ Both results give us ascending order; which is correct.
 
 
 
-### Misc
+## Misc
 
 In my research of Java implementation of sorting; I came across the sorting algorithm that Java uses for its sorting. It's called [Tims Sort][3] and is a hybridized form of Merge sort. Check it out, its pretty cool.
 

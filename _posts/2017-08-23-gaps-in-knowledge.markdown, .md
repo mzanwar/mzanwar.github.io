@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "Gaps in Knowledge"
+title: "To know or not know"
 date: "2017-08-23 22:02"
 author: "Zeshan Anwar"
 summary: "We all have gaps in our knowledge; things we don't know we don't know. How does one go about eliminating them?"
@@ -9,12 +9,15 @@ categories: learning productivity growth
 
 > He that knows not, and knows not that he knows not is a fool
 
-We all have weaknesses. The faster we can acknowledge that, the quicker we can start planning to remove them. We all have gaps in our knowledge that prevent us from doing things as efficiently as possible.
+We all have weaknesses. The faster we acknowledge that, the better off we will
+be. The breaks in our knowledge prevent us from doing things as efficiently as
+possible.
 
 #### How do we have gaps?
-
-There are many reasons why we have holes in our knowledge base. Some of us did not have a formal, 4 year education. As such, we learn
-Whatever the reason, it is imperative we fill these gaps.
+No one in the world understands every part of every system => everyone has
+holes. There are many reasons why we have holes in our knowledge base. Some of  
+us did not have a formal, 4 year education. Whatever the reason, it is
+imperative that we plug them.
 
 #### Background
 

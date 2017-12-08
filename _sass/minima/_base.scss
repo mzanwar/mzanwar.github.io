@@ -206,7 +206,7 @@ a {
   }
 
   &:hover {
-    color: $brand-color;
+    // color: $brand-color;
     // border-bottom: 2px solid $brand-color;
     // transition: border-width 0.1s linear;
   }
@@ -225,12 +225,13 @@ a {
  * Blockquotes
  */
 blockquote {
-  color: $grey-color;
-  border-left: 4px solid $grey-color-light;
+  // color: $grey-color;
+  color: $brand-color-light;
+  border-left: 4px solid $brand-color-light;
   padding-left: $spacing-unit / 2;
   @include relative-font-size(1.125);
   letter-spacing: -1px;
-  font-style: italic;
+  // font-style: italic;
 
   > :last-child {
     margin-bottom: 0;
@@ -246,14 +247,14 @@ pre,
 code {
   // @include relative-font-size(0.7575);
   font-size: 15px;
-  border: 1px solid darken($code-background, 7%);
+  // border: 1px solid darken($code-background, 7%);
   border-radius: 5px;
   background-color: $code-background;
+  font-family: Menlo;
 }
 
 code {
   padding: 1px 5px;
-  font-family: Menlo;
 }
 
 pre {

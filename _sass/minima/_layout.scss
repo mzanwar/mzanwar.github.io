@@ -188,19 +188,25 @@
   list-style: none;
 
   > li {
-    margin-bottom: $spacing-unit;
+    // margin-bottom: $spacing-unit;
   }
 }
 
 .post-meta {
   text-align: center;
   font-size: $small-font-size;
-  color: $grey-color;
+  // color: $grey-color;
+  color: lighten($brand-color,5%);
+  margin-right: 20px;
 }
 
 .post-link {
-  display: block;
-  @include relative-font-size(1.5);
+  // display: block;
+  border-bottom: 1px solid lighten($brand-color, 20%);
+  &:hover {
+    border-bottom: 2px solid $brand-color;
+  }
+  // @include relative-font-size(0.5);
 }
 
 

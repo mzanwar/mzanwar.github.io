@@ -2,6 +2,7 @@
 layout: post
 title: "Java - Super or Extends: Collections copy Method"
 date: "2017-09-11 10:16:34 -0500"
+author: "Zeshan Anwar"
 ---
 
 ```java

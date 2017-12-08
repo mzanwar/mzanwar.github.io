@@ -17,10 +17,10 @@ title: Simpleton
 author: Zeshan Anwar
 email: mzanwar@edu.uwaterloo.ca
 description: > # this means to ignore newlines until "baseurl:"
- Simple explanations one blog post at a time
+ Simple explanations one post at a time
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://mzanwar.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username:
+twitter_username: mzeshan93
 github_username:  mzanwar
 
 # Build settings
