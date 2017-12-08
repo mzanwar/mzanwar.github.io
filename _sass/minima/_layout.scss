@@ -2,9 +2,9 @@
  * Site header
  */
 .site-header {
-  border-top: 5px solid $grey-color-dark;
-  border-bottom: 1px solid $grey-color-light;
-  min-height: $spacing-unit * 1.865;
+  border-top: 5px solid lighten($brand-color, 40%);
+  border-bottom: 1px solid lighten($brand-color, 40%);
+  // min-height: $spacing-unit * 1.865;
 
   // Positioning context for the mobile navigation icon
   position: relative;
@@ -193,6 +193,7 @@
 }
 
 .post-meta {
+  text-align: center;
   font-size: $small-font-size;
   color: $grey-color;
 }
@@ -212,13 +213,23 @@
 }
 
 .post-title {
-  @include relative-font-size(2.625);
+  color: $grey-color-dark;
+  margin-top: 1.5em;
+  text-align: center;
+  @include relative-font-size(1.80);
   letter-spacing: -1px;
   line-height: 1;
 
   @include media-query($on-laptop) {
     @include relative-font-size(2.25);
   }
+}
+
+.post-divider {
+  border-top: 1px solid rgba(34,36,38,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-top: 3em;
+  margin-bottom: 4em;
 }
 
 .post-content {
