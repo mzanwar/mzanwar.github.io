@@ -178,6 +178,9 @@ li {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
+  text-decoration-color: $brand-color;
+  // text-decoration: underline;
+  color: lighten($brand-color, 10%);
   font-weight: $base-font-weight;
 }
 
@@ -322,4 +325,9 @@ pre {
   li + li {
     padding-top: 5px;
   }
+}
+
+strong {
+  font-weight: 700;
+  text-decoration: underline;
 }
