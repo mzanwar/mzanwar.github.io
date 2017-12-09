@@ -7,13 +7,17 @@ permalink: /about/
 $ whoami
 {% endhighlight %}
 
-Hi, I'm Zeshan and welcome to my blog. I'm a software engineer at Bazaarvoice, working on building the world's smartest network.
+Hello stranger! My name is Zeshan and I’m currently employed as a software engineer.
 
 I prefer simple explanations. I believe anything of complexity can be broken down into simpler [components][1]. I'm also a big proponent on reasoning from first principles; removing facades to expose bare fundamental truths. Listen to [Elon Musk][2] talk about that.
 
-One of my passions is to distill complex information and present it in a digestible format.
+One of my passions is to [distill][distill] [complex][machine-learning] information and present it in a [digestible][explorable] format.
 
- Welcome to my journey of learning. Here I will take concepts I found difficult and explain them in an easy format.
+This is where I take [concepts][abstraction] I struggled with and explain them in a simple way - one post at a time.
 
 [1]: https://betterexplained.com/articles/adept-method/
 [2]: https://www.youtube.com/watch?v=NV3sBlRgzTI
+[distill]: https://distill.pub/about/
+[machine-learning]: http://www.r2d3.us/visual-intro-to-machine-learning-part-1/
+[abstraction]: http://worrydream.com/LadderOfAbstraction/
+[explorable]: http://explorabl.es/

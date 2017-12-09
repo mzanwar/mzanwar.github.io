@@ -13,16 +13,13 @@ I searched the web for an explanation and could not find anything that satisfied
 
 Let me explain - here is a simple comparator implemented as a lambda function:
 
-{% highlight java%}
+```java
 Comparator<Integer> ascending = (a,b) -> a - b;
-{% endhighlight %}
+Comparator<Integer> descending = (a, b) -> b - a;
+```
 
 Can you see where the confusion lies? Why does the subtraction of `a - b` result in a sort of ascending order?
 `a` and `b` are simply parameters to the function; they don't inherently provide any insight into what they are.
-
-```java
-Comparator<Integer> descending = (a, b) -> b - a;
-```
 
 ```java
 Integer[] numbers = {4, 5, 2, 9, 1};
@@ -37,16 +34,16 @@ Weird right!
 ### Breaking it down
 
 The key to understanding this is understanding:
- 1. How does the return value of `compare` affect final ordering?
+ 1. How the return value of `compare` affect final ordering?
  2. Which order are the parameters passed into the compare method - namely what are `a` and `b`?
 
 The official [javadocs][2] do a reasonable job explaining the first point but they fall short on explaining what `a` and `b` are.
 
 In short, if the `compare` method returns a negative number, `a` will always precede `b` in the final sorted order. If, however, compare returns a positive number, `b` will always precede `a` in ordering. Let me repeat that for clarity: *the return value of the compare method determines the final sorted placement of the two parameters, `a` and `b` with respect to each other.*
 
-A thing to note is the `compare` method does not know or care about what the words ascending or descending even mean. All it wants to do is place two elements in some order. More precisely, it just wants to *pick* one element over the other.
+A thing to note is the `compare` method does not know or care about what the words ascending or descending mean. All it wants to do is place two elements in some order. More precisely, it just wants to *pick* one element over the other.
 
-Now we still don't know why `a - b` gives us ascending order; and `b - a` gives us descending. To add to the confusion, the switching of parameters `a- b` to `b - a` to change sort, seems to imply that the order in which `a` and `b` are passed seems to affect final order. What we will discover shortly, however, is that this is **not** the case.
+Now we still don't know why `a - b` gives us ascending order; and `b - a` gives us descending. To add to the confusion, the switching of parameters `a- b` to `b - a` to reverse the sort, seems to imply that the order in which `a` and `b` are passed seems to affect final order. What we will discover shortly, however, is that this is **not** the case.
 
 #### A natural order
 
@@ -116,12 +113,12 @@ To surmise, there are three things going on here:
 2. The order in which `a` and `b` are passed do not matter.
 3. The result of `compare(a, b)` determines the final output
 
+The confusion lies when the programmer assigns some sort of importance to the parameters `a` and `b`, the order they are passed in, or the result of their values. Thinking of `compare(a,b)` as a black box is a good strategy here.
 
-Questions moving forward:
 
-1. How do we sort objects that don't have this natural order?
-2. What if inequality is not transitive? If a < b, b < c BUT a > c?
-3. What if values approaches Integer.MAX_VALUE or Integer.MIN_VALUE?
+As is the case with all explanations, this only leads us down a path of more questions. For example, how do we sort objects that don't have a natural order to them like numbers? Pushing further, what if the definition of inequality is not transitive - if a < b, b < c BUT a > c? What about if values approach Integer.MAX_VALUE and Integer.MIN_VALUE?
+
+These will be answered in future posts.
 
 
 ## Misc
