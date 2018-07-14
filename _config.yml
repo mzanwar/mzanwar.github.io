@@ -13,14 +13,14 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Simpleton
+title: Stubborn Programmer
 author: Zeshan Anwar
 email: mzanwar@edu.uwaterloo.ca
 description: > # this means to ignore newlines until "baseurl:"
  Simple explanations one post at a time
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://mzanwar.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: mzeshan93
+url: "https://zeshananwar.com" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: ZeshanAnwar93
 github_username:  mzanwar
 
 # Build settings
