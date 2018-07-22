@@ -1,0 +1,3 @@
+#!/bin/bash
+
+bundle exec jekyll post "$1"

@@ -1,17 +1,141 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-14T22:53:34-06:00</updated><id>http://localhost:4000/</id><title type="html">Simpleton</title><subtitle>Simple explanations one post at a time
-</subtitle><author><name>Zeshan Anwar</name></author><entry><title type="html">Problem: Construct the array</title><link href="http://localhost:4000/2017/12/14/problem-construct-the-array.html" rel="alternate" type="text/html" title="Problem: Construct the array" /><published>2017-12-14T11:58:00-06:00</published><updated>2017-12-14T11:58:00-06:00</updated><id>http://localhost:4000/2017/12/14/problem-construct-the-array</id><content type="html" xml:base="http://localhost:4000/2017/12/14/problem-construct-the-array.html">&lt;p&gt;https://www.hackerrank.com/contests/101hack52/challenges/construct-the-array&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">https://www.hackerrank.com/contests/101hack52/challenges/construct-the-array</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/post/jekyll/update/2017/12/14/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2017-12-14T11:53:59-06:00</published><updated>2017-12-14T11:53:59-06:00</updated><id>http://localhost:4000/post/jekyll/update/2017/12/14/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/post/jekyll/update/2017/12/14/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-22T00:07:22-05:00</updated><id>http://localhost:4000/</id><title type="html">Stubborn Programmer</title><subtitle>Simple explanations one post at a time
+</subtitle><author><name>Zeshan Anwar</name></author><entry><title type="html">Stackable Traits in Scala</title><link href="http://localhost:4000/books/scala/chapter/2018/02/26/Stackable-Traits.html" rel="alternate" type="text/html" title="Stackable Traits in Scala" /><published>2018-02-26T20:45:45-06:00</published><updated>2018-02-26T20:45:45-06:00</updated><id>http://localhost:4000/books/scala/chapter/2018/02/26/Stackable-Traits</id><content type="html" xml:base="http://localhost:4000/books/scala/chapter/2018/02/26/Stackable-Traits.html">&lt;p&gt;A. Defining variables
+Scala has two kinds of variables, &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;. A &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; is similar to a final variable
+in java: once assigned, it cannot be reassigned. A &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; on the other hand, can be.&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello, my name is Scala&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// msg: String - type inferred&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;msg2:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hi!&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// type explicitly given&lt;/span&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;c1&quot;&gt;// reassignment&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;New message&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will give an error&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;msg2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Bye Bye&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">The four musketeers - The cat-mouse game and lesson learned</title><link href="http://localhost:4000/2017/12/11/Bearstacks.html" rel="alternate" type="text/html" title="The four musketeers - The cat-mouse game and lesson learned" /><published>2017-12-11T00:00:00-06:00</published><updated>2017-12-11T00:00:00-06:00</updated><id>http://localhost:4000/2017/12/11/Bearstacks</id><content type="html" xml:base="http://localhost:4000/2017/12/11/Bearstacks.html">&lt;p&gt;In early 2015, my brother and our two best friends (who are also brothers) decide to start an app-development agency. We name it &lt;code class=&quot;highlighter-rouge&quot;&gt;BearStacks Development&lt;/code&gt;. All of us are in school at the time, and ‘Co-founder’ seems like a good thing to put on our resumes. After we barely cover the $99 developer fee; we decide to brainstorm for ideas. Much like all first-time app developers, we decide on a game.&lt;/p&gt;
+&lt;p&gt;B. Defining functions&lt;/p&gt;
+
+&lt;p&gt;Let write a simple min function in Scala&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;x:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;y:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;A few things to note here:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Functions start with &lt;code class=&quot;highlighter-rouge&quot;&gt;def&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Function name is followed by comma-seperated list of parameters&lt;/li&gt;
+  &lt;li&gt;A type must follow every parameter (x: Int)&lt;/li&gt;
+  &lt;li&gt;The result type follow the parameter, after the closing parenthesis (list : Int)&lt;/li&gt;
+  &lt;li&gt;There exists an equal sign (=) before function body&lt;/li&gt;
+  &lt;li&gt;The last variable is what is returned, (either x or y)&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">A. Defining variables Scala has two kinds of variables, val and var. A val is similar to a final variable in java: once assigned, it cannot be reassigned. A var on the other hand, can be.</summary></entry><entry><title type="html">First Steps in Scala</title><link href="http://localhost:4000/books/scala/chapter/2018/02/26/Scala-10.html" rel="alternate" type="text/html" title="First Steps in Scala" /><published>2018-02-26T20:45:45-06:00</published><updated>2018-02-26T20:45:45-06:00</updated><id>http://localhost:4000/books/scala/chapter/2018/02/26/Scala-10</id><content type="html" xml:base="http://localhost:4000/books/scala/chapter/2018/02/26/Scala-10.html">&lt;p&gt;A. Defining variables
+Scala has two kinds of variables, &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;. A &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; is similar to a final variable
+in java: once assigned, it cannot be reassigned. A &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; on the other hand, can be.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello, my name is Scala&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// msg: String - type inferred&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;msg2:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hi!&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// type explicitly given&lt;/span&gt;
+
+
+&lt;span class=&quot;c1&quot;&gt;// reassignment&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;New message&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will give an error&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;msg2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Bye Bye&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;B. Defining functions&lt;/p&gt;
+
+&lt;p&gt;Let write a simple min function in Scala&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;x:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;y:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;A few things to note here:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Functions start with &lt;code class=&quot;highlighter-rouge&quot;&gt;def&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Function name is followed by comma-seperated list of parameters&lt;/li&gt;
+  &lt;li&gt;A type must follow every parameter (x: Int)&lt;/li&gt;
+  &lt;li&gt;The result type follow the parameter, after the closing parenthesis (list : Int)&lt;/li&gt;
+  &lt;li&gt;There exists an equal sign (=) before function body&lt;/li&gt;
+  &lt;li&gt;The last variable is what is returned, (either x or y)&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">A. Defining variables Scala has two kinds of variables, val and var. A val is similar to a final variable in java: once assigned, it cannot be reassigned. A var on the other hand, can be.</summary></entry><entry><title type="html">A Scalable Language</title><link href="http://localhost:4000/books/scala/chapter/2018/02/22/Scala-1.html" rel="alternate" type="text/html" title="A Scalable Language" /><published>2018-02-22T20:45:45-06:00</published><updated>2018-02-22T20:45:45-06:00</updated><id>http://localhost:4000/books/scala/chapter/2018/02/22/Scala-1</id><content type="html" xml:base="http://localhost:4000/books/scala/chapter/2018/02/22/Scala-1.html">&lt;p&gt;For years I’ve been meaning to get learn Scala and get familiar with functional programming but never really had the right motivation.
+Recently, I undertook a technically challenging project at work and it is all written in Scala.&lt;/p&gt;
+
+&lt;p&gt;These series of blog posts will aim to change that.&lt;/p&gt;
+
+&lt;p&gt;Known as a ‘scala-ble language’, Scala is meant to grow with the needs of the developer.
+In short, Scala is a blend of OO and functional programming concepts in a statically typed language.&lt;/p&gt;
+
+&lt;p&gt;What does Scala offer?&lt;/p&gt;
+
+&lt;p&gt;A. Scala is pure OO
+OO gives complex ideas structure and a nice layer of abstraction. Scala is OO in its purest form, whereby every value is an object and every operation is a method call. Thus, even something as trivial as adding two numbers
+together is purely OO. Java on the other hand, pollutes its OO structure with primitive types and their associated operations.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// in-fix notation&lt;/span&gt;
+
+&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.+(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// in pure form&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;B. Scala is also a complete functional language
+Scala is also a full-blown functional language. This means two things:
+A. Functions are values of the same status as say Integers or Strings, and so you can store a function in a variable, return functions from methods, pass functions in as arguments
+B. Immutability by default&lt;/p&gt;
+
+&lt;p&gt;C. Scala in concise
+You can omit much of the verbose syntax of Java in Scala. This improves readability of code.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Java&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// etters&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// getters&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// hashcode&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// equals&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Scala&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;number:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;D. Scala is compatible - Scala compiles to JVM bytecode
+E. Scala is high-level - Functional Programming
+F. Scala is statically-typed
+This may seem trivial but gives us huge benefits: Verifiable properties, Safe refactoring and inline documentation. Remember, the best comments are the ones that are never written.&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">For years I’ve been meaning to get learn Scala and get familiar with functional programming but never really had the right motivation. Recently, I undertook a technically challenging project at work and it is all written in Scala.</summary></entry><entry><title type="html">Books</title><link href="http://localhost:4000/books/productivity/growth/2018/02/17/Books.html" rel="alternate" type="text/html" title="Books" /><published>2018-02-17T06:45:45-06:00</published><updated>2018-02-17T06:45:45-06:00</updated><id>http://localhost:4000/books/productivity/growth/2018/02/17/Books</id><content type="html" xml:base="http://localhost:4000/books/productivity/growth/2018/02/17/Books.html">&lt;p&gt;I have a ton of books; most of which are left un&lt;/p&gt;
+
+&lt;p&gt;Over the course of my career, I’ve bought a ton of books that have
+accumulated dust over the months. I’m a sucker for the physical medium - there
+is nothing quite like flipping a page, or writing
+notes directly on the paper. I also seem to learn better when reading from paper.
+I think over the years I’ve becomes so skeptical of what I read on a screen that
+seeing something on paper gives it some additional credibility.&lt;/p&gt;
+
+&lt;p&gt;Sometimes, if I’m struggling with a particularly hairy piece of code, I will print
+it out and work through it on paper. Most times, the convoluted logic seems not as
+convoluted. I also find it much more relaxing, and always
+come away with a deeper understanding of the code.&lt;/p&gt;
+
+&lt;p&gt;As a programmer, most of my day is spent looking at a screen. The change to
+paper is always something I look forward to and this gives my eyes some much needed rest.&lt;/p&gt;
+
+&lt;p&gt;So back to the problem at hand: I have several unread books on my shelf that I want to
+read but haven’t had the chance to.&lt;/p&gt;
+
+&lt;p&gt;Thus, I have started an initiative whereby I will read a chapter a day and summarize
+it in a blog post here. The cadence may change a little bit but one chapter
+doesn’t seem to difficult.&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">I have a ton of books; most of which are left un</summary></entry><entry><title type="html">Problem: Construct the array</title><link href="http://localhost:4000/2017/12/14/problem-construct-the-array.html" rel="alternate" type="text/html" title="Problem: Construct the array" /><published>2017-12-14T11:58:00-06:00</published><updated>2017-12-14T11:58:00-06:00</updated><id>http://localhost:4000/2017/12/14/problem-construct-the-array</id><content type="html" xml:base="http://localhost:4000/2017/12/14/problem-construct-the-array.html">&lt;p&gt;https://www.hackerrank.com/contests/101hack52/challenges/construct-the-array3sxxdz&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">https://www.hackerrank.com/contests/101hack52/challenges/construct-the-array3sxxdz</summary></entry><entry><title type="html">The four musketeers - The cat-mouse game and lesson learned</title><link href="http://localhost:4000/2017/12/11/Bearstacks.html" rel="alternate" type="text/html" title="The four musketeers - The cat-mouse game and lesson learned" /><published>2017-12-11T00:00:00-06:00</published><updated>2017-12-11T00:00:00-06:00</updated><id>http://localhost:4000/2017/12/11/Bearstacks</id><content type="html" xml:base="http://localhost:4000/2017/12/11/Bearstacks.html">&lt;p&gt;In early 2015, my brother and our two best friends (who are also brothers) decide to start an app-development agency. We name it &lt;code class=&quot;highlighter-rouge&quot;&gt;BearStacks Development&lt;/code&gt;. All of us are in school at the time, and ‘Co-founder’ seems like a good thing to put on our resumes. After we barely cover the $99 developer fee; we decide to brainstorm for ideas. Much like all first-time app developers, we decide on a game.&lt;/p&gt;
 
 &lt;p&gt;We name it Memory Swipe.  It was my brothers idea: show a pattern on the screen and ask the player to mimic it. If the redrawing was close enough, the player would progress to a harder level. The game was designed with no end so a player could potentially play forever.&lt;/p&gt;
 
@@ -343,232 +467,4 @@ compare(a, b) -&amp;gt; (b - a)
 
 &lt;blockquote&gt;
   &lt;p&gt;A stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when running on partially sorted arrays - Tims Sort&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">The comparator compare method is bad design! There I said it. It is non-intuitive and absurd. Unless I’m missing some really big insight here, I don’t think I’m the only one confused.</summary></entry><entry><title type="html">To know or not know</title><link href="http://localhost:4000/learning/productivity/growth/2017/08/23/gaps-in-knowledge.markdown,.html" rel="alternate" type="text/html" title="To know or not know" /><published>2017-08-23T22:02:00-05:00</published><updated>2017-08-23T22:02:00-05:00</updated><id>http://localhost:4000/learning/productivity/growth/2017/08/23/gaps-in-knowledge.markdown,</id><content type="html" xml:base="http://localhost:4000/learning/productivity/growth/2017/08/23/gaps-in-knowledge.markdown,.html">&lt;blockquote&gt;
-  &lt;p&gt;He that knows not, and knows not that he knows not is a fool&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We all have weaknesses. The faster we acknowledge that, the better off we will
-be. The breaks in our knowledge prevent us from doing things as efficiently as
-possible.&lt;/p&gt;
-
-&lt;p&gt;No one in the world understands every part of every system =&amp;gt; everyone has
-holes. There are many reasons why we have holes in our knowledge base. Some of&lt;br /&gt;
-us did not have a formal, 4 year education. Whatever the reason, it is
-imperative that we plug them.&lt;/p&gt;
-
-&lt;h3 id=&quot;knowledge-falls-into-four-levels&quot;&gt;Knowledge falls into four levels:&lt;/h3&gt;
-
-&lt;h4 id=&quot;a-things-you-know-that-you-know&quot;&gt;A. Things you know that you know&lt;/h4&gt;
-&lt;p&gt;Everything that you know well, and understand fits in here. This is where you have the right amount of confidence in your skills and know how to apply your skills to maximum benefit. This is where you want to be to maximize your potential.&lt;/p&gt;
-
-&lt;h4 id=&quot;b-things-you-dont-know-that-you-know&quot;&gt;B. Things you don’t know that you know&lt;/h4&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Humility&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Shy&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Underachiever&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Undervalued&lt;/code&gt; - This is a weird transient state that falls between &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;C&lt;/code&gt;. Some people never never move up from this state due to either a lack of confidence in their abilities or just a touch of the wrong kind of humility. Not where you want to be for the greatest utility.&lt;/p&gt;
-
-&lt;h4 id=&quot;c-things-you-know-that-you-dont-know&quot;&gt;C. Things you know that you don’t know&lt;/h4&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;In progress&lt;/code&gt; - This is a good place to list all your weaknesses when starting out.&lt;/p&gt;
-
-&lt;h4 id=&quot;d-things-you-dont-know-that-you-dont-know&quot;&gt;D. Things you don’t know that you don’t know&lt;/h4&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Arrogant&lt;/code&gt; - This is without a doubt the worst level to be in. You will want to minimize this in your domain of knowledge. Be very careful not to fall into this trap. There are many things you will never know;&lt;/p&gt;
-
-&lt;p&gt;As you progress with your learning you’ll move up a category, sometimes even leaping all the way to &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;. Often times, you’ll also drop down a level. This may seem counter-intuitive but has a very simple explanation: as you learn new material, you also start getting a grasp on all the parts that you didn’t know you didn’t know &lt;code class=&quot;highlighter-rouge&quot;&gt;D&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Imagine a computer science student who has just finished learning about control-flow statements in Java and falsely assumes they know everything about Java coding. He is then given a recursive tree-traversal problem to which he has no answer.&lt;/p&gt;
-
-&lt;p&gt;On a much more personal note, back in first year, I attempted to answer a BST traversal question on an exam using only if statements; not a proud memory of mine. During the exam I was confused as to why I was given only a few lines of empty space for my answer when I needed about two pages.&lt;/p&gt;
-
-&lt;p&gt;Another example is of Dynamic Programming. There exists a famous saying amongst CS students - when you think you’ve understood Dynamic Programming, thats when you know you haven’t.&lt;/p&gt;
-
-&lt;h3 id=&quot;finding-your-gaps&quot;&gt;Finding your gaps&lt;/h3&gt;
-
-&lt;h3 id=&quot;plugging-them&quot;&gt;Plugging them&lt;/h3&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">He that knows not, and knows not that he knows not is a fool</summary></entry><entry><title type="html">Learning Java 8</title><link href="http://localhost:4000/java/language/java8/2017/08/21/Java-8.html" rel="alternate" type="text/html" title="Learning Java 8" /><published>2017-08-21T10:02:21-05:00</published><updated>2017-08-21T10:02:21-05:00</updated><id>http://localhost:4000/java/language/java8/2017/08/21/Java-8</id><content type="html" xml:base="http://localhost:4000/java/language/java8/2017/08/21/Java-8.html">&lt;h2 id=&quot;java-8&quot;&gt;Java 8&lt;/h2&gt;
-
-&lt;h3 id=&quot;lamdas&quot;&gt;Lamdas:&lt;/h3&gt;
-
-&lt;p&gt;FileFilter is an interface with one function, accept. We can do this in two ways:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;New Class which implements interface&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JavaFileFilter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.java&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Anonymous Class&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;FileFilter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileFilter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-            &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.java&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/Users/zeshan.anwar/learning/FileFilterTest&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;javaFiles&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;listFiles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;The new way with Lamdas is:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;FileFilter filter = (File file) -&amp;gt; file.getName().endsWith(&quot;.java&quot;);&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Several other examples:&lt;/p&gt;
-
-&lt;p&gt;If more than one line of code:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Runnable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;more&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Even multiple parameters:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;1-what-is-a-lambda-expression--functional-interface&quot;&gt;1. What is a Lambda expression? =&amp;gt; Functional interface;&lt;/h3&gt;
-
-&lt;p&gt;an interface with only &lt;code class=&quot;highlighter-rouge&quot;&gt;one&lt;/code&gt; abstract method (until Java 7 you couldn’t put anything other than abstract methods in an interface)
-Some examples:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileFilter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pathname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;All objects in Java extend the Object class; thus they don’t count as only one.
-You can define functional interface like such @FunctionalInterface
-This way, the compiler will check to see if it really is a functional interface (contains one abstract method only), and return an error if not.&lt;/p&gt;
-
-&lt;h3 id=&quot;2-can-a-lambda-be-put-in-a-variable--yes&quot;&gt;2. Can a lambda be put in a variable? =&amp;gt; YES!&lt;/h3&gt;
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Can be used everywhere a variable can; passed as a parameter, passed around etc.&lt;/p&gt;
-
-&lt;h3 id=&quot;3-is-a-lambda-an-object-no-but-an-object-without-an-identity&quot;&gt;3. Is a Lambda an Object? No, but an object without an identity.&lt;/h3&gt;
-&lt;p&gt;Anonymous class uses &lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt;, thus that is an object. Not free; lots of overhead!
-This overhead does not exist when using a Lambda expression since there is no new. Performance is much, much better. DO NOT CALL OBJECT METHODS ON A LAMDA. Think of Lambdas as piece of code.&lt;/p&gt;
-
-&lt;h3 id=&quot;functional-interfaces-toolbox-new-package-in-java-8-43-total-interfaces&quot;&gt;Functional Interfaces Toolbox (new package in Java 8) 43 total interfaces&lt;/h3&gt;
-&lt;h4 id=&quot;4-categories&quot;&gt;4 categories&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;Supplier; single interface provides new object:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@FunctionalInterface&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Supplier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Consumer / Biconsumer&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@FunctionalInterface&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Consumer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@FunctionalInterface&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BiConsumer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;U&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;U&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Predicate / BiPredicate&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@FunctionalInterface&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Predicate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@FunctionalInterface&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BiPredicate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;U&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;U&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Function / BiFunction - takes a function, and return a new function&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@FunctionalInterface&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nd&quot;&gt;@FunctionalInterface&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;U&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;U&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;more-lamda-syntax&quot;&gt;More Lamda Syntax&lt;/h4&gt;
-&lt;p&gt;You can omit types; ie&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;===&amp;gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Java 8 will infer those types from the abstract method in the interface.&lt;/p&gt;
-
-&lt;h4 id=&quot;method-reference&quot;&gt;Method Reference&lt;/h4&gt;
-&lt;p&gt;Consumer&lt;String&gt; c = s -&amp;gt; System.out.println(s);
-Consumer&lt;String&gt; c = System.out::println;&lt;/String&gt;&lt;/String&gt;&lt;/p&gt;
-
-&lt;p&gt;Comparator&lt;Integer&gt; c = (i1, i2) -&amp;gt; Integer.compare(i1, i2);
-Comparator&lt;Integer&gt; c = (i1, i2) -&amp;gt; Integer::compare;&lt;/Integer&gt;&lt;/Integer&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;how-can-we-use-all-these-tools-to-process-data&quot;&gt;How can we use all these tools to process data?&lt;/h4&gt;
-
-&lt;p&gt;Where are our objects most of the time? =&amp;gt; Collection API (List, Set, Map)&lt;/p&gt;
-
-&lt;p&gt;Can I process these data structures with lamdas? Yes :)&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Normal Lambda&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Customer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...?&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//Method Reference Lambda&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Customer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...?&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;You can add code into the interface! This is revolutionary in Java; this gave rise to new patterns. We can also add static methods in interfaces.&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">Java 8</summary></entry><entry><title type="html">Soft Skills</title><link href="http://localhost:4000/books/productivity/growth/2017/08/17/soft-skills.html" rel="alternate" type="text/html" title="Soft Skills" /><published>2017-08-17T21:45:45-05:00</published><updated>2017-08-17T21:45:45-05:00</updated><id>http://localhost:4000/books/productivity/growth/2017/08/17/soft-skills</id><content type="html" xml:base="http://localhost:4000/books/productivity/growth/2017/08/17/soft-skills.html">&lt;p&gt;Coding is often the easiest, most enjoyable part of a developers day. The hard part is dealing with everything else. This is what we’re good at; where we thrive. Meetings are the bane of all developers. I know many developers who have stymied their natural progression to management so that they could continue coding.&lt;/p&gt;
-
-&lt;p&gt;There is just something so appealing about sitting down and hacking away at a problem or laying out a solution that existed purely in your head. Taking those crazy ideas swimming in your head, and putting them into practice has a real kick to it. How many other professions can &lt;em&gt;profess&lt;/em&gt; the same? Very few!&lt;/p&gt;
-
-&lt;p&gt;Imagine a Toyota engineer, Phil, has an incredible idea one night in the shower. The idea: lets design the hood of our cars to mimic the &lt;a href=&quot;https://www.vox.com/videos/2017/11/9/16628106/biomimicry-design-nature&quot;&gt;pointed beak of a Kingfisher&lt;/a&gt;. Phil believes that a more aerodynamic shape would reduce drag at high speeds. How difficult is it for Phil to take this crazy idea and see it through to production? What are the costs associated? How much resistance or push-back will they feel? How long would it take? Several months to several years indeed. Unless Phil was the CEO of Toyota, there is little hope his idea would even get traction.&lt;/p&gt;
-
-&lt;p&gt;How about if an architect wants to change the concrete-mixture they poured into their 100-story building? As the British say - not bloody likely.&lt;/p&gt;
-
-&lt;p&gt;Programmers don’t have this hindrance. I can do all this, and do it with minimum overhead. I don’t need anything but my brain and the internet; and my brain is optional. All kidding aside, programmers can put together a completely new setup, pull away the foundations of a project, push in a completely new paradigm in as little time as it takes to write lines of code.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://simpleprogrammer.com&quot;&gt;John Sonmez’s&lt;/a&gt; book, &lt;a href=&quot;https://www.amazon.com/Soft-Skills-software-developers-manual/dp/1617292397&quot;&gt;Soft Skills&lt;/a&gt;, outlines all the skills&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The software developer’s life manual&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Many of them are &lt;em&gt;common sense&lt;/em&gt; (whatever that means) but when has common sense truly been common.
-I write this without hesitation; this is one of my most recommended books to everyone regardless of their technical ability. The chapters laid out in this book are worth their weight in gold - literally. (Add a nice popup quote here, If you were to take the weight of that many pages in gold and sell it, would you make that much more over your life? 1.8 pounds =&amp;gt; $32781.56)&lt;/p&gt;
-
-&lt;p&gt;John organically splits the book into seven chapters; starting with career and ending with emotional intelligence.&lt;/p&gt;
-
-&lt;p&gt;He lays out all the tools needed&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">Coding is often the easiest, most enjoyable part of a developers day. The hard part is dealing with everything else. This is what we’re good at; where we thrive. Meetings are the bane of all developers. I know many developers who have stymied their natural progression to management so that they could continue coding.</summary></entry></feed>
+&lt;/blockquote&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">The comparator compare method is bad design! There I said it. It is non-intuitive and absurd. Unless I’m missing some really big insight here, I don’t think I’m the only one confused.</summary></entry></feed>

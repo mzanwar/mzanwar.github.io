@@ -1,0 +1,38 @@
+---
+layout: post
+title:  "Stackable Traits in Scala"
+date:   2018-02-26 21:45:45 -0500
+categories: books scala chapter
+---
+
+A. Defining variables
+Scala has two kinds of variables, `val` and `var`. A `val` is similar to a final variable
+in java: once assigned, it cannot be reassigned. A `var` on the other hand, can be.
+
+```java
+val msg = "Hello, my name is Scala" // msg: String - type inferred
+var msg2: String = "Hi!" // type explicitly given
+
+
+// reassignment
+msg = "New message" // will give an error
+msg2 = "Bye Bye"
+```
+
+
+B. Defining functions
+
+Let write a simple min function in Scala
+```java
+def min(x: Int, y: Int): Int = {
+  if (x < y) x
+  else y
+}
+```
+A few things to note here:
+1. Functions start with `def`
+2. Function name is followed by comma-seperated list of parameters
+3. A type must follow every parameter (x: Int)
+4. The result type follow the parameter, after the closing parenthesis (list : Int)
+5. There exists an equal sign (=) before function body
+6. The last variable is what is returned, (either x or y)
