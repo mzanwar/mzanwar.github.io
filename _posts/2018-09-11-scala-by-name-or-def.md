@@ -1,13 +1,9 @@
 ---
 layout: post
-title: 'Scala: by-name or def'
+title: 'Scala: by-name parameters'
 date: 2018-09-11 11:47 -0500
 categories: scala 
 ---
-
-# Scala: by-name parameters
-
-
 
 In Scala, functions are first-class citizens. This is just a fancy way of saying functions (blocks of code) and variables (data) are treated the same way. This leads to interesting insights but can also be confusing for newcomers to Functional Programming.
 
@@ -43,7 +39,7 @@ val function = () => {
 
 ```scala
 // 4. def function - interesting... I wonder how this works
-def defFunction = {
+def method = {
   val rand = util.Random.nextInt(100)
   println(s"I am a function, I run every time I am called. Rand number: $rand")
   rand

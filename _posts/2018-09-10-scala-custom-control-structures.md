@@ -10,7 +10,7 @@ date: 2018-09-10 00:09 -0500
 
 Functional Programming
 
-
+One of the defining characteristics of Scala, or any other language that promotes functions to first class citizens, is the ability to write control structures as library functions.
 
 
 
