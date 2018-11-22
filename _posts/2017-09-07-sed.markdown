@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Enough sed!"
+title: "Have I sed enough!"
 date: "2017-09-07 21:20:56 -0500"
 author: "Zeshan Anwar"
 ---
 
-Late one night I needed to shove several thousand `json` documents into my local Elasticsearch cluster. I was setting up a demo for work and why I had left the most demo-worthy part of it till the end, I don't know. Nevertheless, I was able to accomplish that with just two lines of bash! Lets take a look here:
+While preparing for a work-demo late one night, I needed to export several thousand `json` documents into a local Elasticsearch cluster. I am not sure why I had left the only demo-worthy part of my presentation to the last minute. Nevertheless, I was able to accomplish this in two lines! Lets take a look here:
 
 {% highlight sh %}
 # A.
@@ -18,7 +18,7 @@ curl -s -XPOST http://localhost:9200/index/type/_bulk --data-binary @bulkReady.j
 
 ### Explanation:
 
-Time to break this down! My file had a bunch of json documents, i.e.
+Time to break this down! My file had a bunch of json documents:
 ```bash
   {
   "document": "one"
@@ -75,9 +75,7 @@ But my `json` file needed to be in a special format! Every json document needed 
 { "index" : { "_index" : "test", "_type" : "type1", "_id" : "1" } }
 ```
 
-
-
-Since I already knew the index and type of my documents, I could remove them from the metadata. I also wanted Elasticsearch to automatically assign an id. Thus, I needed a document looking like thus:
+Since I already knew the index and type of my documents, I could remove them from the metadata. I also wanted Elasticsearch to automatically assign an id. Thus, I needed a document looking like this:
 
 
 ```bash
@@ -103,7 +101,7 @@ Since I already knew the index and type of my documents, I could remove them fro
   }
 ```
 
-I was back to where I started. Damn, I was so close but now I'll need to add some metadata to each document anyways so why not just use my initial approach of writing that bash script. That is when I discovered the substitution capability of `sed`; an extremely powerful command line Stream EDitor.
+Damn, I was so close but now I'll need to add some metadata to each document anyways so why not just use my initial approach of writing that bash script. That is when I discovered the substitution capability of `sed`; an extremely powerful command line Stream EDitor.
 
 ### sed substitution
 
@@ -140,8 +138,7 @@ curl -s -XPOST http://localhost:9200/index/type/_bulk --data-binary @bulkReady.j
 ```
 
 
-And that is how I was able to upload several thousand json docs in two lines. Makes me wonder how much more productive I'd be if had command of the command line!
-
+And that is how I was able to upload several thousand json docs in two lines. Makes me wonder how much more productive I'd be if was well-versed in all the command line tools!
 
 [1]:http://www.grymoire.com/Unix/Sed.html
 [2]:http://sed.sourceforge.net/sedfaq4.html

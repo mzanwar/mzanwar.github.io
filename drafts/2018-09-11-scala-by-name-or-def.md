@@ -7,37 +7,23 @@ categories: scala
 
 In Scala, functions are first-class citizens. This is just a fancy way of saying functions (blocks of code) and variables (data) are treated the same way. This leads to interesting insights but can also be confusing for newcomers to Functional Programming.
 
-
-
-We will start by defining three different 
-
 ```scala
 // 1. data
 val data = 5
-```
 
-```scala
 // 2. block of code - hmm, what can I do with this?
 val blockOfCode = {
   println("I am a block of code, I run once, when I am evaluated")
   util.Random.nextInt(100)
 }
-```
 
-
-
-```scala
 // 3. function - interesting... I wonder how this works
 val function = () => {
   val rand = util.Random.nextInt(100)
   println(s"I am a function, I run every time I am called. Rand number: $rand")
   rand
 }
-```
 
-
-
-```scala
 // 4. def function - interesting... I wonder how this works
 def method = {
   val rand = util.Random.nextInt(100)
@@ -52,7 +38,7 @@ def method = {
 val a = data // Type: Int, 5
 val b = blockOfCode // Type: Int
 val c = function // () => Int
-val d = function() // Type: Int, 53
+val d = method() // Type: Int, 53
 
 
 List(a, a, a, a) // List[Int] = List(5, 5, 5, 5)
