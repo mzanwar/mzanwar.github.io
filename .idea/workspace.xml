@@ -2,27 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="267a14b8-027d-4792-b199-cdafeed1b2fe" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-08-21-Java-8.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-08-23-gaps-in-knowledge.markdown, .md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2017-08-23-gaps-in-knowledge.markdown, .md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-09-05-comparator-confusion.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2017-09-05-comparator-confusion.markdown" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-09-07-sed.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2017-09-07-sed.markdown" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-09-11-java--super-or-extends-collections-copy-method.markdown" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-12-08-On-the-edge.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-12-11-Bearstacks.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2017-12-11-Bearstacks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2017-12-14-problem-construct-the-array.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-02-22-Books.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-02-22-Books.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-02-22-Scala-1.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-02-22-Scala-1.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-02-22-Scala-10.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-02-22-Scala-10.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-07-20-Stackable-Traits.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-07-25-covariance-vs-contravariance-and-invariance.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-09-09-scala-partially-applied-functions.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-09-10-scala-custom-control-structures.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-09-10-scala-custom-control-structures.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-09-11-scala-by-name-or-def.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2018-09-18-schema-registry-compatibility.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/favicon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +20,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="Gemfile" value="2" />
           <entry key="html" value="2" />
           <entry key="md" value="54" />
           <entry key="yml" value="76" />
@@ -49,15 +30,17 @@
         <counts>
           <entry key="HTML" value="2" />
           <entry key="Markdown" value="54" />
+          <entry key="PLAIN_TEXT" value="2" />
           <entry key="YAML" value="76" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="CNAME" value="1" />
+          <entry key="Gemfile" value="1" />
           <entry key="create-new-post" value="3" />
           <entry key="html" value="4" />
-          <entry key="md" value="5" />
+          <entry key="md" value="6" />
           <entry key="png" value="3" />
           <entry key="sh" value="1" />
           <entry key="start" value="1" />
@@ -68,8 +51,8 @@
         <counts>
           <entry key="HTML" value="4" />
           <entry key="Image" value="3" />
-          <entry key="Markdown" value="5" />
-          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="Markdown" value="6" />
+          <entry key="PLAIN_TEXT" value="7" />
           <entry key="YAML" value="3" />
         </counts>
       </usages-collector>
@@ -78,15 +61,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/2017-08-17-soft-skills.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="90">
-                <caret line="6" column="269" lean-forward="true" selection-start-line="6" selection-start-column="269" selection-end-line="6" selection-end-column="269" />
-              </first_editor>
-              <second_editor>
-                <markdownNavigatorState />
-              </second_editor>
+        <entry file="file://$PROJECT_DIR$/Gemfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -176,6 +154,7 @@
         <option value="$PROJECT_DIR$/_layouts/home.html" />
         <option value="$PROJECT_DIR$/_config.yml" />
         <option value="$PROJECT_DIR$/about.md" />
+        <option value="$PROJECT_DIR$/Gemfile" />
       </list>
     </option>
   </component>
@@ -205,6 +184,11 @@
               <item name="mzanwar.github.io" type="b2602c69:ProjectViewProjectNode" />
               <item name="mzanwar.github.io" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="mzanwar.github.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mzanwar.github.io" type="462c0819:PsiDirectoryNode" />
+              <item name="_posts" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -225,6 +209,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/drafts" />
       <recent name="$PROJECT_DIR$/portfolio" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -765,15 +750,16 @@
       <workItem from="1531513582723" duration="1891000" />
       <workItem from="1532137680582" duration="928000" />
       <workItem from="1532231387931" duration="2690000" />
-      <workItem from="1542840990408" duration="1596000" />
+      <workItem from="1542840990408" duration="1921000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45917000" />
+    <option name="totallyTimeSpent" value="46242000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="57" y="23" width="1680" height="972" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22380953" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -989,6 +975,25 @@
           <second_editor>
             <markdownNavigatorState />
           </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2018-09-10-scala-custom-control-structures.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="315">
+            <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+          </first_editor>
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
         </state>
       </provider>
     </entry>
