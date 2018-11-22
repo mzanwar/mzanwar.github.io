@@ -2,7 +2,103 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="267a14b8-027d-4792-b199-cdafeed1b2fe" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2017-09-05-comparator-confusion.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2017-09-05-comparator-confusion.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-02-22-Books.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-02-22-Books.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-02-22-Scala-1.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-02-22-Scala-1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-02-22-Scala-10.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-02-22-Scala-10.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-09-09-cors.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-09-09-cors.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2018-09-10-scala-custom-control-structures.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2018-09-10-scala-custom-control-structures.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drafts/2017-08-21-Java-8.md" beforeDir="false" afterPath="$PROJECT_DIR$/_drafts/2017-08-21-Java-8.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drafts/2017-09-11-java--super-or-extends-collections-copy-method.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/_drafts/2017-09-11-java--super-or-extends-collections-copy-method.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drafts/2017-12-08-On-the-edge 22-53-48-254.md" beforeDir="false" afterPath="$PROJECT_DIR$/_drafts/2017-12-08-On-the-edge 22-53-48-254.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drafts/2017-12-08-On-the-edge.md" beforeDir="false" afterPath="$PROJECT_DIR$/_drafts/2017-12-08-On-the-edge.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drafts/2017-12-14-problem-construct-the-array.md" beforeDir="false" afterPath="$PROJECT_DIR$/_drafts/2017-12-14-problem-construct-the-array.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drafts/2018-07-20-Stackable-Traits.md" beforeDir="false" afterPath="$PROJECT_DIR$/_drafts/2018-07-20-Stackable-Traits.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drafts/2018-07-25-covariance-vs-contravariance-and-invariance.md" beforeDir="false" afterPath="$PROJECT_DIR$/_drafts/2018-07-25-covariance-vs-contravariance-and-invariance.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drafts/2018-09-09-scala-partially-applied-functions.md" beforeDir="false" afterPath="$PROJECT_DIR$/_drafts/2018-09-09-scala-partially-applied-functions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drafts/2018-09-11-scala-by-name-or-def.md" beforeDir="false" afterPath="$PROJECT_DIR$/_drafts/2018-09-11-scala-by-name-or-def.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drafts/2018-09-18-schema-registry-compatibility.md" beforeDir="false" afterPath="$PROJECT_DIR$/_drafts/2018-09-18-schema-registry-compatibility.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/css/font-awesome.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/css/images/arrow.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/css/images/bars.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/css/images/close.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/css/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/css/noscript.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/fonts/FontAwesome.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/fonts/fontawesome-webfont.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/fonts/fontawesome-webfont.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/fonts/fontawesome-webfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/fonts/fontawesome-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/fonts/fontawesome-webfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/js/breakpoints.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/js/browser.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/js/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/js/jquery.scrollex.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/js/jquery.scrolly.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/js/util.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/sass/libs/_breakpoints.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/sass/libs/_functions.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/sass/libs/_html-grid.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/sass/libs/_mixins.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/sass/libs/_vars.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/sass/libs/_vendor.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/sass/main.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/assets/sass/noscript.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/elements.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/generic.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/images/banner.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/images/pic01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/images/pic02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/images/pic03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/images/pic04.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/images/pic05.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/mississauga-flea-market/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/catering.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/cuisine.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/english.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/fish-menu.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/italy.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/location.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/meat-menu.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/menu-vegetarian.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/reserve.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/slider1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/slider2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/images/slider3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/catering.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/cucina.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/english.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/italy.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/location.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/menu-carne.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/menu-pesce.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/menu-vegetarian.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/prenota.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/slider1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/slider2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/images/slider3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/js/image-effect.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/js/jquery-3.3.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/js/map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/it/js/smooth-scroll.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/js/image-effect.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/js/jquery-3.3.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/js/map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/restaurant/js/smooth-scroll.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/portfolio/testPage.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,14 +118,15 @@
         <counts>
           <entry key="Gemfile" value="2" />
           <entry key="html" value="2" />
-          <entry key="md" value="54" />
+          <entry key="markdown" value="11" />
+          <entry key="md" value="149" />
           <entry key="yml" value="76" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="2" />
-          <entry key="Markdown" value="54" />
+          <entry key="Markdown" value="160" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="YAML" value="76" />
         </counts>
@@ -39,9 +136,11 @@
           <entry key="CNAME" value="1" />
           <entry key="Gemfile" value="1" />
           <entry key="create-new-post" value="3" />
-          <entry key="html" value="4" />
-          <entry key="md" value="6" />
+          <entry key="html" value="5" />
+          <entry key="markdown" value="4" />
+          <entry key="md" value="21" />
           <entry key="png" value="3" />
+          <entry key="scss" value="1" />
           <entry key="sh" value="1" />
           <entry key="start" value="1" />
           <entry key="yml" value="3" />
@@ -49,10 +148,11 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="4" />
+          <entry key="HTML" value="5" />
           <entry key="Image" value="3" />
-          <entry key="Markdown" value="6" />
+          <entry key="Markdown" value="25" />
           <entry key="PLAIN_TEXT" value="7" />
+          <entry key="SCSS" value="1" />
           <entry key="YAML" value="3" />
         </counts>
       </usages-collector>
@@ -61,10 +161,15 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Gemfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+        <entry file="file://$PROJECT_DIR$/_posts/2018-09-10-scala-custom-control-structures.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="30">
+                <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+              </first_editor>
+              <second_editor>
+                <markdownNavigatorState />
+              </second_editor>
             </state>
           </provider>
         </entry>
@@ -107,12 +212,16 @@
       <find>whoami</find>
       <find>/about/</find>
       <find>github_username</find>
+      <find>portfolio</find>
     </findStrings>
     <replaceStrings>
       <replace />
       <replace>{% highlight java %}</replace>
       <replace>{% endhighlight %}</replace>
     </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/portfolio</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -138,7 +247,6 @@
         <option value="$PROJECT_DIR$/_sass/minima/_layout.scss" />
         <option value="$PROJECT_DIR$/_layouts/post.html" />
         <option value="$PROJECT_DIR$/_site/about/index.html" />
-        <option value="$PROJECT_DIR$/_posts/2017-09-05-comparator-confusion.markdown" />
         <option value="$PROJECT_DIR$/_posts/2017-12-08-On-the-edge.md" />
         <option value="$PROJECT_DIR$/_posts/2017-09-11-java--super-or-extends-collections-copy-method.markdown" />
         <option value="$PROJECT_DIR$/_posts/2017-12-11-Bearstacks.md" />
@@ -155,6 +263,12 @@
         <option value="$PROJECT_DIR$/_config.yml" />
         <option value="$PROJECT_DIR$/about.md" />
         <option value="$PROJECT_DIR$/Gemfile" />
+        <option value="$PROJECT_DIR$/_posts/2017-09-05-comparator-confusion.markdown" />
+        <option value="$PROJECT_DIR$/_posts/2018-02-22-Books.md" />
+        <option value="$PROJECT_DIR$/_posts/2018-02-22-Scala-1.md" />
+        <option value="$PROJECT_DIR$/_posts/2018-02-22-Scala-10.md" />
+        <option value="$PROJECT_DIR$/_posts/2018-09-09-cors.md" />
+        <option value="$PROJECT_DIR$/_posts/2018-09-10-scala-custom-control-structures.md" />
       </list>
     </option>
   </component>
@@ -188,6 +302,11 @@
               <item name="mzanwar.github.io" type="b2602c69:ProjectViewProjectNode" />
               <item name="mzanwar.github.io" type="462c0819:PsiDirectoryNode" />
               <item name="_posts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mzanwar.github.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mzanwar.github.io" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -750,12 +869,12 @@
       <workItem from="1531513582723" duration="1891000" />
       <workItem from="1532137680582" duration="928000" />
       <workItem from="1532231387931" duration="2690000" />
-      <workItem from="1542840990408" duration="1921000" />
+      <workItem from="1542840990408" duration="2302000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46242000" />
+    <option name="totallyTimeSpent" value="46623000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="57" y="23" width="1680" height="972" extended-state="0" />
@@ -804,7 +923,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/_posts/2017-12-14-problem-construct-the-array.md" />
-    <entry file="file://$PROJECT_DIR$/_posts/2017-12-11-Bearstacks.md" />
     <entry file="file://$PROJECT_DIR$/_posts/2017-12-08-On-the-edge.md" />
     <entry file="file://$PROJECT_DIR$/_posts/2017-09-11-java--super-or-extends-collections-copy-method.markdown" />
     <entry file="file://$PROJECT_DIR$/_layouts/page.html">
@@ -821,7 +939,6 @@
     <entry file="file://$PROJECT_DIR$/post/404.html" />
     <entry file="file://$PROJECT_DIR$/post/index.md" />
     <entry file="file://$PROJECT_DIR$/index.md" />
-    <entry file="file://$PROJECT_DIR$/_posts/2018-02-22-Scala-10.md" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.scala" />
     <entry file="file://$PROJECT_DIR$/post/_posts/2018-07-21-welcome-to-jekyll.markdown" />
     <entry file="file://$PROJECT_DIR$/testpage.md" />
@@ -835,13 +952,6 @@
           <second_editor>
             <markdownNavigatorState />
           </second_editor>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/portfolio/testPage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -966,6 +1076,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/portfolio/testPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/main.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2017-08-17-soft-skills.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
@@ -978,11 +1105,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2018-09-10-scala-custom-control-structures.md">
+    <entry file="file://$PROJECT_DIR$/_posts/2017-08-23-gaps-in-knowledge.markdown, .md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="315">
-            <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+          <first_editor />
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2017-09-05-comparator-confusion.markdown">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="60">
+            <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
           </first_editor>
           <second_editor>
             <markdownNavigatorState />
@@ -990,10 +1127,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+    <entry file="file://$PROJECT_DIR$/_posts/2017-09-07-sed.markdown">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2017-12-11-Bearstacks.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2018-02-22-Scala-10.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="30">
+            <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+          </first_editor>
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2018-02-22-Scala-1.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="30">
+            <caret line="2" column="10" lean-forward="true" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+          </first_editor>
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2018-02-22-Books.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="30">
+            <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+          </first_editor>
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2018-09-09-cors.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="90">
+            <caret line="6" column="18" lean-forward="true" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+          </first_editor>
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2018-09-10-scala-custom-control-structures.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="30">
+            <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+          </first_editor>
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
         </state>
       </provider>
     </entry>

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ‘Scala lets me do what!'
+title: "Scala lets me do that!"
 date: 2018-09-10 00:09 -0500
 ---
 

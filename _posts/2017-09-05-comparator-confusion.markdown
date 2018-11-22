@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Comparator Confusion?"
+title: "Confounded Comparator"
 date: "2017-09-05 00:00:15 -0500"
 author: "Zeshan Anwar"
 ---
