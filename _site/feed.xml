@@ -1,56 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-11-26T15:31:54-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Writings</title><subtitle>Simple explanations one post at a time
-</subtitle><author><name>Zeshan Anwar</name></author><entry><title type="html">Avro Schema Evolution</title><link href="http://localhost:4000/2018/11/26/avro-schema-evolution.html" rel="alternate" type="text/html" title="Avro Schema Evolution" /><published>2018-11-26T13:52:00-06:00</published><updated>2018-11-26T13:52:00-06:00</updated><id>http://localhost:4000/2018/11/26/avro-schema-evolution</id><content type="html" xml:base="http://localhost:4000/2018/11/26/avro-schema-evolution.html">&lt;p&gt;&lt;strong&gt;Summary&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;SR auto-schema resolution &lt;strong&gt;breaks&lt;/strong&gt; Avro evolution safety-guarantees.&lt;/li&gt;
-  &lt;li&gt;Do we really need evolution safety-guarantees?&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;I highly recommend you read the rest of this post to understand why.&lt;/p&gt;
-
-&lt;p&gt;This document hopes to illustrate the benefits of schema evolution, and why they are &lt;strong&gt;not&lt;/strong&gt; needed within most types of applications. Furthermore, it highlights why the &lt;strong&gt;&lt;u&gt;auto-schema selection&lt;/u&gt;&lt;/strong&gt; nullifies evolution safety-guarantees, and a potential ways to mitigate against such a thing. It ends with some non-intuitive quirks of the Schema Registry that we must all be cognizant of. If you read only one section, read about these quirks.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-11-26T17:19:07-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Writings</title><subtitle>Simple explanations one post at a time
+</subtitle><author><name>Zeshan Anwar</name></author><entry><title type="html">Schema Evolution Explained</title><link href="http://localhost:4000/2018/11/26/avro-schema-evolution.html" rel="alternate" type="text/html" title="Schema Evolution Explained" /><published>2018-11-26T13:52:00-06:00</published><updated>2018-11-26T13:52:00-06:00</updated><id>http://localhost:4000/2018/11/26/avro-schema-evolution</id><content type="html" xml:base="http://localhost:4000/2018/11/26/avro-schema-evolution.html">&lt;p&gt;This blog post hopes to illustrate the benefits of schema evolution, and why they may not be &lt;em&gt;not&lt;/em&gt; needed within most types of applications.&lt;/p&gt;
 
 &lt;h2 id=&quot;1-schema-evolution-explained&quot;&gt;1. Schema Evolution Explained&lt;/h2&gt;
 
-&lt;p&gt;We must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place &lt;strong&gt;will not&lt;/strong&gt; break any other part of our system (graph). Put another way, downstream consumers &lt;u&gt;**do not need to be updated**&lt;/u&gt; to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.&lt;/p&gt;
+&lt;p&gt;In any complex system, we must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place &lt;em&gt;will not&lt;/em&gt; break any other part of a system (graph). Put another way, downstream consumers &lt;u&gt;*do not need to be updated*&lt;/u&gt; to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;There are &lt;strong&gt;three&lt;/strong&gt; main schema evolution patterns:&lt;/p&gt;
+&lt;p&gt;There are &lt;em&gt;three&lt;/em&gt; main schema evolution patterns:&lt;/p&gt;
 
-  &lt;ol&gt;
-    &lt;li&gt;&lt;u&gt;Backwards&lt;/u&gt; - data encoded with an &lt;strong&gt;older&lt;/strong&gt; schema can be read with a &lt;u&gt;newer&lt;/u&gt; schema&lt;/li&gt;
-    &lt;li&gt;&lt;u&gt;Forwards&lt;/u&gt; - data encoded with a &lt;strong&gt;newer&lt;/strong&gt; schema can be read with an &lt;u&gt;older&lt;/u&gt; schema&lt;/li&gt;
-    &lt;li&gt;&lt;u&gt;Full&lt;/u&gt; - data encoded with &lt;strong&gt;older or newer&lt;/strong&gt; can be read by both &lt;u&gt;older and newer&lt;/u&gt; schemas&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;u&gt;Backwards&lt;/u&gt; - data encoded with an &lt;em&gt;older&lt;/em&gt; schema can be read with a &lt;u&gt;newer&lt;/u&gt; schema&lt;/li&gt;
+  &lt;li&gt;&lt;u&gt;Forwards&lt;/u&gt; - data encoded with a &lt;em&gt;newer&lt;/em&gt; schema can be read with an &lt;u&gt;older&lt;/u&gt; schema&lt;/li&gt;
+  &lt;li&gt;&lt;u&gt;Full&lt;/u&gt; - data encoded with &lt;em&gt;older or newer&lt;/em&gt; can be read by both &lt;u&gt;older and newer&lt;/u&gt; schemas&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h4 id=&quot;which-pattern-to-choose&quot;&gt;Which pattern to choose?&lt;/h4&gt;
 
-&lt;p&gt;The evolution pattern is chosen by the relationship between the &lt;strong&gt;producer&lt;/strong&gt; and its &lt;strong&gt;consumers&lt;/strong&gt;. A handy way to tie the compatibility modes with the &lt;strong&gt;producer-consumer&lt;/strong&gt; concept is the following:&lt;/p&gt;
+&lt;p&gt;The evolution pattern is chosen by the relationship between the &lt;em&gt;producer&lt;/em&gt; and its &lt;em&gt;consumers&lt;/em&gt;. A handy way to tie the compatibility modes with the &lt;em&gt;producer-consumer&lt;/em&gt; concept is the following:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;If the &lt;strong&gt;producer&lt;/strong&gt; falls behind (‘backwards’) its &lt;strong&gt;consumers&lt;/strong&gt;, meaning schema changes are made to &lt;strong&gt;consumers&lt;/strong&gt; but not the producer, then we need &lt;u&gt;**Backward**&lt;/u&gt; compatibility to ensure seamless operation.&lt;/li&gt;
-  &lt;li&gt;If the &lt;strong&gt;producer&lt;/strong&gt; falls ahead (‘forwards’) of its &lt;strong&gt;consumers&lt;/strong&gt;, meaning changes are made to the &lt;strong&gt;producer&lt;/strong&gt; but not its &lt;strong&gt;consumers&lt;/strong&gt;, then we need &lt;u&gt;**Forward**&lt;/u&gt; compatibility to&lt;/li&gt;
-  &lt;li&gt;If the **producer and its consumers **have no well-defined relationship, meaning changes are made to both, then we need &lt;u&gt;**Full**&lt;/u&gt; compatibility.&lt;/li&gt;
+  &lt;li&gt;If the &lt;em&gt;producer&lt;/em&gt; falls behind (‘backwards’) its &lt;em&gt;consumers&lt;/em&gt;, meaning schema changes are made to &lt;em&gt;consumers&lt;/em&gt; but not the producer, then we need &lt;u&gt;*Backward*&lt;/u&gt; compatibility to ensure seamless operation.&lt;/li&gt;
+  &lt;li&gt;If the &lt;em&gt;producer&lt;/em&gt; falls ahead (‘forwards’) of its &lt;em&gt;consumers&lt;/em&gt;, meaning changes are made to the &lt;em&gt;producer&lt;/em&gt; but not its &lt;em&gt;consumers&lt;/em&gt;, then we need &lt;u&gt;*Forward*&lt;/u&gt; compatibility to&lt;/li&gt;
+  &lt;li&gt;If the *producer and its consumers *have no well-defined relationship, meaning changes are made to both, then we need &lt;u&gt;*Full*&lt;/u&gt; compatibility.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;To rephrase for emphasis, if we evolve by making compatible changes, we can make &lt;strong&gt;&lt;u&gt;any&lt;/u&gt;&lt;/strong&gt; compatible change and &lt;strong&gt;guarantee&lt;/strong&gt; our system continues to work &lt;u&gt;seamlessly&lt;/u&gt;.&lt;/p&gt;
+&lt;p&gt;To rephrase for emphasis, if we evolve by making compatible changes, we can make &lt;em&gt;&lt;u&gt;any&lt;/u&gt;&lt;/em&gt; compatible change and &lt;em&gt;guarantee&lt;/em&gt; our system continues to work &lt;u&gt;seamlessly&lt;/u&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;how-does-evolution-provide-such-a-strong-guarantee&quot;&gt;How does evolution provide such a strong guarantee?&lt;/h3&gt;
 
-&lt;p&gt;Evolution provides such a strong guarantees by supplementing missing fields with default values. Let us examine these &lt;strong&gt;patterns&lt;/strong&gt; a little more carefully with some examples:&lt;/p&gt;
+&lt;p&gt;Evolution provides such a strong guarantees by supplementing missing fields with default values. Let us examine these &lt;em&gt;patterns&lt;/em&gt; a little more carefully with some examples:&lt;/p&gt;
 
-&lt;h4 id=&quot;backward-evolution&quot;&gt;&lt;u&gt;**Backward Evolution**&lt;/u&gt;:&lt;/h4&gt;
+&lt;h4 id=&quot;backward-evolution&quot;&gt;&lt;u&gt;*Backward Evolution*&lt;/u&gt;:&lt;/h4&gt;
 
 &lt;p&gt;We may pick this setting for the following reasons:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;If the &lt;strong&gt;producer&lt;/strong&gt; falls behind its &lt;strong&gt;consumers&lt;/strong&gt; because changes are made to &lt;strong&gt;consumers&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Consumers&lt;/strong&gt; are fluid and ever-changing, and &lt;strong&gt;producers&lt;/strong&gt; do not change (slow to change)&lt;/li&gt;
+  &lt;li&gt;If the &lt;em&gt;producer&lt;/em&gt; falls behind its &lt;em&gt;consumers&lt;/em&gt; because changes are made to &lt;em&gt;consumers&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Consumers&lt;/em&gt; are fluid and ever-changing, and &lt;em&gt;producers&lt;/em&gt; do not change (slow to change)&lt;/li&gt;
   &lt;li&gt;New consumers have to read historical data (replay a topic), some of which is written using old schemas&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;How to evolve in a backward manner (simplified):&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;How to evolve in a backward manner (simplified):&lt;/em&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;u&gt;Adding new field&lt;/u&gt;: Must specify a default value.&lt;/li&gt;
@@ -90,19 +79,19 @@
 
 &lt;p&gt;Consumers can be upgraded to any evolved schema that is higher than the producers schema, and still function without breaking. Producers can upgrade schemas, but only if they are at the version or below all their consumers. To illustrate from our example, &lt;code class=&quot;highlighter-rouge&quot;&gt;Producer v1&lt;/code&gt; cannot move to &lt;code class=&quot;highlighter-rouge&quot;&gt;v2&lt;/code&gt; until &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v1&lt;/code&gt; moves to &lt;code class=&quot;highlighter-rouge&quot;&gt;v2&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;In more concrete terms, when the &lt;strong&gt;application code&lt;/strong&gt; inside &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v3&lt;/code&gt; tries to something to the effect of &lt;code class=&quot;highlighter-rouge&quot;&gt;record.getField(“wind”)&lt;/code&gt; , it will return a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;0L&lt;/code&gt;, which was the default specified in the schema. This trivial explanation will make more sense when we get to the Schema Registry and how it auto-resolves schemas.&lt;/p&gt;
+&lt;p&gt;In more concrete terms, when the &lt;em&gt;application code&lt;/em&gt; inside &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v3&lt;/code&gt; tries to something to the effect of &lt;code class=&quot;highlighter-rouge&quot;&gt;record.getField(“wind”)&lt;/code&gt; , it will return a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;0L&lt;/code&gt;, which was the default specified in the schema. This trivial explanation will make more sense when we get to the Schema Registry and how it auto-resolves schemas.&lt;/p&gt;
 
-&lt;h4 id=&quot;forward-evolution&quot;&gt;&lt;u&gt;**Forward Evolution**&lt;/u&gt;:&lt;/h4&gt;
+&lt;h4 id=&quot;forward-evolution&quot;&gt;&lt;u&gt;*Forward Evolution*&lt;/u&gt;:&lt;/h4&gt;
 
 &lt;p&gt;We may pick this setting for the following reasons:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;If the &lt;strong&gt;producer&lt;/strong&gt; falls aheads of its &lt;strong&gt;consumers&lt;/strong&gt; because schema changes are made to &lt;strong&gt;producers&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Producers&lt;/strong&gt; are fluid and ever-changing, and &lt;strong&gt;consumers&lt;/strong&gt; do not change (slow to change)&lt;/li&gt;
-  &lt;li&gt;Unchanged (old) &lt;strong&gt;consumers&lt;/strong&gt; need the ability to deserialize newly produced documents&lt;/li&gt;
+  &lt;li&gt;If the &lt;em&gt;producer&lt;/em&gt; falls aheads of its &lt;em&gt;consumers&lt;/em&gt; because schema changes are made to &lt;em&gt;producers&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Producers&lt;/em&gt; are fluid and ever-changing, and &lt;em&gt;consumers&lt;/em&gt; do not change (slow to change)&lt;/li&gt;
+  &lt;li&gt;Unchanged (old) &lt;em&gt;consumers&lt;/em&gt; need the ability to deserialize newly produced documents&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;How to evolve in a forward manner (simplified):&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;How to evolve in a forward manner (simplified):&lt;/em&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;u&gt;Adding new field&lt;/u&gt;: No restriction, except the obvious (cannot be the same name as another field etc.)&lt;/li&gt;
@@ -144,21 +133,21 @@
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Producer v4&lt;/code&gt; is producing documents with only &lt;code class=&quot;highlighter-rouge&quot;&gt;temperature and wind&lt;/code&gt; while &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v3&lt;/code&gt; expects &lt;code class=&quot;highlighter-rouge&quot;&gt;temperature, wind and humidity&lt;/code&gt;. Since we have default values in place for humidity (0L), we are able to continue operation. &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v1&lt;/code&gt; continues since all it needs is &lt;code class=&quot;highlighter-rouge&quot;&gt;temperature&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Everything in this system will continue to work without a hiccup. &lt;strong&gt;Producers&lt;/strong&gt; can be &lt;strong&gt;upgraded&lt;/strong&gt; to any evolved schema that is higher than its downstream consumers schema. &lt;strong&gt;Consumers&lt;/strong&gt; can upgrade schemas, but only if they are at the version or below their parents producers. To illustrate from our example, &lt;code class=&quot;highlighter-rouge&quot;&gt;Producer v4&lt;/code&gt; cannot move to &lt;code class=&quot;highlighter-rouge&quot;&gt;v2&lt;/code&gt; until &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v3&lt;/code&gt; moves to &lt;code class=&quot;highlighter-rouge&quot;&gt;v2&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Everything in this system will continue to work without a hiccup. &lt;em&gt;Producers&lt;/em&gt; can be &lt;em&gt;upgraded&lt;/em&gt; to any evolved schema that is higher than its downstream consumers schema. &lt;em&gt;Consumers&lt;/em&gt; can upgrade schemas, but only if they are at the version or below their parents producers. To illustrate from our example, &lt;code class=&quot;highlighter-rouge&quot;&gt;Producer v4&lt;/code&gt; cannot move to &lt;code class=&quot;highlighter-rouge&quot;&gt;v2&lt;/code&gt; until &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v3&lt;/code&gt; moves to &lt;code class=&quot;highlighter-rouge&quot;&gt;v2&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;In more concrete terms, when the &lt;strong&gt;application code&lt;/strong&gt; inside &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v3&lt;/code&gt; tries to do something of the sort of &lt;code class=&quot;highlighter-rouge&quot;&gt;record.getField(“humidity”)&lt;/code&gt; it will return a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;0L&lt;/code&gt;. Again, this seemingly trivial explanation will make more sense when we get to the Schema Registry and how it auto-resolves schemas.&lt;/p&gt;
+&lt;p&gt;In more concrete terms, when the &lt;em&gt;application code&lt;/em&gt; inside &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v3&lt;/code&gt; tries to do something of the sort of &lt;code class=&quot;highlighter-rouge&quot;&gt;record.getField(“humidity”)&lt;/code&gt; it will return a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;0L&lt;/code&gt;. Again, this seemingly trivial explanation will make more sense when we get to the Schema Registry and how it auto-resolves schemas.&lt;/p&gt;
 
-&lt;h4 id=&quot;full-evolution&quot;&gt;&lt;strong&gt;&lt;u&gt;Full Evolution:&lt;/u&gt;&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;full-evolution&quot;&gt;&lt;em&gt;&lt;u&gt;Full Evolution:&lt;/u&gt;&lt;/em&gt;&lt;/h4&gt;
 
 &lt;p&gt;We may pick this setting for the following reasons:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;If the &lt;strong&gt;producer&lt;/strong&gt; falls behind its &lt;strong&gt;consumers&lt;/strong&gt; and  &lt;strong&gt;consumers&lt;/strong&gt; fall behind producers&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Consumers&lt;/strong&gt; are fluid and ever-changing, and &lt;strong&gt;producers&lt;/strong&gt; are also fluid and evolving&lt;/li&gt;
+  &lt;li&gt;If the &lt;em&gt;producer&lt;/em&gt; falls behind its &lt;em&gt;consumers&lt;/em&gt; and  &lt;em&gt;consumers&lt;/em&gt; fall behind producers&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Consumers&lt;/em&gt; are fluid and ever-changing, and &lt;em&gt;producers&lt;/em&gt; are also fluid and evolving&lt;/li&gt;
   &lt;li&gt;We want the ability for old and new consumers to deserialize old and new data.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;How to evolve (simplified):&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;How to evolve (simplified):&lt;/em&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;u&gt;Adding new field&lt;/u&gt;: Must specify a default value.&lt;/li&gt;
@@ -169,326 +158,15 @@
 
 &lt;p&gt;&lt;img src=&quot;https://documents.lucidchart.com/documents/2b3269c5-a0c4-4ffd-8ebd-b8b5323df4bc/pages/0_0?a=748&amp;amp;x=421&amp;amp;y=249&amp;amp;w=420&amp;amp;h=683&amp;amp;store=1&amp;amp;accept=image%2F*&amp;amp;auth=LCA%2012394970b9487e02d4a2eb1a4ef4c77c6db8b47e-ts%3D1537928810&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Producers&lt;/strong&gt; can be &lt;strong&gt;upgraded&lt;/strong&gt; to any evolved schema on the schema timeline. &lt;strong&gt;Consumers&lt;/strong&gt; can also be upgraded to any schema on the timeline.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Producers&lt;/em&gt; can be &lt;em&gt;upgraded&lt;/em&gt; to any evolved schema on the schema timeline. &lt;em&gt;Consumers&lt;/em&gt; can also be upgraded to any schema on the timeline.&lt;/p&gt;
 
 &lt;h3 id=&quot;summary&quot;&gt;Summary:&lt;/h3&gt;
 
-&lt;p&gt;The important takeaway here is that the value in evolution is only realized when we have a &lt;strong&gt;&lt;u&gt;mismatch&lt;/u&gt;&lt;/strong&gt; in &lt;strong&gt;producer&lt;/strong&gt; and &lt;strong&gt;consumer&lt;/strong&gt; schema versions. This is by design. If we were to update all the affected  &lt;strong&gt;producers/consumers&lt;/strong&gt; every time we made a schema change, then we wouldn’t really need evolution, nor would we be utilizing its value. Or, put in a different way, if both producer and consumer schema were &lt;strong&gt;&lt;u&gt;always&lt;/u&gt;&lt;/strong&gt; forced to be the same, we wouldn’t really have evolution.&lt;/p&gt;
+&lt;p&gt;The important takeaway here is that the value in evolution is only realized when we have a &lt;em&gt;&lt;u&gt;mismatch&lt;/u&gt;&lt;/em&gt; in &lt;em&gt;producer&lt;/em&gt; and &lt;em&gt;consumer&lt;/em&gt; schema versions. This is by design. If we were to update all the affected  &lt;em&gt;producers/consumers&lt;/em&gt; every time we made a schema change, then we wouldn’t really need evolution, nor would we be utilizing its value. Or, put in a different way, if both producer and consumer schema were &lt;em&gt;&lt;u&gt;always&lt;/u&gt;&lt;/em&gt; forced to be the same, we wouldn’t really have evolution.&lt;/p&gt;
 
-&lt;h2 id=&quot;2-schema-registry-auto-schema-resolution-breaks-evolution&quot;&gt;2. Schema Registry auto-schema resolution breaks evolution&lt;/h2&gt;
+&lt;p&gt;The &lt;em&gt;backbone&lt;/em&gt; of evolution is the ability to replace a &lt;u&gt;missing&lt;/u&gt; field with a default value. So far we’ve assumed that the priority of our system is to continue operating even if fields are missing. What if this is not what we want? Worse yet, what if by ‘papering’ over a missing field by replacing it with a default value, we run the risk of &lt;em&gt;incorrect computations&lt;/em&gt; and &lt;em&gt;polluted streams&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p&gt;The Schema Registry provides &lt;strong&gt;consumers&lt;/strong&gt; the ability to dynamically resolve the correct schema at the time of deserialization. In other words, the schema used to write a document, is also the &lt;strong&gt;exact same schema&lt;/strong&gt; used to read it.  This is normally not the case in typical circumstances. This means the moment we introduce a schema change at the &lt;strong&gt;&lt;u&gt;producer&lt;/u&gt;&lt;/strong&gt; level, we force all downstream &lt;u&gt;**consumers**&lt;/u&gt; to &lt;strong&gt;dynamically&lt;/strong&gt; pick up that change. This may seem like a nifty little feature, and it is, but it also brings with it some interesting drawbacks. Since the SR now forces both producer schema and consumer schema versions to be the &lt;strong&gt;exact same&lt;/strong&gt;, we have some interesting &lt;strong&gt;side-effects&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Evolution guarantees are nullified&lt;/strong&gt; - The safety value provided by evolution is significantly diminished. With schema evolution, we could guarantee that a compatible change would not break existing infrastructure. &lt;strong&gt;We cannot guarantee that anymore&lt;/strong&gt;. That is, a compatible change &lt;u&gt;**can**&lt;/u&gt; and &lt;u&gt;**will**&lt;/u&gt; break existing infrastructure. From our previous example with ‘Forward’ evolution, when our &lt;code class=&quot;highlighter-rouge&quot;&gt;Producer&lt;/code&gt; evolved from &lt;code class=&quot;highlighter-rouge&quot;&gt;v1&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;v4&lt;/code&gt;, we could guarantee that the downstream consumers &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v1&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v3&lt;/code&gt; would continue operating without hassle. With SR in the mix, when our &lt;code class=&quot;highlighter-rouge&quot;&gt;Producer&lt;/code&gt; evolves from &lt;code class=&quot;highlighter-rouge&quot;&gt;v1&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;v4&lt;/code&gt;, our consumers also evolve from &lt;code class=&quot;highlighter-rouge&quot;&gt;v1&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;v4&lt;/code&gt;. More concretely, when the &lt;strong&gt;application code&lt;/strong&gt; inside &lt;code class=&quot;highlighter-rouge&quot;&gt;Consumer v3 (now v4)&lt;/code&gt; tries to do a &lt;code class=&quot;highlighter-rouge&quot;&gt;record.getField(“humidity”)&lt;/code&gt; it will break because &lt;code class=&quot;highlighter-rouge&quot;&gt;v4&lt;/code&gt; does not have a &lt;strong&gt;default&lt;/strong&gt; value defined for &lt;code class=&quot;highlighter-rouge&quot;&gt;humidity&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Default values can only be null (cannot be anything else)&lt;/strong&gt; - This is really interesting. Why is this? The Avro documentation states that a default value is used &lt;strong&gt;only during consumption (read)&lt;/strong&gt; to fill in for when a field does not exist. Since a producer is using the &lt;strong&gt;exact same schema&lt;/strong&gt; a consumer is, a missing field at the producer gets published with a ’null’ value into the stream. Producers don’t apply the default in this case. This means a consumer never really sees a &lt;strong&gt;missing field&lt;/strong&gt; since it is now set to a value of ’null’. This also means that types needs to be of union [type, “null”], otherwise the producer will fail on missing values.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// weatherSchema&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;temperature&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;long&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;humidity&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;long&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;default&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0L&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weatherRecord&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GenericData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weatherSchema&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;weatherRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temperature&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;weatherRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;humidity&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;producer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weatherRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;cm&quot;&gt;/* weatherRecord = {
-    &quot;temperature&quot;: 100,
-    &quot;humidity&quot;: 10
-}
-*/&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// Everything looks in order. &lt;/span&gt;
-    
-    
-    
-&lt;span class=&quot;c1&quot;&gt;// Now let us omit a field intentionally&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weatherMissing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GenericData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weatherSchema&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;weatherMissing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temperature&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;producer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weatherMissing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;cm&quot;&gt;/*`Exception in thread &quot;main&quot; org.apache.kafka.common.errors.SerializationException: Error serializing Avro message
-Caused by: java.lang.NullPointerException: null of long in field humidity of schemaregistry.weather` */&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;If we intentionally omit adding a value for humidity, we fail because our type of &lt;code class=&quot;highlighter-rouge&quot;&gt;long&lt;/code&gt; does not match &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;. We will need change our type for the missing field from &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;long&quot;&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;[&quot;null&quot;, &quot;long&quot;]&lt;/code&gt;. KSQL does this by default.&lt;/p&gt;
-
-&lt;p&gt;Let’s try that again, but with the correct union type.&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// weatherSchemaWithUnion - note union type [&quot;null&quot;, &quot;long&quot;]
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;temperature&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;humidity&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;[&quot;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;long&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;default&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;L&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weatherRecord&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GenericData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weatherSchemaWithUnion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;weatherRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temperature&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;producer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weatherRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;/* {
-    &quot;temperature&quot;: 100,
-    &quot;humidity&quot;: null // note how this is null and NOT 0L
-} */&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Notice how the value of humidity is &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; and not &lt;code class=&quot;highlighter-rouge&quot;&gt;0L&lt;/code&gt; which was the default value specified in the schema.&lt;/p&gt;
-
-&lt;h4 id=&quot;potential-ways-to-solve&quot;&gt;Potential ways to solve:&lt;/h4&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Forcibly disable auto-resolution by letting each consumer lookup its own version of the schema manually using topic name + version. This means not using the &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;  to lookup the schema. This way every consumer is tied to a single version of a schema. A little quirk: SR stores schemas using an &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; which is an atomically increasing, topic-agnostic number, assigned at registration time. This &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;  is also used for &lt;strong&gt;automatic&lt;/strong&gt; schema lookup. They provide a REST API endpoint to lookup a schema with topic name + version, but this needs to be done manually.&lt;/li&gt;
-  &lt;li&gt;Only use SR for validation but handle all schema changes manually.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;3--are-evolution-safety-guarantees-really-what-we-want&quot;&gt;3.  Are evolution safety-guarantees really what we want?&lt;/h2&gt;
-
-&lt;p&gt;The &lt;strong&gt;backbone&lt;/strong&gt; of evolution is the ability to replace a &lt;u&gt;missing&lt;/u&gt; field with a default value. So far we’ve assumed that the priority of our system is to continue operating even if fields are missing. What if this is not what we want? Worse yet, what if by ‘papering’ over a missing field by replacing it with a default value, we run the risk of &lt;strong&gt;incorrect computations&lt;/strong&gt; and &lt;strong&gt;polluted streams&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;An important question to answer: &lt;strong&gt;Where, in the application, do we actually need default values?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;what-value-then-does-evolution-provide-the-application&quot;&gt;What value, then, does evolution provide the application?&lt;/h4&gt;
-
-&lt;p&gt;We can leverage evolution restraints to catch a lot of&lt;/p&gt;
-
-&lt;p&gt;Are the all the restrictions that evolution posits, the same restrictions that we want it the application? &lt;strong&gt;&lt;u&gt;No&lt;/u&gt;&lt;/strong&gt;, but there is a significant overlap of concerns. Also remember SR provides an automated validation check against a schema, which is tremendously valuable.&lt;/p&gt;
-
-&lt;p&gt;We need a list of &lt;strong&gt;&lt;u&gt;additional requirements&lt;/u&gt;&lt;/strong&gt; that our schema must adhere to when evolving. &lt;u&gt;If our change does not pass this test, we **cannot** evolve our schema, and must **branch** to handle that change.&lt;/u&gt;&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Additional Requirements&lt;/th&gt;
-      &lt;th&gt;Why?&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Disallow removal any field - required or optional&lt;/td&gt;
-      &lt;td&gt;It is difficult to determine which downstream node consumes that field. We don’t want to be the ones tracing through the application to determine this. We will  disallow this here. If a field needs to be removed, we branch, and migrate downstream nodes to the new branch.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Disallow adding an optional field - a field with a default value.&lt;/td&gt;
-      &lt;td&gt;SR will forcibly disallow a removal of a required field. If we add a field, it has to be a required field. A required field cannot be removed because it’ll fail the SR compatibility check.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Disallow adding a union type with ‘null’ in set.&lt;/td&gt;
-      &lt;td&gt;Protect ourselves from polluted streams. We want to fail-fast at the producer if a field goes missing.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Disallow mutation of field name.&lt;/td&gt;
-      &lt;td&gt;This is analogous to removing a field. Same reason.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Disallow mutation of field type (except Avro promotion)&lt;/td&gt;
-      &lt;td&gt;This is analogous to removing a field. Same reason.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Let us compare these with the three &lt;strong&gt;transitive&lt;/strong&gt; evolution patterns:&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Requirements&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;FULL&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;BACKWARDS&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;FORWARDS&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Allows adding a required field (without default)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Allows type promotion&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt; ^1^&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Prevents removing a required field&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt; ^2^&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Prevents adding an optional field (default)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Prevents mutating name for required fields&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt; ^2^&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt; ^2^&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Prevents mutating type for required fields&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt; ^2^&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt; ^2^&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Cannot add a union type with ‘null’ in set.&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;To add, &lt;strong&gt;FULL_TRANSITIVE&lt;/strong&gt; does not allow Avro type promotions, and you can only add a field with a default value ^2^. This means we can’t add ‘required’ fields. &lt;strong&gt;BACKWARD_TRANSITIVE&lt;/strong&gt; also only allow us to add fields with default values but allows Avro promotion in the normal sense &lt;code class=&quot;highlighter-rouge&quot;&gt;int -&amp;gt; long -&amp;gt; double&lt;/code&gt;.&lt;strong&gt;FORWARD_TRANSITIVE&lt;/strong&gt; &lt;strong&gt;allows&lt;/strong&gt; us to add fields without default values and allows Avro promotion in the backward sense^1^ &lt;code class=&quot;highlighter-rouge&quot;&gt;long -&amp;gt; int&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;What &lt;strong&gt;FORWARD_TRANSITIVE&lt;/strong&gt; fails to catch is the addition/removal of an optional field, and a union type containing [’null’]. We can supplement that by requiring an additional pair of criteria:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Cannot add optional fields with a default value&lt;/strong&gt;. This ensures once a field is added, it cannot be removed.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Union types cannot contain ’null’&lt;/strong&gt;. We fail-fast (at producer) and prevent pollution of streams.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Protect pollution of streams&lt;/strong&gt;: We need to define all our fields without a union type containing [“null”]. Thus, a missing field will break at the producer side. Otherwise we risk passing a null value into the stream and to the consumer. We want to protect our streams from being polluted, by failing if there is missing data.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;u&gt;'Can the mutation be done in the same stream' matrix:&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;By ‘node requires change’ we mean the application code in the nodes uses the field. A checkmark indicates that the change can be made in the same stream, and a cross indicates it cannot. Note that determining whether a node required a change is &lt;strong&gt;&lt;u&gt;HARD&lt;/u&gt;&lt;/strong&gt;, especially if we have several downstream consumer. We don’t want to do this check.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Forward_Transitive&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Is valid schema evolution?&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Consumer that requires it does not break?&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Add a field w/o default&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Add a field with default&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Remove a field w/o default&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Remove a field with default&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Mutate a field name with default&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Mutate a field name w/o default&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Mutate a field type with default&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Mutate a field type w/o default&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Mutate type valid avro promotion with default&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Mutate type valid avro promotion w/o default&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;✔&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;4-quirks---things-to-be-aware-of-when-using-the-sr&quot;&gt;4. Quirks - things to be aware of when using the SR:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;If a schema is removed (destroyed), we will lose the capability to read documents encoded with that schema.&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Any documents encoded with that schema will be lost, unless the schema is restored at the correct &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; path.&lt;/li&gt;
-      &lt;li&gt;What if a schema is deleted after a consumer has already cached it? Restarting that consumer will break nonetheless.&lt;/li&gt;
-      &lt;li&gt;See 3.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Default values are only ever null, even with a default specified&lt;/strong&gt;.
-    &lt;ul&gt;
-      &lt;li&gt;Also, type must be a union [“null”, type]&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Deleting a schema doesn’t really remove it from the Schema Registry&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;It can still be looked up (by &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;) and used by consumers. Deleting is useful when you want to remove a schema to pass a compatibility check.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Automatic Schema lookup is based on &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;, which is agnostic of topic or version.&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;This is highly problematic. If we ever need to restore our Schema Registry, even if we have all the schemas, they must be registered in the exact same order every time, otherwise we risk losing the ability to read old data. SR does provide a REST API to lookup using topic + version but this has to be done manually. I believe this was an optimization done to save space by storing the &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;topic_name&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;version&lt;/code&gt; with each record.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;BACKWARD, FORWARD and FULL compatibility levels can essentially be reduced to NONE&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;The default check is &lt;strong&gt;only&lt;/strong&gt; against the &lt;u&gt;last registered schema&lt;/u&gt;. You can easily apply a set of deltas to violate compatibility. If needed, always use a &lt;strong&gt;backwards_transitive, forwards_transitive or full_transitive&lt;/strong&gt;.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Global compatibility and topic-specific compatibility can be changed on the fly&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;An actor (nefarious or accidentally) can pollute a schema evolution stream by turning compatibility off, or flipping it and registering an incompatible schema.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Schema Registry won’t auto-resolve to an evolved schema, even when one exists under the topic&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;If a topic is set with transitive backward compatibility (best case scenario), a qualified compatible schema that &lt;strong&gt;can&lt;/strong&gt; read the record will exist, but SR will fail to pull it down because it can’t find the &lt;strong&gt;exact&lt;/strong&gt; schema (&lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;) that wrote the record.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;5-potential-prs-to-sr-in-increasing-order-of-difficulty&quot;&gt;5. Potential PRs to SR (in increasing order of difficulty):&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Update their REST API Error message for compatibility - They haven’t updated their log messages when setting compatibility levels.&lt;/li&gt;
-  &lt;li&gt;Default state should be &lt;strong&gt;backward_transitive&lt;/strong&gt;, not &lt;strong&gt;backward&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;Have a &lt;strong&gt;strict&lt;/strong&gt; mode, where compatibility cannot be changed once defined at creation.&lt;/li&gt;
-  &lt;li&gt;When changing compatibility, check to see if all/latest existing schema adhere to the compatibility.&lt;/li&gt;
-  &lt;li&gt;With &lt;strong&gt;strict&lt;/strong&gt; mode and transitive compatibility enabled, if schema &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; not found, pick up latest compatible schema.&lt;/li&gt;
-  &lt;li&gt;Producer (GenericRecord) should &lt;strong&gt;inject default Avro value&lt;/strong&gt; (instead of null) when value does not exist.&lt;/li&gt;
-  &lt;li&gt;Add flag to enable automatic lookup of schema using &lt;code class=&quot;highlighter-rouge&quot;&gt;topic_name&lt;/code&gt; + &lt;code class=&quot;highlighter-rouge&quot;&gt;version&lt;/code&gt;, instead of the arbitrary &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;blockquote&gt;
-  &lt;h3 id=&quot;avropromotion&quot;&gt;AvroPromotion&lt;/h3&gt;
-
-  &lt;p&gt;The writer’s schema may be promoted to the reader’s as follows:&lt;/p&gt;
-
-  &lt;ul&gt;
-    &lt;li&gt;int is promotable to long, float, or double&lt;/li&gt;
-    &lt;li&gt;long is promotable to float or double&lt;/li&gt;
-    &lt;li&gt;float is promotable to double&lt;/li&gt;
-    &lt;li&gt;string is promotable to bytes&lt;/li&gt;
-    &lt;li&gt;bytes is promotable to string&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">Summary:</summary></entry><entry><title type="html">Scala lets me do that!</title><link href="http://localhost:4000/2018/09/10/scala-custom-control-structures.html" rel="alternate" type="text/html" title="Scala lets me do that!" /><published>2018-09-10T00:09:00-05:00</published><updated>2018-09-10T00:09:00-05:00</updated><id>http://localhost:4000/2018/09/10/scala-custom-control-structures</id><content type="html" xml:base="http://localhost:4000/2018/09/10/scala-custom-control-structures.html">&lt;p&gt;&lt;img src=&quot;https://media.giphy.com/media/SJX3gbZ2dbaEhU92Pu/giphy.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;An important question to to ask is: &lt;em&gt;Where, in the application, do we actually need default values?&lt;/em&gt;&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">This blog post hopes to illustrate the benefits of schema evolution, and why they may not be not needed within most types of applications.</summary></entry><entry><title type="html">Scala lets me do that!</title><link href="http://localhost:4000/2018/09/10/scala-custom-control-structures.html" rel="alternate" type="text/html" title="Scala lets me do that!" /><published>2018-09-10T00:09:00-05:00</published><updated>2018-09-10T00:09:00-05:00</updated><id>http://localhost:4000/2018/09/10/scala-custom-control-structures</id><content type="html" xml:base="http://localhost:4000/2018/09/10/scala-custom-control-structures.html">&lt;p&gt;&lt;img src=&quot;https://media.giphy.com/media/SJX3gbZ2dbaEhU92Pu/giphy.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I kid you not, this feature of Scala totally blew my mind and I had to write a little post about it. I come from a non-functional, functions need to be treated differently from variables, background so thinking like this was really mind-mending.&lt;/p&gt;
 

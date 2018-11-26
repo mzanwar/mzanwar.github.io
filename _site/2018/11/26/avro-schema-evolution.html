@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Avro Schema Evolution</title>
-  <meta name="description" content="Summary:">
+  <title>Schema Evolution Explained</title>
+  <meta name="description" content="This blog post hopes to illustrate the benefits of schema evolution, and why they may not be not needed within most types of applications.">
 
   <link rel="stylesheet" href="/assets/main.css">
   <link rel="canonical" href="http://localhost:4000/2018/11/26/avro-schema-evolution.html">
@@ -76,7 +76,7 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Avro Schema Evolution</h1>
+        <h1 class="post-title" itemprop="name headline">Schema Evolution Explained</h1>
 
         <p class="post-meta">
 
@@ -88,7 +88,7 @@
             
 
             
-            <span class="reading-time">16 min read</span>
+            <span class="reading-time">6 min read</span>
 
             <time datetime="2018-11-26T13:52:00-06:00" itemprop="datePublished">
                 
@@ -100,58 +100,47 @@
     </header>
 
     <div class="post-content" itemprop="articleBody">
-        <p><strong>Summary</strong>:</p>
-
-<ol>
-  <li>SR auto-schema resolution <strong>breaks</strong> Avro evolution safety-guarantees.</li>
-  <li>Do we really need evolution safety-guarantees?</li>
-</ol>
-
-<p>I highly recommend you read the rest of this post to understand why.</p>
-
-<p>This document hopes to illustrate the benefits of schema evolution, and why they are <strong>not</strong> needed within most types of applications. Furthermore, it highlights why the <strong><u>auto-schema selection</u></strong> nullifies evolution safety-guarantees, and a potential ways to mitigate against such a thing. It ends with some non-intuitive quirks of the Schema Registry that we must all be cognizant of. If you read only one section, read about these quirks.</p>
+        <p>This blog post hopes to illustrate the benefits of schema evolution, and why they may not be <em>not</em> needed within most types of applications.</p>
 
 <h2 id="1-schema-evolution-explained">1. Schema Evolution Explained</h2>
 
-<p>We must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place <strong>will not</strong> break any other part of our system (graph). Put another way, downstream consumers <u>**do not need to be updated**</u> to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.</p>
+<p>In any complex system, we must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place <em>will not</em> break any other part of a system (graph). Put another way, downstream consumers <u>*do not need to be updated*</u> to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.</p>
 
-<blockquote>
-  <p>There are <strong>three</strong> main schema evolution patterns:</p>
+<p>There are <em>three</em> main schema evolution patterns:</p>
 
-  <ol>
-    <li><u>Backwards</u> - data encoded with an <strong>older</strong> schema can be read with a <u>newer</u> schema</li>
-    <li><u>Forwards</u> - data encoded with a <strong>newer</strong> schema can be read with an <u>older</u> schema</li>
-    <li><u>Full</u> - data encoded with <strong>older or newer</strong> can be read by both <u>older and newer</u> schemas</li>
-  </ol>
-</blockquote>
+<ol>
+  <li><u>Backwards</u> - data encoded with an <em>older</em> schema can be read with a <u>newer</u> schema</li>
+  <li><u>Forwards</u> - data encoded with a <em>newer</em> schema can be read with an <u>older</u> schema</li>
+  <li><u>Full</u> - data encoded with <em>older or newer</em> can be read by both <u>older and newer</u> schemas</li>
+</ol>
 
 <h4 id="which-pattern-to-choose">Which pattern to choose?</h4>
 
-<p>The evolution pattern is chosen by the relationship between the <strong>producer</strong> and its <strong>consumers</strong>. A handy way to tie the compatibility modes with the <strong>producer-consumer</strong> concept is the following:</p>
+<p>The evolution pattern is chosen by the relationship between the <em>producer</em> and its <em>consumers</em>. A handy way to tie the compatibility modes with the <em>producer-consumer</em> concept is the following:</p>
 
 <ul>
-  <li>If the <strong>producer</strong> falls behind (‘backwards’) its <strong>consumers</strong>, meaning schema changes are made to <strong>consumers</strong> but not the producer, then we need <u>**Backward**</u> compatibility to ensure seamless operation.</li>
-  <li>If the <strong>producer</strong> falls ahead (‘forwards’) of its <strong>consumers</strong>, meaning changes are made to the <strong>producer</strong> but not its <strong>consumers</strong>, then we need <u>**Forward**</u> compatibility to</li>
-  <li>If the **producer and its consumers **have no well-defined relationship, meaning changes are made to both, then we need <u>**Full**</u> compatibility.</li>
+  <li>If the <em>producer</em> falls behind (‘backwards’) its <em>consumers</em>, meaning schema changes are made to <em>consumers</em> but not the producer, then we need <u>*Backward*</u> compatibility to ensure seamless operation.</li>
+  <li>If the <em>producer</em> falls ahead (‘forwards’) of its <em>consumers</em>, meaning changes are made to the <em>producer</em> but not its <em>consumers</em>, then we need <u>*Forward*</u> compatibility to</li>
+  <li>If the *producer and its consumers *have no well-defined relationship, meaning changes are made to both, then we need <u>*Full*</u> compatibility.</li>
 </ul>
 
-<p>To rephrase for emphasis, if we evolve by making compatible changes, we can make <strong><u>any</u></strong> compatible change and <strong>guarantee</strong> our system continues to work <u>seamlessly</u>.</p>
+<p>To rephrase for emphasis, if we evolve by making compatible changes, we can make <em><u>any</u></em> compatible change and <em>guarantee</em> our system continues to work <u>seamlessly</u>.</p>
 
 <h3 id="how-does-evolution-provide-such-a-strong-guarantee">How does evolution provide such a strong guarantee?</h3>
 
-<p>Evolution provides such a strong guarantees by supplementing missing fields with default values. Let us examine these <strong>patterns</strong> a little more carefully with some examples:</p>
+<p>Evolution provides such a strong guarantees by supplementing missing fields with default values. Let us examine these <em>patterns</em> a little more carefully with some examples:</p>
 
-<h4 id="backward-evolution"><u>**Backward Evolution**</u>:</h4>
+<h4 id="backward-evolution"><u>*Backward Evolution*</u>:</h4>
 
 <p>We may pick this setting for the following reasons:</p>
 
 <ul>
-  <li>If the <strong>producer</strong> falls behind its <strong>consumers</strong> because changes are made to <strong>consumers</strong></li>
-  <li><strong>Consumers</strong> are fluid and ever-changing, and <strong>producers</strong> do not change (slow to change)</li>
+  <li>If the <em>producer</em> falls behind its <em>consumers</em> because changes are made to <em>consumers</em></li>
+  <li><em>Consumers</em> are fluid and ever-changing, and <em>producers</em> do not change (slow to change)</li>
   <li>New consumers have to read historical data (replay a topic), some of which is written using old schemas</li>
 </ul>
 
-<p><strong>How to evolve in a backward manner (simplified):</strong></p>
+<p><em>How to evolve in a backward manner (simplified):</em></p>
 
 <ul>
   <li><u>Adding new field</u>: Must specify a default value.</li>
@@ -191,19 +180,19 @@
 
 <p>Consumers can be upgraded to any evolved schema that is higher than the producers schema, and still function without breaking. Producers can upgrade schemas, but only if they are at the version or below all their consumers. To illustrate from our example, <code class="highlighter-rouge">Producer v1</code> cannot move to <code class="highlighter-rouge">v2</code> until <code class="highlighter-rouge">Consumer v1</code> moves to <code class="highlighter-rouge">v2</code>.</p>
 
-<p>In more concrete terms, when the <strong>application code</strong> inside <code class="highlighter-rouge">Consumer v3</code> tries to something to the effect of <code class="highlighter-rouge">record.getField(“wind”)</code> , it will return a value of <code class="highlighter-rouge">0L</code>, which was the default specified in the schema. This trivial explanation will make more sense when we get to the Schema Registry and how it auto-resolves schemas.</p>
+<p>In more concrete terms, when the <em>application code</em> inside <code class="highlighter-rouge">Consumer v3</code> tries to something to the effect of <code class="highlighter-rouge">record.getField(“wind”)</code> , it will return a value of <code class="highlighter-rouge">0L</code>, which was the default specified in the schema. This trivial explanation will make more sense when we get to the Schema Registry and how it auto-resolves schemas.</p>
 
-<h4 id="forward-evolution"><u>**Forward Evolution**</u>:</h4>
+<h4 id="forward-evolution"><u>*Forward Evolution*</u>:</h4>
 
 <p>We may pick this setting for the following reasons:</p>
 
 <ul>
-  <li>If the <strong>producer</strong> falls aheads of its <strong>consumers</strong> because schema changes are made to <strong>producers</strong></li>
-  <li><strong>Producers</strong> are fluid and ever-changing, and <strong>consumers</strong> do not change (slow to change)</li>
-  <li>Unchanged (old) <strong>consumers</strong> need the ability to deserialize newly produced documents</li>
+  <li>If the <em>producer</em> falls aheads of its <em>consumers</em> because schema changes are made to <em>producers</em></li>
+  <li><em>Producers</em> are fluid and ever-changing, and <em>consumers</em> do not change (slow to change)</li>
+  <li>Unchanged (old) <em>consumers</em> need the ability to deserialize newly produced documents</li>
 </ul>
 
-<p><strong>How to evolve in a forward manner (simplified):</strong></p>
+<p><em>How to evolve in a forward manner (simplified):</em></p>
 
 <ul>
   <li><u>Adding new field</u>: No restriction, except the obvious (cannot be the same name as another field etc.)</li>
@@ -245,21 +234,21 @@
 
 <p><code class="highlighter-rouge">Producer v4</code> is producing documents with only <code class="highlighter-rouge">temperature and wind</code> while <code class="highlighter-rouge">Consumer v3</code> expects <code class="highlighter-rouge">temperature, wind and humidity</code>. Since we have default values in place for humidity (0L), we are able to continue operation. <code class="highlighter-rouge">Consumer v1</code> continues since all it needs is <code class="highlighter-rouge">temperature</code>.</p>
 
-<p>Everything in this system will continue to work without a hiccup. <strong>Producers</strong> can be <strong>upgraded</strong> to any evolved schema that is higher than its downstream consumers schema. <strong>Consumers</strong> can upgrade schemas, but only if they are at the version or below their parents producers. To illustrate from our example, <code class="highlighter-rouge">Producer v4</code> cannot move to <code class="highlighter-rouge">v2</code> until <code class="highlighter-rouge">Consumer v3</code> moves to <code class="highlighter-rouge">v2</code>.</p>
+<p>Everything in this system will continue to work without a hiccup. <em>Producers</em> can be <em>upgraded</em> to any evolved schema that is higher than its downstream consumers schema. <em>Consumers</em> can upgrade schemas, but only if they are at the version or below their parents producers. To illustrate from our example, <code class="highlighter-rouge">Producer v4</code> cannot move to <code class="highlighter-rouge">v2</code> until <code class="highlighter-rouge">Consumer v3</code> moves to <code class="highlighter-rouge">v2</code>.</p>
 
-<p>In more concrete terms, when the <strong>application code</strong> inside <code class="highlighter-rouge">Consumer v3</code> tries to do something of the sort of <code class="highlighter-rouge">record.getField(“humidity”)</code> it will return a value of <code class="highlighter-rouge">0L</code>. Again, this seemingly trivial explanation will make more sense when we get to the Schema Registry and how it auto-resolves schemas.</p>
+<p>In more concrete terms, when the <em>application code</em> inside <code class="highlighter-rouge">Consumer v3</code> tries to do something of the sort of <code class="highlighter-rouge">record.getField(“humidity”)</code> it will return a value of <code class="highlighter-rouge">0L</code>. Again, this seemingly trivial explanation will make more sense when we get to the Schema Registry and how it auto-resolves schemas.</p>
 
-<h4 id="full-evolution"><strong><u>Full Evolution:</u></strong></h4>
+<h4 id="full-evolution"><em><u>Full Evolution:</u></em></h4>
 
 <p>We may pick this setting for the following reasons:</p>
 
 <ul>
-  <li>If the <strong>producer</strong> falls behind its <strong>consumers</strong> and  <strong>consumers</strong> fall behind producers</li>
-  <li><strong>Consumers</strong> are fluid and ever-changing, and <strong>producers</strong> are also fluid and evolving</li>
+  <li>If the <em>producer</em> falls behind its <em>consumers</em> and  <em>consumers</em> fall behind producers</li>
+  <li><em>Consumers</em> are fluid and ever-changing, and <em>producers</em> are also fluid and evolving</li>
   <li>We want the ability for old and new consumers to deserialize old and new data.</li>
 </ul>
 
-<p><strong>How to evolve (simplified):</strong></p>
+<p><em>How to evolve (simplified):</em></p>
 
 <ul>
   <li><u>Adding new field</u>: Must specify a default value.</li>
@@ -270,326 +259,15 @@
 
 <p><img src="https://documents.lucidchart.com/documents/2b3269c5-a0c4-4ffd-8ebd-b8b5323df4bc/pages/0_0?a=748&amp;x=421&amp;y=249&amp;w=420&amp;h=683&amp;store=1&amp;accept=image%2F*&amp;auth=LCA%2012394970b9487e02d4a2eb1a4ef4c77c6db8b47e-ts%3D1537928810" alt="img" /></p>
 
-<p><strong>Producers</strong> can be <strong>upgraded</strong> to any evolved schema on the schema timeline. <strong>Consumers</strong> can also be upgraded to any schema on the timeline.</p>
+<p><em>Producers</em> can be <em>upgraded</em> to any evolved schema on the schema timeline. <em>Consumers</em> can also be upgraded to any schema on the timeline.</p>
 
 <h3 id="summary">Summary:</h3>
 
-<p>The important takeaway here is that the value in evolution is only realized when we have a <strong><u>mismatch</u></strong> in <strong>producer</strong> and <strong>consumer</strong> schema versions. This is by design. If we were to update all the affected  <strong>producers/consumers</strong> every time we made a schema change, then we wouldn’t really need evolution, nor would we be utilizing its value. Or, put in a different way, if both producer and consumer schema were <strong><u>always</u></strong> forced to be the same, we wouldn’t really have evolution.</p>
+<p>The important takeaway here is that the value in evolution is only realized when we have a <em><u>mismatch</u></em> in <em>producer</em> and <em>consumer</em> schema versions. This is by design. If we were to update all the affected  <em>producers/consumers</em> every time we made a schema change, then we wouldn’t really need evolution, nor would we be utilizing its value. Or, put in a different way, if both producer and consumer schema were <em><u>always</u></em> forced to be the same, we wouldn’t really have evolution.</p>
 
-<h2 id="2-schema-registry-auto-schema-resolution-breaks-evolution">2. Schema Registry auto-schema resolution breaks evolution</h2>
+<p>The <em>backbone</em> of evolution is the ability to replace a <u>missing</u> field with a default value. So far we’ve assumed that the priority of our system is to continue operating even if fields are missing. What if this is not what we want? Worse yet, what if by ‘papering’ over a missing field by replacing it with a default value, we run the risk of <em>incorrect computations</em> and <em>polluted streams</em>.</p>
 
-<p>The Schema Registry provides <strong>consumers</strong> the ability to dynamically resolve the correct schema at the time of deserialization. In other words, the schema used to write a document, is also the <strong>exact same schema</strong> used to read it.  This is normally not the case in typical circumstances. This means the moment we introduce a schema change at the <strong><u>producer</u></strong> level, we force all downstream <u>**consumers**</u> to <strong>dynamically</strong> pick up that change. This may seem like a nifty little feature, and it is, but it also brings with it some interesting drawbacks. Since the SR now forces both producer schema and consumer schema versions to be the <strong>exact same</strong>, we have some interesting <strong>side-effects</strong>:</p>
-
-<ol>
-  <li><strong>Evolution guarantees are nullified</strong> - The safety value provided by evolution is significantly diminished. With schema evolution, we could guarantee that a compatible change would not break existing infrastructure. <strong>We cannot guarantee that anymore</strong>. That is, a compatible change <u>**can**</u> and <u>**will**</u> break existing infrastructure. From our previous example with ‘Forward’ evolution, when our <code class="highlighter-rouge">Producer</code> evolved from <code class="highlighter-rouge">v1</code> to <code class="highlighter-rouge">v4</code>, we could guarantee that the downstream consumers <code class="highlighter-rouge">Consumer v1</code> and <code class="highlighter-rouge">Consumer v3</code> would continue operating without hassle. With SR in the mix, when our <code class="highlighter-rouge">Producer</code> evolves from <code class="highlighter-rouge">v1</code> to <code class="highlighter-rouge">v4</code>, our consumers also evolve from <code class="highlighter-rouge">v1</code> to <code class="highlighter-rouge">v4</code>. More concretely, when the <strong>application code</strong> inside <code class="highlighter-rouge">Consumer v3 (now v4)</code> tries to do a <code class="highlighter-rouge">record.getField(“humidity”)</code> it will break because <code class="highlighter-rouge">v4</code> does not have a <strong>default</strong> value defined for <code class="highlighter-rouge">humidity</code>.</li>
-  <li><strong>Default values can only be null (cannot be anything else)</strong> - This is really interesting. Why is this? The Avro documentation states that a default value is used <strong>only during consumption (read)</strong> to fill in for when a field does not exist. Since a producer is using the <strong>exact same schema</strong> a consumer is, a missing field at the producer gets published with a ’null’ value into the stream. Producers don’t apply the default in this case. This means a consumer never really sees a <strong>missing field</strong> since it is now set to a value of ’null’. This also means that types needs to be of union [type, “null”], otherwise the producer will fail on missing values.</li>
-</ol>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// weatherSchema</span>
-<span class="o">{</span>
-    <span class="o">{</span> <span class="s">"name"</span><span class="o">:</span> <span class="s">"temperature"</span><span class="o">,</span> <span class="s">"type"</span><span class="o">:</span> <span class="s">"long"</span> <span class="o">},</span>
-    <span class="o">{</span> <span class="s">"name"</span><span class="o">:</span> <span class="s">"humidity"</span><span class="o">,</span> <span class="s">"type"</span><span class="o">:</span> <span class="s">"long"</span><span class="o">,</span> <span class="s">"default"</span><span class="o">:</span><span class="mi">0L</span> <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="n">val</span> <span class="n">weatherRecord</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GenericData</span><span class="o">.</span><span class="na">Record</span><span class="o">(</span><span class="n">weatherSchema</span><span class="o">)</span>
-<span class="n">weatherRecord</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"temperature"</span><span class="o">,</span> <span class="mi">100</span><span class="o">)</span>
-<span class="n">weatherRecord</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"humidity"</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
-<span class="n">producer</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">weatherRecord</span><span class="o">)</span>
-
-<span class="cm">/* weatherRecord = {
-    "temperature": 100,
-    "humidity": 10
-}
-*/</span>
-<span class="c1">// Everything looks in order. </span>
-    
-    
-    
-<span class="c1">// Now let us omit a field intentionally</span>
-<span class="n">val</span> <span class="n">weatherMissing</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GenericData</span><span class="o">.</span><span class="na">Record</span><span class="o">(</span><span class="n">weatherSchema</span><span class="o">)</span>
-<span class="n">weatherMissing</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"temperature"</span><span class="o">,</span> <span class="mi">100</span><span class="o">)</span>
-<span class="n">producer</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">weatherMissing</span><span class="o">)</span>
-
-<span class="cm">/*`Exception in thread "main" org.apache.kafka.common.errors.SerializationException: Error serializing Avro message
-Caused by: java.lang.NullPointerException: null of long in field humidity of schemaregistry.weather` */</span>
-</code></pre></div></div>
-
-<p>If we intentionally omit adding a value for humidity, we fail because our type of <code class="highlighter-rouge">long</code> does not match <code class="highlighter-rouge">null</code>. We will need change our type for the missing field from <code class="highlighter-rouge">"long"</code> to <code class="highlighter-rouge">["null", "long"]</code>. KSQL does this by default.</p>
-
-<p>Let’s try that again, but with the correct union type.</p>
-
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// weatherSchemaWithUnion - note union type ["null", "long"]
-</span><span class="o">{</span>
-    <span class="o">{</span> <span class="s">"name"</span><span class="k">:</span> <span class="err">"</span><span class="kt">temperature</span><span class="err">"</span><span class="o">,</span> <span class="s">"type"</span><span class="k">:</span> <span class="err">"</span><span class="kt">long</span><span class="err">"</span> <span class="o">},</span>
-    <span class="o">{</span> <span class="s">"name"</span><span class="k">:</span> <span class="err">"</span><span class="kt">humidity</span><span class="err">"</span><span class="o">,</span> <span class="s">"type"</span><span class="k">:</span> <span class="err">["</span><span class="kt">null</span><span class="err">"</span><span class="o">,</span> <span class="s">"long"</span><span class="err">]</span><span class="o">,</span> <span class="s">"default"</span><span class="k">:</span><span class="err">0</span><span class="kt">L</span> <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="k">val</span> <span class="n">weatherRecord</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">GenericData</span><span class="o">.</span><span class="nc">Record</span><span class="o">(</span><span class="n">weatherSchemaWithUnion</span><span class="o">)</span>
-<span class="n">weatherRecord</span><span class="o">.</span><span class="n">put</span><span class="o">(</span><span class="s">"temperature"</span><span class="o">,</span> <span class="mi">100</span><span class="o">)</span>
-<span class="n">producer</span><span class="o">.</span><span class="n">send</span><span class="o">(</span><span class="n">weatherRecord</span><span class="o">)</span>
-<span class="cm">/* {
-    "temperature": 100,
-    "humidity": null // note how this is null and NOT 0L
-} */</span>
-</code></pre></div></div>
-
-<p>Notice how the value of humidity is <code class="highlighter-rouge">null</code> and not <code class="highlighter-rouge">0L</code> which was the default value specified in the schema.</p>
-
-<h4 id="potential-ways-to-solve">Potential ways to solve:</h4>
-
-<ol>
-  <li>Forcibly disable auto-resolution by letting each consumer lookup its own version of the schema manually using topic name + version. This means not using the <code class="highlighter-rouge">id</code>  to lookup the schema. This way every consumer is tied to a single version of a schema. A little quirk: SR stores schemas using an <code class="highlighter-rouge">id</code> which is an atomically increasing, topic-agnostic number, assigned at registration time. This <code class="highlighter-rouge">id</code>  is also used for <strong>automatic</strong> schema lookup. They provide a REST API endpoint to lookup a schema with topic name + version, but this needs to be done manually.</li>
-  <li>Only use SR for validation but handle all schema changes manually.</li>
-</ol>
-
-<h2 id="3--are-evolution-safety-guarantees-really-what-we-want">3.  Are evolution safety-guarantees really what we want?</h2>
-
-<p>The <strong>backbone</strong> of evolution is the ability to replace a <u>missing</u> field with a default value. So far we’ve assumed that the priority of our system is to continue operating even if fields are missing. What if this is not what we want? Worse yet, what if by ‘papering’ over a missing field by replacing it with a default value, we run the risk of <strong>incorrect computations</strong> and <strong>polluted streams</strong>.</p>
-
-<p>An important question to answer: <strong>Where, in the application, do we actually need default values?</strong></p>
-
-<h4 id="what-value-then-does-evolution-provide-the-application">What value, then, does evolution provide the application?</h4>
-
-<p>We can leverage evolution restraints to catch a lot of</p>
-
-<p>Are the all the restrictions that evolution posits, the same restrictions that we want it the application? <strong><u>No</u></strong>, but there is a significant overlap of concerns. Also remember SR provides an automated validation check against a schema, which is tremendously valuable.</p>
-
-<p>We need a list of <strong><u>additional requirements</u></strong> that our schema must adhere to when evolving. <u>If our change does not pass this test, we **cannot** evolve our schema, and must **branch** to handle that change.</u></p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">Additional Requirements</th>
-      <th>Why?</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">Disallow removal any field - required or optional</td>
-      <td>It is difficult to determine which downstream node consumes that field. We don’t want to be the ones tracing through the application to determine this. We will  disallow this here. If a field needs to be removed, we branch, and migrate downstream nodes to the new branch.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Disallow adding an optional field - a field with a default value.</td>
-      <td>SR will forcibly disallow a removal of a required field. If we add a field, it has to be a required field. A required field cannot be removed because it’ll fail the SR compatibility check.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Disallow adding a union type with ‘null’ in set.</td>
-      <td>Protect ourselves from polluted streams. We want to fail-fast at the producer if a field goes missing.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Disallow mutation of field name.</td>
-      <td>This is analogous to removing a field. Same reason.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Disallow mutation of field type (except Avro promotion)</td>
-      <td>This is analogous to removing a field. Same reason.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Let us compare these with the three <strong>transitive</strong> evolution patterns:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">Requirements</th>
-      <th style="text-align: center">FULL</th>
-      <th style="text-align: center">BACKWARDS</th>
-      <th style="text-align: center">FORWARDS</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">Allows adding a required field (without default)</td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Allows type promotion</td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-      <td style="text-align: center"><span style="color:green">✔</span> ^1^</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Prevents removing a required field</td>
-      <td style="text-align: center"><span style="color:green">✔</span> ^2^</td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Prevents adding an optional field (default)</td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Prevents mutating name for required fields</td>
-      <td style="text-align: center"><span style="color:green">✔</span> ^2^</td>
-      <td style="text-align: center"><span style="color:green">✔</span> ^2^</td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Prevents mutating type for required fields</td>
-      <td style="text-align: center"><span style="color:green">✔</span> ^2^</td>
-      <td style="text-align: center"><span style="color:green">✔</span> ^2^</td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Cannot add a union type with ‘null’ in set.</td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<p>To add, <strong>FULL_TRANSITIVE</strong> does not allow Avro type promotions, and you can only add a field with a default value ^2^. This means we can’t add ‘required’ fields. <strong>BACKWARD_TRANSITIVE</strong> also only allow us to add fields with default values but allows Avro promotion in the normal sense <code class="highlighter-rouge">int -&gt; long -&gt; double</code>.<strong>FORWARD_TRANSITIVE</strong> <strong>allows</strong> us to add fields without default values and allows Avro promotion in the backward sense^1^ <code class="highlighter-rouge">long -&gt; int</code>.</p>
-
-<p>What <strong>FORWARD_TRANSITIVE</strong> fails to catch is the addition/removal of an optional field, and a union type containing [’null’]. We can supplement that by requiring an additional pair of criteria:</p>
-
-<ol>
-  <li><strong>Cannot add optional fields with a default value</strong>. This ensures once a field is added, it cannot be removed.</li>
-  <li><strong>Union types cannot contain ’null’</strong>. We fail-fast (at producer) and prevent pollution of streams.</li>
-</ol>
-
-<blockquote>
-  <p><strong>Protect pollution of streams</strong>: We need to define all our fields without a union type containing [“null”]. Thus, a missing field will break at the producer side. Otherwise we risk passing a null value into the stream and to the consumer. We want to protect our streams from being polluted, by failing if there is missing data.</p>
-</blockquote>
-
-<p><strong><u>'Can the mutation be done in the same stream' matrix:</u></strong></p>
-
-<p>By ‘node requires change’ we mean the application code in the nodes uses the field. A checkmark indicates that the change can be made in the same stream, and a cross indicates it cannot. Note that determining whether a node required a change is <strong><u>HARD</u></strong>, especially if we have several downstream consumer. We don’t want to do this check.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">Forward_Transitive</th>
-      <th style="text-align: center">Is valid schema evolution?</th>
-      <th style="text-align: center">Consumer that requires it does not break?</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">Add a field w/o default</td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Add a field with default</td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Remove a field w/o default</td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Remove a field with default</td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Mutate a field name with default</td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Mutate a field name w/o default</td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Mutate a field type with default</td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Mutate a field type w/o default</td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-      <td style="text-align: center"><span style="color:red">X</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Mutate type valid avro promotion with default</td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Mutate type valid avro promotion w/o default</td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-      <td style="text-align: center"><span style="color:green">✔</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="4-quirks---things-to-be-aware-of-when-using-the-sr">4. Quirks - things to be aware of when using the SR:</h2>
-
-<ol>
-  <li><strong>If a schema is removed (destroyed), we will lose the capability to read documents encoded with that schema.</strong>
-    <ul>
-      <li>Any documents encoded with that schema will be lost, unless the schema is restored at the correct <code class="highlighter-rouge">id</code> path.</li>
-      <li>What if a schema is deleted after a consumer has already cached it? Restarting that consumer will break nonetheless.</li>
-      <li>See 3.</li>
-    </ul>
-  </li>
-  <li><strong>Default values are only ever null, even with a default specified</strong>.
-    <ul>
-      <li>Also, type must be a union [“null”, type]</li>
-    </ul>
-  </li>
-  <li><strong>Deleting a schema doesn’t really remove it from the Schema Registry</strong>
-    <ul>
-      <li>It can still be looked up (by <code class="highlighter-rouge">id</code>) and used by consumers. Deleting is useful when you want to remove a schema to pass a compatibility check.</li>
-    </ul>
-  </li>
-  <li><strong>Automatic Schema lookup is based on <code class="highlighter-rouge">id</code>, which is agnostic of topic or version.</strong>
-    <ul>
-      <li>This is highly problematic. If we ever need to restore our Schema Registry, even if we have all the schemas, they must be registered in the exact same order every time, otherwise we risk losing the ability to read old data. SR does provide a REST API to lookup using topic + version but this has to be done manually. I believe this was an optimization done to save space by storing the <code class="highlighter-rouge">id</code> instead of <code class="highlighter-rouge">topic_name</code> and <code class="highlighter-rouge">version</code> with each record.</li>
-    </ul>
-  </li>
-  <li><strong>BACKWARD, FORWARD and FULL compatibility levels can essentially be reduced to NONE</strong>
-    <ul>
-      <li>The default check is <strong>only</strong> against the <u>last registered schema</u>. You can easily apply a set of deltas to violate compatibility. If needed, always use a <strong>backwards_transitive, forwards_transitive or full_transitive</strong>.</li>
-    </ul>
-  </li>
-  <li><strong>Global compatibility and topic-specific compatibility can be changed on the fly</strong>
-    <ul>
-      <li>An actor (nefarious or accidentally) can pollute a schema evolution stream by turning compatibility off, or flipping it and registering an incompatible schema.</li>
-    </ul>
-  </li>
-  <li><strong>Schema Registry won’t auto-resolve to an evolved schema, even when one exists under the topic</strong>
-    <ul>
-      <li>If a topic is set with transitive backward compatibility (best case scenario), a qualified compatible schema that <strong>can</strong> read the record will exist, but SR will fail to pull it down because it can’t find the <strong>exact</strong> schema (<code class="highlighter-rouge">id</code>) that wrote the record.</li>
-    </ul>
-  </li>
-</ol>
-
-<h2 id="5-potential-prs-to-sr-in-increasing-order-of-difficulty">5. Potential PRs to SR (in increasing order of difficulty):</h2>
-
-<ol>
-  <li>Update their REST API Error message for compatibility - They haven’t updated their log messages when setting compatibility levels.</li>
-  <li>Default state should be <strong>backward_transitive</strong>, not <strong>backward</strong>.</li>
-  <li>Have a <strong>strict</strong> mode, where compatibility cannot be changed once defined at creation.</li>
-  <li>When changing compatibility, check to see if all/latest existing schema adhere to the compatibility.</li>
-  <li>With <strong>strict</strong> mode and transitive compatibility enabled, if schema <code class="highlighter-rouge">id</code> not found, pick up latest compatible schema.</li>
-  <li>Producer (GenericRecord) should <strong>inject default Avro value</strong> (instead of null) when value does not exist.</li>
-  <li>Add flag to enable automatic lookup of schema using <code class="highlighter-rouge">topic_name</code> + <code class="highlighter-rouge">version</code>, instead of the arbitrary <code class="highlighter-rouge">id</code></li>
-</ol>
-
-<blockquote>
-  <h3 id="avropromotion">AvroPromotion</h3>
-
-  <p>The writer’s schema may be promoted to the reader’s as follows:</p>
-
-  <ul>
-    <li>int is promotable to long, float, or double</li>
-    <li>long is promotable to float or double</li>
-    <li>float is promotable to double</li>
-    <li>string is promotable to bytes</li>
-    <li>bytes is promotable to string</li>
-  </ul>
-</blockquote>
+<p>An important question to to ask is: <em>Where, in the application, do we actually need default values?</em></p>
 
     </div>
 
