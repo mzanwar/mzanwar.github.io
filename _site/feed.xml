@@ -1,27 +1,261 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-25T09:36:47-05:00</updated><id>http://localhost:4000/</id><title type="html">Stubborn Programmer</title><subtitle>Simple explanations one post at a time
-</subtitle><author><name>Zeshan Anwar</name></author><entry><title type="html">Covariance vs Contravariance and Invariance</title><link href="http://localhost:4000/2018/07/25/covariance-vs-contravariance-and-invariance.html" rel="alternate" type="text/html" title="Covariance vs Contravariance and Invariance" /><published>2018-07-25T09:36:00-05:00</published><updated>2018-07-25T09:36:00-05:00</updated><id>http://localhost:4000/2018/07/25/covariance-vs-contravariance-and-invariance</id><content type="html" xml:base="http://localhost:4000/2018/07/25/covariance-vs-contravariance-and-invariance.html"></content><author><name>Zeshan Anwar</name></author><summary type="html"></summary></entry><entry><title type="html">Stackable Traits in Scala</title><link href="http://localhost:4000/books/scala/chapter/2018/02/26/Stackable-Traits.html" rel="alternate" type="text/html" title="Stackable Traits in Scala" /><published>2018-02-26T20:45:45-06:00</published><updated>2018-02-26T20:45:45-06:00</updated><id>http://localhost:4000/books/scala/chapter/2018/02/26/Stackable-Traits</id><content type="html" xml:base="http://localhost:4000/books/scala/chapter/2018/02/26/Stackable-Traits.html">&lt;p&gt;A. Defining variables
-Scala has two kinds of variables, &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;. A &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; is similar to a final variable
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-11-26T13:40:59-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Writings</title><subtitle>Simple explanations one post at a time
+</subtitle><author><name>Zeshan Anwar</name></author><entry><title type="html">Scala lets me do that!</title><link href="http://localhost:4000/2018/09/10/scala-custom-control-structures.html" rel="alternate" type="text/html" title="Scala lets me do that!" /><published>2018-09-10T00:09:00-05:00</published><updated>2018-09-10T00:09:00-05:00</updated><id>http://localhost:4000/2018/09/10/scala-custom-control-structures</id><content type="html" xml:base="http://localhost:4000/2018/09/10/scala-custom-control-structures.html">&lt;p&gt;&lt;img src=&quot;https://media.giphy.com/media/SJX3gbZ2dbaEhU92Pu/giphy.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I kid you not, this feature of Scala totally blew my mind and I had to write a little post about it. I come from a non-functional, functions need to be treated differently from variables, background so thinking like this was really mind-mending.&lt;/p&gt;
+
+&lt;p&gt;Scala lets you to write custom control-flow structures as library functions. Wait… what does that mean? You can write your own &lt;code class=&quot;highlighter-rouge&quot;&gt;while&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;if&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;onlyOnceIf&lt;/code&gt; control-flow mechanisms.  You can’t do this in traditional, non-functional languages.&lt;/p&gt;
+
+&lt;p&gt;A really good example I came across:&lt;/p&gt;
+
+&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;using&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;&amp;lt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Unit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, &lt;span class=&quot;kt&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;](&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// automatically close the connection once done
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;MongoFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getConnection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nc&quot;&gt;MongoFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getCollection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mongoObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This is really ingenious (at least to me) so I want to break down how it works. First, we look at the method signature.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[A &amp;lt;: { def close(): Unit }, B]&lt;/code&gt; - We are defining two types here &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; must define a &lt;code class=&quot;highlighter-rouge&quot;&gt;close&lt;/code&gt; method.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;(param: A)(f: A =&amp;gt; B)&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;(param: A)&lt;/code&gt; - param is of type A which has a .close() method&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;(f: A =&amp;gt; B)&lt;/code&gt; - a function that takes a param A and returns a B&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;f(param)&lt;/code&gt; - Pass param of type A to function f&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;param.close()&lt;/code&gt;- since type A has a &lt;code class=&quot;highlighter-rouge&quot;&gt;close&lt;/code&gt; method, we call it here.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Another example is that of the ternary operator. We can implement our own control logic to mimic the behaviour.&lt;/p&gt;
+
+&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Our own if/then/else operator
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;when&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;](&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;whenTrue&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;whenFalse&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;whenTrue&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;whenFalse&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;scala&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;when&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bar&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;res13&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;scala&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;when&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bar&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;res14&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I know what you’re thinking - gee, Zeshan, we can do this in almost any other language. And you’re correct, except for one minor case. We can also pass functions as parameters. Time to get really fancy:&lt;/p&gt;
+
+&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;scala&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;when&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bar&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Wait, what?! Why did it run both functions?
+// This is really interesting. Why did we print both `foo` and `bar`...?
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Hmm... change the function signature a little bit
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;whenForFunc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;](&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;whenTrue&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;whenFalse&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;whenTrue&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;whenFalse&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;scala&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;whenForFunc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;foo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bar&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Apparently &lt;code class=&quot;highlighter-rouge&quot;&gt;whenTrue: A&lt;/code&gt; is different from &lt;code class=&quot;highlighter-rouge&quot;&gt;whenTrue: A&lt;/code&gt; when the parameter is a function. This is really intriguing I’m planning on devoting a whole post on it. Nevertheless, I hope you can appreciate the power of writing your own custom control structures as library functions.&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html"></summary></entry><entry><title type="html">Simplify CORS for me, please</title><link href="http://localhost:4000/2018/09/09/cors.html" rel="alternate" type="text/html" title="Simplify CORS for me, please" /><published>2018-09-09T20:49:00-05:00</published><updated>2018-09-09T20:49:00-05:00</updated><id>http://localhost:4000/2018/09/09/cors</id><content type="html" xml:base="http://localhost:4000/2018/09/09/cors.html">&lt;h1 id=&quot;cors-simplified&quot;&gt;CORS: Simplified&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dkv97bqrmxzll.cloudfront.net/img/conversations-api/cors/chrome-cors-error.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ah, the infamous &lt;code class=&quot;highlighter-rouge&quot;&gt;Origin is therefore not allowed access &lt;/code&gt;error. If you’ve ever programmed for the web you have most likely run into the situation pictured above. I ran into this a few years ago but didn’t take the time out to understand what it meant. Shamefully, I carried around a vague understanding of CORS for several years. I lay the blame on these terrible [answers][https://stackoverflow.com/questions/10143093/origin-is-not-allowed-by-access-control-allow-origin].&lt;/p&gt;
+
+&lt;p&gt;A google search reveals some intriguing results. Most solutions are too specific and come with half-baked explanations as to why they work. To make matters worse, these answers are littered with incorrect assumptions about what CORS is.&lt;/p&gt;
+
+&lt;p&gt;Some of the accepted or top-voted answers I found:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The easy way is to just add the extension in google chrome to allow access using CORS.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Try using &lt;a href=&quot;http://en.wikipedia.org/wiki/JSONP&quot;&gt;JSONP&lt;/a&gt; (note the &lt;strong&gt;P&lt;/strong&gt; at the end) for speaking between domains&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;chrome.exe —user-data-dir=&quot;C:/Chrome dev session&quot; --disable-web-security&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It’s very simple to solve if you are using &lt;a href=&quot;http://en.wikipedia.org/wiki/PHP&quot;&gt;PHP&lt;/a&gt;. Just add the following script in the beginning of your PHP page which handles the request:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Access-Control-Allow-Origin: *'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To add insult to injury, one of the comments to an answer above:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I think this is a really great answer &lt;strong&gt;if you don’t need a permanent fix or if you only need CORS disabled temporarily.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://media0.giphy.com/media/3oEjI5P7RD2we6odZC/giphy.gif&quot; alt=&quot;donald trump no GIF by Election 2016&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;###What is CORS?&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;C&lt;/strong&gt;ross-&lt;strong&gt;O&lt;/strong&gt;rigin &lt;strong&gt;R&lt;/strong&gt;esource &lt;strong&gt;S&lt;/strong&gt;haring&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;CORS is a &lt;strong&gt;relaxation mechanism&lt;/strong&gt; for the &lt;a href=&quot;https://en.wikipedia.org/wiki/Same-origin_policy&quot;&gt;same-origin security policy&lt;/a&gt; implemented in most modern browsers. In super-simple terms, CORS relaxes security restrictions in browsers.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;CORS&lt;/strong&gt; is&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;not&lt;/strong&gt; a security policy, and thus, cannot be toggled off and/or disabled&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;not&lt;/strong&gt; a restriction on browsers&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Before we continue about CORS, we must first learn about the &lt;a href=&quot;https://en.wikipedia.org/wiki/Same-origin_policy&quot;&gt;same-origin policy&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;same-origin-policy&quot;&gt;Same-origin policy&lt;/h3&gt;
+
+&lt;p&gt;The &lt;strong&gt;same-origin policy&lt;/strong&gt; is a &lt;strong&gt;security mechanism&lt;/strong&gt; that defines how resources from one &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Glossary/origin&quot;&gt;origin&lt;/a&gt; cannot interact with another origin. It helps isolate malicious documents, reducing possible attack vectors.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A &lt;strong&gt;browser&lt;/strong&gt; permits scripts contained in a first web page to access data in a second web page, but only if both web pages have the &lt;strong&gt;same origin&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;###Back to CORS&lt;/p&gt;
+
+&lt;p&gt;“Cross-Origin Resource Sharing (&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Glossary/CORS&quot;&gt;CORS&lt;/a&gt;) is a &lt;strong&gt;mechanism&lt;/strong&gt; that uses additional &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Glossary/HTTP&quot;&gt;HTTP&lt;/a&gt; headers to &lt;strong&gt;tell a browser&lt;/strong&gt; to let a web application running at one origin (domain) have &lt;strong&gt;permission&lt;/strong&gt; to access selected resources from a server at a different origin.” - Mozilla&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Q: What is a cross-origin request?&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;A. A request that ‘&lt;strong&gt;cross&lt;/strong&gt;es’ one origin to another. This means it has a different domain or protocol or port to the originating request.&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Q: What is an origin?&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;A. An origin is defined by the set of domain, protocol and port. In other words, two pages have the same origin if the protocol, port (if specified), and host are the same for both pages.&lt;/p&gt;
+
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;URL&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;Domain&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;Protocol&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;Port&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080&lt;/code&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;localhost&lt;/code&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;HTTP&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;8080&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://192.168.3.10:2181&lt;/code&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.3.10&lt;/code&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;HTTPS&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;2181&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Origin URL: “&lt;strong&gt;http://www.example.com/dir/page.html&lt;/strong&gt;”.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;URL&lt;/th&gt;
+      &lt;th&gt;Outcome&lt;/th&gt;
+      &lt;th&gt;Reason&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;http://www.example.com&lt;/strong&gt;/dir/page2.html&lt;/td&gt;
+      &lt;td&gt;&lt;span style=&quot;color:green&quot;&gt;Success&lt;/span&gt;&lt;/td&gt;
+      &lt;td&gt;Same protocol, host and port&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;http://www.example.com&lt;/strong&gt;/dir2/other.html&lt;/td&gt;
+      &lt;td&gt;&lt;span style=&quot;color:green&quot;&gt;Success&lt;/span&gt;&lt;/td&gt;
+      &lt;td&gt;Same protocol, host and port&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;http://&lt;/strong&gt;username:password@&lt;strong&gt;www.example.com&lt;/strong&gt;/dir2/other.html&lt;/td&gt;
+      &lt;td&gt;&lt;span style=&quot;color:green&quot;&gt;Success&lt;/span&gt;&lt;/td&gt;
+      &lt;td&gt;Same protocol, host and port&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;http://www.example.com:&lt;strong&gt;81&lt;/strong&gt;/dir/other.html&lt;/td&gt;
+      &lt;td&gt;&lt;span style=&quot;color:red&quot;&gt;Failure&lt;/span&gt;&lt;/td&gt;
+      &lt;td&gt;Same protocol and host but different port&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;https&lt;/strong&gt;://www.example.com/dir/other.html&lt;/td&gt;
+      &lt;td&gt;&lt;span style=&quot;color:red&quot;&gt;Failure&lt;/span&gt;&lt;/td&gt;
+      &lt;td&gt;Different protocol&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;http://&lt;strong&gt;en.example.com&lt;/strong&gt;/dir/other.html&lt;/td&gt;
+      &lt;td&gt;&lt;span style=&quot;color:red&quot;&gt;Failure&lt;/span&gt;&lt;/td&gt;
+      &lt;td&gt;Different host&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;http://&lt;strong&gt;example.com&lt;/strong&gt;/dir/other.html&lt;/td&gt;
+      &lt;td&gt;&lt;span style=&quot;color:red&quot;&gt;Failure&lt;/span&gt;&lt;/td&gt;
+      &lt;td&gt;Different host (exact match required)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;http://&lt;strong&gt;v2.www.example.com&lt;/strong&gt;/dir/other.html&lt;/td&gt;
+      &lt;td&gt;&lt;span style=&quot;color:red&quot;&gt;Failure&lt;/span&gt;&lt;/td&gt;
+      &lt;td&gt;Different host (exact match required)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;http://www.example.com:&lt;strong&gt;80&lt;/strong&gt;/dir/other.html&lt;/td&gt;
+      &lt;td&gt;Depends&lt;/td&gt;
+      &lt;td&gt;Port explicit. Depends on implementation in browser.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">CORS: Simplified</summary></entry><entry><title type="html">Scala Baby Steps</title><link href="http://localhost:4000/books/scala/chapter/2018/02/26/Scala-10.html" rel="alternate" type="text/html" title="Scala Baby Steps" /><published>2018-02-26T20:45:45-06:00</published><updated>2018-02-26T20:45:45-06:00</updated><id>http://localhost:4000/books/scala/chapter/2018/02/26/Scala-10</id><content type="html" xml:base="http://localhost:4000/books/scala/chapter/2018/02/26/Scala-10.html">&lt;h4 id=&quot;a-defining-variables&quot;&gt;A. Defining variables&lt;/h4&gt;
+
+&lt;p&gt;Scala has two kinds of variables, &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;. A &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; is similar to a final variable
 in java: once assigned, it cannot be reassigned. A &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; on the other hand, can be.&lt;/p&gt;
 
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello, my name is Scala&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// msg: String - type inferred&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;msg2:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hi!&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// type explicitly given&lt;/span&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello, my name is Scala&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// msg: String - type inferred&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;msg2:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hi!&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// type explicitly given&lt;/span&gt;
 
 
 &lt;span class=&quot;c1&quot;&gt;// reassignment&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;New message&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will give an error&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;msg2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Bye Bye&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;B. Defining functions&lt;/p&gt;
+&lt;h4 id=&quot;b-defining-functions&quot;&gt;B. Defining functions&lt;/h4&gt;
 
 &lt;p&gt;Let write a simple min function in Scala&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;x:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;y:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;x:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;y:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;A few things to note here:&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;Functions start with &lt;code class=&quot;highlighter-rouge&quot;&gt;def&lt;/code&gt;&lt;/li&gt;
@@ -30,66 +264,34 @@ in java: once assigned, it cannot be reassigned. A &lt;code class=&quot;highligh
   &lt;li&gt;The result type follow the parameter, after the closing parenthesis (list : Int)&lt;/li&gt;
   &lt;li&gt;There exists an equal sign (=) before function body&lt;/li&gt;
   &lt;li&gt;The last variable is what is returned, (either x or y)&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">A. Defining variables Scala has two kinds of variables, val and var. A val is similar to a final variable in java: once assigned, it cannot be reassigned. A var on the other hand, can be.</summary></entry><entry><title type="html">First Steps in Scala</title><link href="http://localhost:4000/books/scala/chapter/2018/02/26/Scala-10.html" rel="alternate" type="text/html" title="First Steps in Scala" /><published>2018-02-26T20:45:45-06:00</published><updated>2018-02-26T20:45:45-06:00</updated><id>http://localhost:4000/books/scala/chapter/2018/02/26/Scala-10</id><content type="html" xml:base="http://localhost:4000/books/scala/chapter/2018/02/26/Scala-10.html">&lt;p&gt;A. Defining variables
-Scala has two kinds of variables, &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;. A &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; is similar to a final variable
-in java: once assigned, it cannot be reassigned. A &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; on the other hand, can be.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello, my name is Scala&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// msg: String - type inferred&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;msg2:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hi!&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// type explicitly given&lt;/span&gt;
-
-
-&lt;span class=&quot;c1&quot;&gt;// reassignment&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;New message&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will give an error&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;msg2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Bye Bye&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;B. Defining functions&lt;/p&gt;
-
-&lt;p&gt;Let write a simple min function in Scala&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;x:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;y:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;A few things to note here:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Functions start with &lt;code class=&quot;highlighter-rouge&quot;&gt;def&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Function name is followed by comma-seperated list of parameters&lt;/li&gt;
-  &lt;li&gt;A type must follow every parameter (x: Int)&lt;/li&gt;
-  &lt;li&gt;The result type follow the parameter, after the closing parenthesis (list : Int)&lt;/li&gt;
-  &lt;li&gt;There exists an equal sign (=) before function body&lt;/li&gt;
-  &lt;li&gt;The last variable is what is returned, (either x or y)&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">A. Defining variables Scala has two kinds of variables, val and var. A val is similar to a final variable in java: once assigned, it cannot be reassigned. A var on the other hand, can be.</summary></entry><entry><title type="html">A Scalable Language</title><link href="http://localhost:4000/books/scala/chapter/2018/02/22/Scala-1.html" rel="alternate" type="text/html" title="A Scalable Language" /><published>2018-02-22T20:45:45-06:00</published><updated>2018-02-22T20:45:45-06:00</updated><id>http://localhost:4000/books/scala/chapter/2018/02/22/Scala-1</id><content type="html" xml:base="http://localhost:4000/books/scala/chapter/2018/02/22/Scala-1.html">&lt;p&gt;For years I’ve been meaning to get learn Scala and get familiar with functional programming but never really had the right motivation.
-Recently, I undertook a technically challenging project at work and it is all written in Scala.&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">A. Defining variables</summary></entry><entry><title type="html">Why choose Scala?</title><link href="http://localhost:4000/books/scala/chapter/2018/02/22/Scala-1.html" rel="alternate" type="text/html" title="Why choose Scala?" /><published>2018-02-22T20:45:45-06:00</published><updated>2018-02-22T20:45:45-06:00</updated><id>http://localhost:4000/books/scala/chapter/2018/02/22/Scala-1</id><content type="html" xml:base="http://localhost:4000/books/scala/chapter/2018/02/22/Scala-1.html">&lt;p&gt;Recently, I undertook a technically challenging project at work and it is all written in Scala. I’ve been meaning to get learn Scala and get familiar with functional programming but never really had the right motivation.&lt;/p&gt;
 
 &lt;p&gt;These series of blog posts will aim to change that.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-does-scala-offer&quot;&gt;What does Scala offer?&lt;/h3&gt;
 
 &lt;p&gt;Known as a ‘scala-ble language’, Scala is meant to grow with the needs of the developer.
 In short, Scala is a blend of OO and functional programming concepts in a statically typed language.&lt;/p&gt;
 
-&lt;p&gt;What does Scala offer?&lt;/p&gt;
+&lt;h4 id=&quot;a-scala-is-pure-oo&quot;&gt;A. Scala is pure OO&lt;/h4&gt;
 
-&lt;p&gt;A. Scala is pure OO
-OO gives complex ideas structure and a nice layer of abstraction. Scala is OO in its purest form, whereby every value is an object and every operation is a method call. Thus, even something as trivial as adding two numbers
+&lt;p&gt;OO gives complex ideas structure and a nice layer of abstraction. Scala is OO in its purest form, whereby every value is an object and every operation is a method call. Thus, even something as trivial as adding two numbers
 together is purely OO. Java on the other hand, pollutes its OO structure with primitive types and their associated operations.&lt;/p&gt;
 
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// in-fix notation&lt;/span&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// in-fix notation&lt;/span&gt;
 
 &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.+(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// in pure form&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;B. Scala is also a complete functional language
-Scala is also a full-blown functional language. This means two things:
+&lt;h4 id=&quot;b-scala-is-also-a-complete-functional-language&quot;&gt;B. Scala is also a complete functional language&lt;/h4&gt;
+&lt;p&gt;Scala is also a full-blown functional language. This means two things:
 A. Functions are values of the same status as say Integers or Strings, and so you can store a function in a variable, return functions from methods, pass functions in as arguments
 B. Immutability by default&lt;/p&gt;
 
-&lt;p&gt;C. Scala in concise
-You can omit much of the verbose syntax of Java in Scala. This improves readability of code.&lt;/p&gt;
+&lt;h4 id=&quot;c-scala-is-concise&quot;&gt;C. Scala is concise&lt;/h4&gt;
+&lt;p&gt;You can omit much of the verbose syntax of Java in Scala. This improves the readability of code.&lt;/p&gt;
 
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Java&lt;/span&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Java&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
@@ -106,127 +308,77 @@ You can omit much of the verbose syntax of Java in Scala. This improves readabil
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;// Scala&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;number:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;number:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;D. Scala is compatible - Scala compiles to JVM bytecode
-E. Scala is high-level - Functional Programming
-F. Scala is statically-typed
-This may seem trivial but gives us huge benefits: Verifiable properties, Safe refactoring and inline documentation. Remember, the best comments are the ones that are never written.&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">For years I’ve been meaning to get learn Scala and get familiar with functional programming but never really had the right motivation. Recently, I undertook a technically challenging project at work and it is all written in Scala.</summary></entry><entry><title type="html">Books</title><link href="http://localhost:4000/books/productivity/growth/2018/02/17/Books.html" rel="alternate" type="text/html" title="Books" /><published>2018-02-17T06:45:45-06:00</published><updated>2018-02-17T06:45:45-06:00</updated><id>http://localhost:4000/books/productivity/growth/2018/02/17/Books</id><content type="html" xml:base="http://localhost:4000/books/productivity/growth/2018/02/17/Books.html">&lt;p&gt;I have a ton of books; most of which are left un&lt;/p&gt;
+&lt;h4 id=&quot;d-compatibility-with-java---scala-compiles-to-jvm-bytecode&quot;&gt;D. Compatibility with Java - Scala compiles to JVM bytecode&lt;/h4&gt;
 
-&lt;p&gt;Over the course of my career, I’ve bought a ton of books that have
-accumulated dust over the months. I’m a sucker for the physical medium - there
-is nothing quite like flipping a page, or writing
-notes directly on the paper. I also seem to learn better when reading from paper.
+&lt;h4 id=&quot;e-scala-is-a-high-level-functional-programming-language&quot;&gt;E. Scala is a high-level Functional Programming language&lt;/h4&gt;
+
+&lt;h4 id=&quot;f-scala-is-statically-typed&quot;&gt;F. Scala is statically-typed&lt;/h4&gt;
+
+&lt;p&gt;This may seem trivial but gives us huge benefits: Verifiable properties, Safe refactoring and inline documentation. Remember, the best comments are the ones that are never written.&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">Recently, I undertook a technically challenging project at work and it is all written in Scala. I’ve been meaning to get learn Scala and get familiar with functional programming but never really had the right motivation.</summary></entry><entry><title type="html">Dusty Books</title><link href="http://localhost:4000/books/productivity/growth/2018/02/17/Books.html" rel="alternate" type="text/html" title="Dusty Books" /><published>2018-02-17T06:45:45-06:00</published><updated>2018-02-17T06:45:45-06:00</updated><id>http://localhost:4000/books/productivity/growth/2018/02/17/Books</id><content type="html" xml:base="http://localhost:4000/books/productivity/growth/2018/02/17/Books.html">&lt;p&gt;Over the course of my career, I’ve bought a ton of books that have
+accumulated dust over the years. I’m a sucker for the physical medium - there is nothing quite like flipping a page, or writing
+notes directly on the paper. I also seem to learn better when reading from physical paper.
 I think over the years I’ve becomes so skeptical of what I read on a screen that
 seeing something on paper gives it some additional credibility.&lt;/p&gt;
 
 &lt;p&gt;Sometimes, if I’m struggling with a particularly hairy piece of code, I will print
-it out and work through it on paper. Most times, the convoluted logic seems not as
-convoluted. I also find it much more relaxing, and always
-come away with a deeper understanding of the code.&lt;/p&gt;
+it out and work through it on paper. Most times, the convoluted logic on paper is much easier to digest. I also find it much more relaxing, and always come away with a deeper understanding of the code.&lt;/p&gt;
 
-&lt;p&gt;As a programmer, most of my day is spent looking at a screen. The change to
-paper is always something I look forward to and this gives my eyes some much needed rest.&lt;/p&gt;
+&lt;p&gt;To add, most of my day is spent looking at a screen. The change to paper is always something I look forward to and it gives my eyes some much needed rest.&lt;/p&gt;
 
 &lt;p&gt;So back to the problem at hand: I have several unread books on my shelf that I want to
 read but haven’t had the chance to.&lt;/p&gt;
 
-&lt;p&gt;Thus, I have started an initiative whereby I will read a chapter a day and summarize
-it in a blog post here. The cadence may change a little bit but one chapter
-doesn’t seem to difficult.&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">I have a ton of books; most of which are left un</summary></entry><entry><title type="html">Problem: Construct the array</title><link href="http://localhost:4000/2017/12/14/problem-construct-the-array.html" rel="alternate" type="text/html" title="Problem: Construct the array" /><published>2017-12-14T11:58:00-06:00</published><updated>2017-12-14T11:58:00-06:00</updated><id>http://localhost:4000/2017/12/14/problem-construct-the-array</id><content type="html" xml:base="http://localhost:4000/2017/12/14/problem-construct-the-array.html">&lt;p&gt;https://www.hackerrank.com/contests/101hack52/challenges/construct-the-array3sxxdz&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">https://www.hackerrank.com/contests/101hack52/challenges/construct-the-array3sxxdz</summary></entry><entry><title type="html">The four musketeers - The cat-mouse game and lesson learned</title><link href="http://localhost:4000/2017/12/11/Bearstacks.html" rel="alternate" type="text/html" title="The four musketeers - The cat-mouse game and lesson learned" /><published>2017-12-11T00:00:00-06:00</published><updated>2017-12-11T00:00:00-06:00</updated><id>http://localhost:4000/2017/12/11/Bearstacks</id><content type="html" xml:base="http://localhost:4000/2017/12/11/Bearstacks.html">&lt;p&gt;In early 2015, my brother and our two best friends (who are also brothers) decide to start an app-development agency. We name it &lt;code class=&quot;highlighter-rouge&quot;&gt;BearStacks Development&lt;/code&gt;. All of us are in school at the time, and ‘Co-founder’ seems like a good thing to put on our resumes. After we barely cover the $99 developer fee; we decide to brainstorm for ideas. Much like all first-time app developers, we decide on a game.&lt;/p&gt;
+&lt;p&gt;Thus, I have started an initiative whereby once I read a chapter, I’ll summarize
+the difficult or interesting bits in a blog post.&lt;/p&gt;
 
-&lt;p&gt;We name it Memory Swipe.  It was my brothers idea: show a pattern on the screen and ask the player to mimic it. If the redrawing was close enough, the player would progress to a harder level. The game was designed with no end so a player could potentially play forever.&lt;/p&gt;
+&lt;p&gt;Wish me luck!&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">Over the course of my career, I’ve bought a ton of books that have accumulated dust over the years. I’m a sucker for the physical medium - there is nothing quite like flipping a page, or writing notes directly on the paper. I also seem to learn better when reading from physical paper. I think over the years I’ve becomes so skeptical of what I read on a screen that seeing something on paper gives it some additional credibility.</summary></entry><entry><title type="html">The four musketeers - The cat-mouse game and lessons learned</title><link href="http://localhost:4000/2017/12/11/Bearstacks.html" rel="alternate" type="text/html" title="The four musketeers - The cat-mouse game and lessons learned" /><published>2017-12-11T00:00:00-06:00</published><updated>2017-12-11T00:00:00-06:00</updated><id>http://localhost:4000/2017/12/11/Bearstacks</id><content type="html" xml:base="http://localhost:4000/2017/12/11/Bearstacks.html">&lt;p&gt;&lt;img src=&quot;https://media.giphy.com/media/fxeeuml8GaESfmuE4z/giphy.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Now this development took place over a few semesters - in-between lectures, assignments, midterms and exams. One fateful morning, before our 8:30am classes (damn Waterloo) one of us mindlessly searches for the name “Memory Swipe” in the app store. And there pops up our app with our logo, icon, pictures and name. Everything was exactly as we had designed it.&lt;/p&gt;
+&lt;p&gt;In early 2015, my best friends and I start an app-development agency. We name it &lt;code class=&quot;highlighter-rouge&quot;&gt;BearStacks Development&lt;/code&gt;. All of us are in school at the time, and ‘co-founder’ seems like a good thing to put on our resumes. After barely covering the $99 developer fee, we decide to brainstorm for ideas. Like all first-time app developers, we decide on a game.&lt;/p&gt;
 
-&lt;p&gt;There was one slight problem though - none of us had uploaded it to the App store. Apple has a pretty involved app submission process and its not something you can accidently fat-finger from your IDE. Initially we all think that one of us from the team went ahead and started the process but in about 15 mins it became pretty clear that someone had stolen our code.&lt;/p&gt;
+&lt;p&gt;It was a simple idea: show a pattern on the screen and ask the player to mimic it. If the redrawing was close enough, the player would win the round and progress to a harder level. The game was designed with no end so a player could potentially play forever. We name it &lt;code class=&quot;highlighter-rouge&quot;&gt;Memory Swipe&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;During this time, being first-time iOS developers, we thought it ‘wise’ to push to a public repo on GitHub. Who would steal our crappy code, we thought. We didn’t wanna pay for a private repo. That was our only mistake.&lt;/p&gt;
+&lt;p&gt;Development took place over a several semesters - in-between lectures, missed assignments, midterms and exams. We were making slow and steady progress. The coolest part of the app was the algorithm we devised to calculate how close a redrawing was to the original.&lt;/p&gt;
 
-&lt;p&gt;We check the dates, and the game has been on the app store for about a month now. It also has one update - &lt;code class=&quot;highlighter-rouge&quot;&gt;V1.1 Some bug fix&lt;/code&gt;. That update was the icing on the cake; whoever was stealing our code was also keeping it up to date will all our recent updates to the repo. They had the audacity to include the message &lt;code class=&quot;highlighter-rouge&quot;&gt;Some bug fix&lt;/code&gt; without having an inlking on what was fixed. As a matter of fact, if I remember correctly, we had added a feature in that delta.&lt;/p&gt;
+&lt;p&gt;One early morning, before leaving for our 8:30 am classes (damn UWaterloo) one of us enters the name “Memory Swipe” into the App Store search bar and presses enter. It was a mindless search, made without the expectation of seeing anything but it did. There was an app on the App Store with our name on it. Not only was the name the same, but the icon, company logo, screenshots were all the same. Everything was exactly as we had designed it.&lt;/p&gt;
 
-&lt;p&gt;After fuming for a few hours, we decide to investigate who this was.&lt;/p&gt;
+&lt;p&gt;There was one slight problem though - none of us had uploaded it to the App store. Apple has a pretty involved app submission process and it’s not something you can accidentally fat-finger from your IDE. Initially, we think that one of us went ahead with the submission but in a span of 15 mins and several frantic WhatApp messages, it became pretty clear that someone had stolen our code.&lt;/p&gt;
 
-&lt;p&gt;We check our GitHub repo to see who else has forked our code. We realize that several people have forked our code but none of them seemed like our thief. Some of them didn’t have Apple developer accounts in the same name, and the ones that did, didn’t have our app posted.&lt;/p&gt;
+&lt;p&gt;We had made our first mistake. Being first-time iOS developers, we thought it ‘wise’ to push to a public repo on GitHub. We were naive and thought who would steal our crappy code. Why dish out money for a private repo when a public one suffices.&lt;/p&gt;
 
-&lt;p&gt;After some further investigation, and some digging through the web, we chance upon the the culprit. A developer account linked to somebody half-way around the world.&lt;/p&gt;
+&lt;p&gt;We check the dates, and the game has been on the app store for about a month now. It also has one update - &lt;code class=&quot;highlighter-rouge&quot;&gt;V1.1 Some bug fix&lt;/code&gt;. Whoever was stealing our code was also keeping it up to date will all our recent updates to GitHub. They had the audacity to include the message &lt;code class=&quot;highlighter-rouge&quot;&gt;Some bug fix&lt;/code&gt; without having an inkling as to what was being fixed. After fuming for a few hours, we decide to investigate who this was.&lt;/p&gt;
 
-&lt;p&gt;Our &lt;code class=&quot;highlighter-rouge&quot;&gt;thief&lt;/code&gt; has hundreds of well-designed iOS apps to their name. Their apps look completely legit with reviews and comments. They had a phone number, address and different ways to contact them. To anyone else, this was a perfectly&lt;/p&gt;
+&lt;p&gt;We check our GitHub repo to see who else has forked our code. We see that several people have forked our code but none of them looked like our thief. Some of them didn’t have Apple developer accounts in the same name, and the ones that did, didn’t have our app posted.&lt;/p&gt;
 
-&lt;p&gt;We send emails to that person to take down the app, and even have the courage to call them. (Google Call)&lt;/p&gt;
+&lt;p&gt;After some further investigation, and some digging through the web, we chance upon our thief. A developer account linked to somebody half-way around the world. Our &lt;code class=&quot;highlighter-rouge&quot;&gt;thief&lt;/code&gt; has hundreds of well-designed iOS apps to their name. Their apps look completely legit with reviews and comments. They have a phone number, address and different ways to contact them. To the world, this seems like a completely legit operation.&lt;/p&gt;
 
-&lt;p&gt;We received emails back in a foreign language which we literally put into google translate to figure out what was being said. Initially they were denying everything and wanted us to show proof. We were pretty distraught at this point since it’s really hard to prove&lt;/p&gt;
+&lt;p&gt;We send emails to that person to take down the app, and even have the courage to call them (not worried about money now). We received emails back in a foreign language which we literally put into Google Translate to understand. They deny everything and want us to show proof that we wrote the code.&lt;/p&gt;
 
-&lt;p&gt;We thought we could scare them by saying we’d sue them and what-not. Tell Apple etc. etc. tell-tale&lt;/p&gt;
+&lt;p&gt;When looking at the code again we realized one simple fact - &lt;code class=&quot;highlighter-rouge&quot;&gt;Xcode&lt;/code&gt;, by default copyright header at the top of every file with the name of the developer and the year. We immediately send back an email mentioning that EVERY SINGLE FILE has a copyright header with one of our four names. This scares them, and we don’t hear back for a few weeks.&lt;/p&gt;
 
-&lt;p&gt;When looking at the code again we realized one simple fact - &lt;code class=&quot;highlighter-rouge&quot;&gt;Xcode&lt;/code&gt; puts a default copyright header at the top of every file with the name of the developer and the year. We immediately send back an email detailing that EVERY SINGLE FILE has a copyright header with one of our four names. This really scares them, and we don’t hear back for a few weeks.&lt;/p&gt;
+&lt;p&gt;We get in touch with Apple, and relay the situation to them. In the meantime, we hastily submit our app for review and it gets rejected for having the word ‘Memory’. Apparently that word is copyright in some European countries as it clashes with a board game. We remove the space (MemorySwipe) and put it up for review again. This time it fails because it matches another app on the store - our thief’s. We file a petition to Apple, mention the headers, and after a month they take down our thief’s app.&lt;/p&gt;
 
-&lt;p&gt;We get in touch with Apple, and after&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lessons learned:&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;In the meantime, we hastily submit our app for review and it gets rejected for having the word ‘Memory’. Apparently that word is copyright in many countries as it clashes with a board game. We remove the space (MemorySwipe) and put it up for review again. This time it fails because matches someone elses code - our thiefs. We complain to apple, mention the Copyright headers, and after a month they take down our thiefs app.&lt;/p&gt;
-
-&lt;p&gt;But by this time several other ones have also sprung up on the app store; some with a slightly different name but same icon, some with a different icon. Our app also gets accepted and is thrown into the mix.&lt;/p&gt;
-
-&lt;p&gt;We didn’t have the energy to now go after everybody else as well, and so we were pretty&lt;/p&gt;
-
-&lt;p&gt;Lessons learned:&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;Never push private code to a public repo, no matter how insignificant - if you accidently push a password or key to public repo, you assume its been compromised.&lt;/li&gt;
-  &lt;li&gt;You never know when those annoying copyright headers may come in handy&lt;/li&gt;
-  &lt;li&gt;Don’t cheap out over security or anonymity&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">In early 2015, my brother and our two best friends (who are also brothers) decide to start an app-development agency. We name it BearStacks Development. All of us are in school at the time, and ‘Co-founder’ seems like a good thing to put on our resumes. After we barely cover the $99 developer fee; we decide to brainstorm for ideas. Much like all first-time app developers, we decide on a game.</summary></entry><entry><title type="html">On the edge!</title><link href="http://localhost:4000/2017/12/09/On-the-edge.html" rel="alternate" type="text/html" title="On the edge!" /><published>2017-12-09T12:47:00-06:00</published><updated>2017-12-09T12:47:00-06:00</updated><id>http://localhost:4000/2017/12/09/On-the-edge</id><content type="html" xml:base="http://localhost:4000/2017/12/09/On-the-edge.html">&lt;p&gt;In another blog &lt;a href=&quot;https://mzanwar.github.io/2017/09/05/comparator-confusion.html&quot;&gt;post&lt;/a&gt; we talked about the&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ascending&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;descending&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ascending&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {1, 2, 4, 5, 9}&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;descending&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {9, 5, 4, 2, 1}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;what-if-the-values-of-approach-minvalue-and-maxvalue&quot;&gt;What if the values of approach MIN.VALUE and MAX.VALUE?&lt;/h3&gt;
-&lt;p&gt;How do we compare longs, floats, BigIntegers etc&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;a-b&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;b-a&lt;/code&gt; is a terrible hack.&lt;/p&gt;
-
-&lt;p&gt;Its a bad abstraction and the worst case of someone being too clever.&lt;/p&gt;
-
-&lt;p&gt;As is the case with clever solutions, they catch on and permeate throughout the web. People are inexplicably drawn to these solutions.&lt;/p&gt;
-
-&lt;p&gt;You will find several accepted solution on StackOverflow implementing the comparator as a - b. This will work in 98% of scenarios, but why implement a flawed solution to begin with. The 2% of the time it does fail will be extremely hard to debug.&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">In another blog post we talked about the</summary></entry><entry><title type="html">Java - Super or Extends: Collections copy Method</title><link href="http://localhost:4000/2017/09/11/java-super-or-extends-collections-copy-method.html" rel="alternate" type="text/html" title="Java - Super or Extends: Collections copy Method" /><published>2017-09-11T10:16:34-05:00</published><updated>2017-09-11T10:16:34-05:00</updated><id>http://localhost:4000/2017/09/11/java--super-or-extends-collections-copy-method</id><content type="html" xml:base="http://localhost:4000/2017/09/11/java-super-or-extends-collections-copy-method.html">&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;srcSize&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;srcSize&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IndexOutOfBoundsException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Source does not fit in dest&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;srcSize&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;COPY_THRESHOLD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RandomAccess&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dest&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RandomAccess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;srcSize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ListIterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;di&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;listIterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ListIterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;si&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;listIterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;srcSize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;di&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;di&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;si&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">```java public static void copy(List&amp;lt;? super T&amp;gt; dest, List&amp;lt;? extends T&amp;gt; src) { int srcSize = src.size(); if (srcSize &amp;gt; dest.size()) throw new IndexOutOfBoundsException(&quot;Source does not fit in dest&quot;);</summary></entry><entry><title type="html">Enough sed!</title><link href="http://localhost:4000/2017/09/07/sed.html" rel="alternate" type="text/html" title="Enough sed!" /><published>2017-09-07T21:20:56-05:00</published><updated>2017-09-07T21:20:56-05:00</updated><id>http://localhost:4000/2017/09/07/sed</id><content type="html" xml:base="http://localhost:4000/2017/09/07/sed.html">&lt;p&gt;Late one night I needed to shove several thousand &lt;code class=&quot;highlighter-rouge&quot;&gt;json&lt;/code&gt; documents into my local Elasticsearch cluster. I was setting up a demo for work and why I had left the most demo-worthy part of it till the end, I don’t know. Nevertheless, I was able to accomplish that with just two lines of bash! Lets take a look here:&lt;/p&gt;
+  &lt;li&gt;Never push private code to a public repo. If pushed, assume it has been compromised.&lt;/li&gt;
+  &lt;li&gt;Those annoying default copyright headers are useful.&lt;/li&gt;
+  &lt;li&gt;Don’t cheap out over security or anonymity.&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html"></summary></entry><entry><title type="html">Have I sed enough!</title><link href="http://localhost:4000/2017/09/07/sed.html" rel="alternate" type="text/html" title="Have I sed enough!" /><published>2017-09-07T21:20:56-05:00</published><updated>2017-09-07T21:20:56-05:00</updated><id>http://localhost:4000/2017/09/07/sed</id><content type="html" xml:base="http://localhost:4000/2017/09/07/sed.html">&lt;p&gt;While preparing for a work-demo late one night, I needed to export several thousand &lt;code class=&quot;highlighter-rouge&quot;&gt;json&lt;/code&gt; documents into a local Elasticsearch cluster. I am not sure why I had left the only demo-worthy part of my presentation to the last minute. Nevertheless, I was able to accomplish this in two lines! Lets take a look here:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;c&quot;&gt;# A.&lt;/span&gt;
-sed &lt;span class=&quot;s1&quot;&gt;'s/^/{ &quot;index&quot; : {} }\
-/'&lt;/span&gt; jsonFile &amp;gt; bulkReady.json
+&lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/^/{ &quot;index&quot; : {} }\
+/'&lt;/span&gt; jsonFile &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; bulkReady.json
 
 &lt;span class=&quot;c&quot;&gt;# B.&lt;/span&gt;
-curl -s -XPOST http://localhost:9200/index/type/_bulk --data-binary @bulkReady.json&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+curl &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-XPOST&lt;/span&gt; http://localhost:9200/index/type/_bulk &lt;span class=&quot;nt&quot;&gt;--data-binary&lt;/span&gt; @bulkReady.json&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;explanation&quot;&gt;Explanation:&lt;/h3&gt;
 
-&lt;p&gt;Time to break this down! My file had a bunch of json documents, i.e.&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;p&gt;Time to break this down! My file had a bunch of json documents:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;document&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;one&quot;&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
@@ -242,49 +394,45 @@ curl -s -XPOST http://localhost:9200/index/type/_bulk --data-binary @bulkReady.j
   &lt;span class=&quot;s2&quot;&gt;&quot;document&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;four&quot;&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-.
-.
-.
+&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;I needed a way to index all of these into my node Elasticsearch node. I knew Elasticsearch offered a basic &lt;code class=&quot;highlighter-rouge&quot;&gt;Index API&lt;/code&gt; which would solve my problem, but I’d have to send each document one by one.&lt;/p&gt;
 
 &lt;p&gt;For example:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# First document&lt;/span&gt;
-curl -XPUT &lt;span class=&quot;s1&quot;&gt;'localhost:9200/index/type/1?pretty'&lt;/span&gt; -H &lt;span class=&quot;s1&quot;&gt;'Content-Type: application/json'&lt;/span&gt; -d&lt;span class=&quot;s1&quot;&gt;'
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# First document&lt;/span&gt;
+curl &lt;span class=&quot;nt&quot;&gt;-XPUT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'localhost:9200/index/type/1?pretty'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Content-Type: application/json'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
 {
 &quot;document&quot;: &quot;one&quot;
 &quot;title&quot;:{}
 }
 '&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# Second document&lt;/span&gt;
-curl -XPUT &lt;span class=&quot;s1&quot;&gt;'localhost:9200/index/type/1?pretty'&lt;/span&gt; -H &lt;span class=&quot;s1&quot;&gt;'Content-Type: application/json'&lt;/span&gt; -d&lt;span class=&quot;s1&quot;&gt;'
+curl &lt;span class=&quot;nt&quot;&gt;-XPUT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'localhost:9200/index/type/1?pretty'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Content-Type: application/json'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
 {
 &quot;document&quot;: &quot;two&quot;
 &quot;title&quot;:{}
 }
 '&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;I thought I’d put together a simple bash script that would run through my documents and &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; them to my ES node. But, I knew there had to be a better way. I had heard about the &lt;code class=&quot;highlighter-rouge&quot;&gt;Bulk API&lt;/code&gt; interface that ES offered but I hadn’t had a chance to use it - until now.&lt;/p&gt;
 
 &lt;p&gt;After looking into the &lt;code class=&quot;highlighter-rouge&quot;&gt;Bulk API&lt;/code&gt; interface, I realized that it was actually pretty simple to use. I could simple use the command:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -s -XPOST http://localhost:9200/_bulk --data-binary @bulkReady.json
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-XPOST&lt;/span&gt; http://localhost:9200/_bulk &lt;span class=&quot;nt&quot;&gt;--data-binary&lt;/span&gt; @bulkReady.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;But my &lt;code class=&quot;highlighter-rouge&quot;&gt;json&lt;/code&gt; file needed to be in a special format! Every json document needed to have a some metadata associated with it. So I needed to massage my file into something like this:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;index&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;_index&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;test&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;_type&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;type1&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;_id&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;index&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;_index&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;test&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;_type&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;type1&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;_id&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;1&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Since I already knew the index and type of my documents, I could remove them from the metadata. I also wanted Elasticsearch to automatically assign an id. Thus, I needed a document looking like thus:&lt;/p&gt;
+&lt;p&gt;Since I already knew the index and type of my documents, I could remove them from the metadata. I also wanted Elasticsearch to automatically assign an id. Thus, I needed a document looking like this:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;index&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;index&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
   &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;document&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;one&quot;&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
@@ -304,42 +452,223 @@ curl -XPUT &lt;span class=&quot;s1&quot;&gt;'localhost:9200/index/type/1?pretty'
   &lt;span class=&quot;s2&quot;&gt;&quot;document&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;four&quot;&lt;/span&gt;
   &lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;I was back to where I started. Damn, I was so close but now I’ll need to add some metadata to each document anyways so why not just use my initial approach of writing that bash script. That is when I discovered the substitution capability of &lt;code class=&quot;highlighter-rouge&quot;&gt;sed&lt;/code&gt;; an extremely powerful command line Stream EDitor.&lt;/p&gt;
+&lt;p&gt;Damn, I was so close but now I’ll need to add some metadata to each document anyways so why not just use my initial approach of writing that bash script. That is when I discovered the substitution capability of &lt;code class=&quot;highlighter-rouge&quot;&gt;sed&lt;/code&gt;; an extremely powerful command line Stream EDitor.&lt;/p&gt;
 
 &lt;h3 id=&quot;sed-substitution&quot;&gt;sed substitution&lt;/h3&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 &lt;span class=&quot;c&quot;&gt;# sed processes each line of a file and applies some substitution if it matches a regex&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# the syntax is sed 's/regex/replacement/'&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# s - substitution&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# / are delimiters - you need three after s/a/b/ - replaces a with b&lt;/span&gt;
 
-&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;sunday | sed &lt;span class=&quot;s1&quot;&gt;'s/day/night/'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;sunday | &lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/day/night/'&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# =&amp;gt; sunnight&lt;/span&gt;
 
-&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Monday Sunday | sed &lt;span class=&quot;s1&quot;&gt;'s/day/night/'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Monday Sunday | &lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/day/night/'&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# =&amp;gt; Monnight Sunday - only processes first match&lt;/span&gt;
 
-&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Monday Sunday | sed &lt;span class=&quot;s1&quot;&gt;'s/day/night/g'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Monday Sunday | &lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/day/night/g'&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# =&amp;gt; Monnight Sunnight - a g parameter at the end tell sed to act globally&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;This is all I needed to solve my bulk format problem. I needed to add some metadata before every document. &lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt; is regex for start of the line. I had some problems adding a new line because \n does not seem to work on my &lt;a href=&quot;http://sed.sourceforge.net/sedfaq4.html&quot;&gt;version&lt;/a&gt; of sed. I had to actually add a physical new line to get it to work.&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sed &lt;span class=&quot;s1&quot;&gt;'s/^/{ &quot;index&quot; : {} }\
-/'&lt;/span&gt; jsonFile &amp;gt; bulkReady.json
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/^/{ &quot;index&quot; : {} }\
+/'&lt;/span&gt; jsonFile &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; bulkReady.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Once I had my file in the correct format, one simple curl was all I needed:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -s -XPOST http://localhost:9200/index/type/_bulk --data-binary @bulkReady.json
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-XPOST&lt;/span&gt; http://localhost:9200/index/type/_bulk &lt;span class=&quot;nt&quot;&gt;--data-binary&lt;/span&gt; @bulkReady.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;And that is how I was able to upload several thousand json docs in two lines. Makes me wonder how much more productive I’d be if had command of the command line!&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">Late one night I needed to shove several thousand json documents into my local Elasticsearch cluster. I was setting up a demo for work and why I had left the most demo-worthy part of it till the end, I don’t know. Nevertheless, I was able to accomplish that with just two lines of bash! Lets take a look here:</summary></entry></feed>
+&lt;p&gt;And that is how I was able to upload several thousand json docs in two lines. Makes me wonder how much more productive I’d be if was well-versed in all the command line tools!&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">While preparing for a work-demo late one night, I needed to export several thousand json documents into a local Elasticsearch cluster. I am not sure why I had left the only demo-worthy part of my presentation to the last minute. Nevertheless, I was able to accomplish this in two lines! Lets take a look here:</summary></entry><entry><title type="html">Confounded Comparator</title><link href="http://localhost:4000/2017/09/05/comparator-confusion.html" rel="alternate" type="text/html" title="Confounded Comparator" /><published>2017-09-05T00:00:15-05:00</published><updated>2017-09-05T00:00:15-05:00</updated><id>http://localhost:4000/2017/09/05/comparator-confusion</id><content type="html" xml:base="http://localhost:4000/2017/09/05/comparator-confusion.html">&lt;p&gt;&lt;img src=&quot;https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif&quot; alt=&quot;confused&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sort&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;How many times have we seen something the comparator compare method defined as the subtraction of two arbitrary entities? &lt;strong&gt;This is bad code&lt;/strong&gt;! It is non-intuitive and absurd. Unless I’m missing some really big insight here, I firmly believe I’m not the only one this has confused.&lt;/p&gt;
+
+&lt;p&gt;After searching the searched the web for an explanation and could not find anything that satisfied my curiosity. I found pages and pages of example of how to use it - but nothing describing the mechanism behind it. Someone even posted an enticing &lt;a href=&quot;https://stackoverflow.com/questions/26107921/what-determines-ascending-or-descending-order-in-comparator-comparable-collect&quot;&gt;question&lt;/a&gt;; and sadly was given a less than ideal answer.&lt;/p&gt;
+
+&lt;p&gt;Let me explain - here is a simple comparator implemented as a lambda function:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ascending&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;descending&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Can you see where the confusion lies? Why does the subtraction of &lt;code class=&quot;highlighter-rouge&quot;&gt;a - b&lt;/code&gt; result in a sort of ascending order?
+&lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; are simply parameters to the function; they don’t inherently provide any insight into what they are. To add to the confusion, by simple swapping the subtraction, namely &lt;code class=&quot;highlighter-rouge&quot;&gt;b - a&lt;/code&gt;, we end up with a descending order.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ascending&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {1, 2, 4, 5, 9}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;descending&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {9, 5, 4, 2, 1}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Weird right!&lt;/p&gt;
+
+&lt;h3 id=&quot;breaking-it-down&quot;&gt;Breaking it down&lt;/h3&gt;
+
+&lt;p&gt;The key to understanding this is understanding:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;The return value of &lt;code class=&quot;highlighter-rouge&quot;&gt;compare&lt;/code&gt; affects the final ordering.&lt;/li&gt;
+  &lt;li&gt;Which order are the parameters passed into the compare method - namely what are &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt;?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The official &lt;a href=&quot;http://docs.oracle.com/javase/7/docs/api/java/util/Comparator.html&quot;&gt;javadocs&lt;/a&gt; do a reasonable job explaining the first point but they fall short on explaining what &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; are.&lt;/p&gt;
+
+&lt;p&gt;In short, if the &lt;code class=&quot;highlighter-rouge&quot;&gt;compare&lt;/code&gt; method returns a negative number, &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; will always precede &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; in the final sorted order. If, however, compare returns a positive number, &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; will always precede &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; in ordering. Let me repeat that for clarity: &lt;em&gt;the return value of the compare method determines the final sorted placement of the two parameters, &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; with respect to each other.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;A thing to note is the &lt;code class=&quot;highlighter-rouge&quot;&gt;compare&lt;/code&gt; method does not know or care about what the words ascending or descending mean. All it wants to do is place two elements in some order. More precisely, it just wants to &lt;em&gt;pick&lt;/em&gt; one element over the other.&lt;/p&gt;
+
+&lt;p&gt;Now we still don’t know why &lt;code class=&quot;highlighter-rouge&quot;&gt;a - b&lt;/code&gt; gives us ascending order; and &lt;code class=&quot;highlighter-rouge&quot;&gt;b - a&lt;/code&gt; gives us descending. To add to the confusion, the switching of parameters &lt;code class=&quot;highlighter-rouge&quot;&gt;a- b&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;b - a&lt;/code&gt; to reverse the sort, seems to imply that the order in which &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; are passed seems to affect final order. What we will discover shortly, however, is that this is &lt;strong&gt;not&lt;/strong&gt; the case.&lt;/p&gt;
+
+&lt;h4 id=&quot;a-natural-order&quot;&gt;A natural order&lt;/h4&gt;
+
+&lt;p&gt;Numbers have a natural order to them. 7 is bigger than 5. Likewise, 5 is smaller than 6. Subtract a smaller number from a bigger one and you end up with a positive value.  A smaller number minus a bigger one results in a negative value. This beckons the question: how do we know if a number is bigger or smaller than another? Instinctively, we picture a number line and plot the two points on it. The number that is furthest to the right is the bigger one. This is exactly what we are testing when we subtract the two inside our comparator function.&lt;/p&gt;
+
+&lt;p&gt;Let me illustrate with some examples: &lt;code class=&quot;highlighter-rouge&quot;&gt;Notation (a, b) -&amp;gt; (a - b)&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a = 7, b = 3
+compare(a, b) -&amp;gt; (a - b)
+(7, 3) -&amp;gt; (7 - 3)
+7 - 3 = 4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;4 is a positive value meaning &lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt; precedes &lt;code class=&quot;highlighter-rouge&quot;&gt;7&lt;/code&gt; in the final sorted order; or put in other words: &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; comes before &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let’s flip our parameters:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a = 3, b = 7
+compare(a, b) -&amp;gt; (a - b)
+(3, 7) -&amp;gt; (3 - 7)
+3 - 7 = -4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;-4 is a negative number, and thus &lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt; will come before &lt;code class=&quot;highlighter-rouge&quot;&gt;7&lt;/code&gt; again. Put in other words: &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; comes before &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Both results give us ascending order; which is correct. What we have just realized is that the order we pass into the function does not matter. But then what happens if we switch the parameters &lt;code class=&quot;highlighter-rouge&quot;&gt;(b - a)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Lets try our first example again: &lt;code class=&quot;highlighter-rouge&quot;&gt;Notation (a, b) -&amp;gt; (b - a)&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a = 7, b = 3
+compare(a, b) -&amp;gt; (b - a)
+(7, 3) -&amp;gt; (3 - 7) =&amp;gt; negative value;`7` comes before `3`
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;-4 is a negative number so &lt;code class=&quot;highlighter-rouge&quot;&gt;7&lt;/code&gt; precedes &lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt; in final order. But hold on, what just happened here. I thought we just concluded above that the order we passed the numbers into the comparator function didn’t matter.&lt;/p&gt;
+
+&lt;p&gt;By swapping the input parameters &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt;, we’ve flipped our choice and this reverses the sort order. If a negative result would’ve selected &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; the first time, now we’re gonna select &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Where before, &lt;code class=&quot;highlighter-rouge&quot;&gt;(a - b)&lt;/code&gt; returning a positive number the algorithm would pick b, &lt;code class=&quot;highlighter-rouge&quot;&gt;(b - a)&lt;/code&gt; will return a negative number and so it’ll select &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; this time. This works vice-versa.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;What we need to realize is that the &lt;code class=&quot;highlighter-rouge&quot;&gt;(b - a)&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;(a - b)&lt;/code&gt; part doesn’t really matter. What matters is the return value of the &lt;code class=&quot;highlighter-rouge&quot;&gt;compare&lt;/code&gt; method.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pick&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This means we can do all sorts of crazy stuff like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Comparator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crazySort&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// pick a&lt;/span&gt;
+       &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crazySort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// [1, 9, 2, 5, 4]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;why-is-comparatorinteger-sort--ab---a---b-problematic&quot;&gt;Why is &lt;code class=&quot;highlighter-rouge&quot;&gt;Comparator&amp;lt;Integer&amp;gt; sort = (a,b) -&amp;gt; a - b;&lt;/code&gt; problematic?&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;a-b&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;b-a&lt;/code&gt; is a terrible hack. It’s a bad abstraction and someone trying to be too clever. As is the case with clever solutions, they catch on and permeate throughout the web. For some odd reason, people are inexplicably drawn to these solutions.&lt;/p&gt;
+
+&lt;p&gt;You will find several accepted solution on StackOverflow implementing the comparator as &lt;code class=&quot;highlighter-rouge&quot;&gt;a - b&lt;/code&gt;. This will work in 98% of scenarios, but why implement a flawed solution to begin with. The 2% of the time it does fail will be extremely hard to debug.&lt;/p&gt;
+
+&lt;p&gt;Other than being non-intuitive and confusing on first glance, this approach actually has a flaw. It fails when the values of &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; approach &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer.MIN_VALUE&lt;/code&gt; / &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer.MIN_VALUE&lt;/code&gt;. The better way to write this is the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Better way
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ascendingSort&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// order a before b
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// order b before a
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Some more problems:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;How do we sort objects that don’t have a natural order to them like numbers?&lt;/li&gt;
+  &lt;li&gt;What if the definition of inequality is not transitive - if a &amp;lt; b, b &amp;lt; c BUT a &amp;gt; c? Most sort algorithms assume that sort order is transitive by optimizing away the unnecessary checks.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;summary&quot;&gt;Summary&lt;/h4&gt;
+
+&lt;p&gt;To surmise, there are three things going on here:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The subtractions &lt;code class=&quot;highlighter-rouge&quot;&gt;(a - b)&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;(b - a)&lt;/code&gt; don’t mean anything in isolation&lt;/li&gt;
+  &lt;li&gt;The order in which &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; are passed do not matter.&lt;/li&gt;
+  &lt;li&gt;The result of &lt;code class=&quot;highlighter-rouge&quot;&gt;compare(a, b)&lt;/code&gt; determines the final output.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The confusion lies when the programmer assigns some sort of importance to the parameters &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt;, the order they are passed in, or the result of their values. Thinking of &lt;code class=&quot;highlighter-rouge&quot;&gt;compare(a, b)&lt;/code&gt; as a black box is a good strategy here.&lt;/p&gt;
+
+&lt;h2 id=&quot;misc&quot;&gt;Misc&lt;/h2&gt;
+
+&lt;p&gt;In my research for this; I came across the sorting algorithm that Java uses for its default sorting. It’s called &lt;a href=&quot;http://svn.python.org/projects/python/trunk/Objects/listsort.txt&quot;&gt;Tims Sort&lt;/a&gt; and is a hybridized form of Merge sort. Check it out, its pretty cool.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when running on partially sorted arrays - Tims Sort&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html"></summary></entry><entry><title type="html">To know or not know, how do we know?</title><link href="http://localhost:4000/learning/productivity/growth/2017/08/23/gaps-in-knowledge.markdown,.html" rel="alternate" type="text/html" title="To know or not know, how do we know?" /><published>2017-08-23T22:02:00-05:00</published><updated>2017-08-23T22:02:00-05:00</updated><id>http://localhost:4000/learning/productivity/growth/2017/08/23/gaps-in-knowledge.markdown,</id><content type="html" xml:base="http://localhost:4000/learning/productivity/growth/2017/08/23/gaps-in-knowledge.markdown,.html">&lt;blockquote&gt;
+  &lt;p&gt;He that knows not, and knows not that he knows not is a fool&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn2.hubspot.net/hubfs/398536/Images/blog/bigstock-Question-Marks-On-White-146393174.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We all have weaknesses. The quicker we acknowledge this fact, the better off we will be. No one in the world understands every part of every system, everyone is a fool in some domain. There is nothing wrong with being a fool, but we must intentionally make an effort to not be one. Despite the various reasons we have gaps in our knowledge, it is &lt;strong&gt;imperative&lt;/strong&gt; we try to plug them.&lt;/p&gt;
+
+&lt;p&gt;A budding student has just finished learning about control-flow statements and falsely assumes they can solve any problem given to them. If they are now given a problem that only has a recursive (tree-traversal) solution, they will fumble with . From personal experience, I attempted to answer a BST traversal question on an exam using only if statements; not a very proud memory of mine. During the exam I was confused as to why I was given only a few lines of empty space for my answer when I needed about two pages.&lt;/p&gt;
+
+&lt;h3 id=&quot;knowledge-falls-into-four-levels&quot;&gt;Knowledge falls into four levels:&lt;/h3&gt;
+
+&lt;h4 id=&quot;a-things-you-know-that-you-know&quot;&gt;A. Things you know that you know&lt;/h4&gt;
+&lt;p&gt;Everything that we know well, and understand fits in here. This is where we the right amount of confidence in your skills and know how to apply these skills to maximize benefit. This is where we want to be to reach our potential.&lt;/p&gt;
+
+&lt;h4 id=&quot;b-things-you-dont-know-that-you-know&quot;&gt;B. Things you don’t know that you know&lt;/h4&gt;
+&lt;p&gt;This is a weird transient state that falls between &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;C&lt;/code&gt;. Some people never move up from this state due to either a lack of confidence in their abilities or just a touch of the wrong kind of humility. Not where we want to be for greatest utility.&lt;/p&gt;
+
+&lt;h4 id=&quot;c-things-you-know-that-you-dont-know&quot;&gt;C. Things you know that you don’t know&lt;/h4&gt;
+
+&lt;p&gt;This is a good place to list all your weaknesses when starting out.&lt;/p&gt;
+
+&lt;h4 id=&quot;d-things-you-dont-know-that-you-dont-know&quot;&gt;D. Things you don’t know that you don’t know&lt;/h4&gt;
+
+&lt;p&gt;We want to minimize our time in this state. We must be very careful not to fall into this trap. There are many things you will never know, but the ones you &lt;strong&gt;should&lt;/strong&gt; know, you should know them very well.&lt;/p&gt;
+
+&lt;p&gt;As you progress with your learning you’ll move up a category, sometimes even leaping all the way to &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;. Often times, you’ll also drop down a level. This may seem counter-intuitive but has a very simple explanation: as you learn new material, you also start getting a grasp on all the parts that you didn’t know you didn’t know &lt;code class=&quot;highlighter-rouge&quot;&gt;D&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In our next post we will discuss how to uncover these gaps and how to plug them.&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">He that knows not, and knows not that he knows not is a fool</summary></entry><entry><title type="html">Soft Skills</title><link href="http://localhost:4000/books/productivity/growth/2017/08/17/soft-skills.html" rel="alternate" type="text/html" title="Soft Skills" /><published>2017-08-17T21:45:45-05:00</published><updated>2017-08-17T21:45:45-05:00</updated><id>http://localhost:4000/books/productivity/growth/2017/08/17/soft-skills</id><content type="html" xml:base="http://localhost:4000/books/productivity/growth/2017/08/17/soft-skills.html">&lt;p&gt;Coding is often the easiest, most enjoyable part of a developers day. The hard part is dealing with everything else. This is what we’re good at; where we thrive. Meetings are the bane of all developers. I know many developers who have stymied their natural progression to management so that they could continue coding.&lt;/p&gt;
+
+&lt;p&gt;There is just something so appealing about sitting down and hacking away at a problem or laying out a solution that existed purely in your head. Taking those crazy ideas swimming in your head, and putting them into practice has a real kick to it. How many other professions can &lt;em&gt;profess&lt;/em&gt; the same? Very few!&lt;/p&gt;
+
+&lt;p&gt;Imagine a Toyota engineer, Phil, has an incredible idea one night in the shower. The idea: lets design the hood of our cars to mimic the &lt;a href=&quot;https://www.vox.com/videos/2017/11/9/16628106/biomimicry-design-nature&quot;&gt;pointed beak of a Kingfisher&lt;/a&gt;. Phil believes that a more aerodynamic shape would reduce drag at high speeds. How difficult is it for Phil to take this crazy idea and see it through to production? What are the costs associated? How much resistance or push-back will they feel? How long would it take? Several months to several years indeed. Unless Phil was the CEO of Toyota, there is little hope his idea would even get traction.&lt;/p&gt;
+
+&lt;p&gt;How about if an architect wants to change the concrete-mixture they poured into their 100-story building? As the British say - not bloody likely.&lt;/p&gt;
+
+&lt;p&gt;Programmers don’t have this hindrance. I can do all this, and do it with minimum overhead. I don’t need anything but my brain and the internet; and my brain is optional. All kidding aside, programmers can put together a completely new setup, pull away the foundations of a project, push in a completely new paradigm in as little time as it takes to write lines of code.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://simpleprogrammer.com&quot;&gt;John Sonmez’s&lt;/a&gt; book, &lt;a href=&quot;https://www.amazon.com/Soft-Skills-software-developers-manual/dp/1617292397&quot;&gt;Soft Skills&lt;/a&gt;, outlines all the skills&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The software developer’s life manual&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Many of them are &lt;em&gt;common sense&lt;/em&gt; (whatever that means) but when has common sense truly been common.
+I write this without hesitation; this is one of my most recommended books to everyone regardless of their technical ability. The chapters laid out in this book are worth their weight in gold - literally. (Add a nice popup quote here, If you were to take the weight of that many pages in gold and sell it, would you make that much more over your life? 1.8 pounds =&amp;gt; $32781.56)&lt;/p&gt;
+
+&lt;p&gt;John organically splits the book into seven chapters; starting with career and ending with emotional intelligence. It is basic stuff, but I recommend everyone to give it a read.&lt;/p&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">Coding is often the easiest, most enjoyable part of a developers day. The hard part is dealing with everything else. This is what we’re good at; where we thrive. Meetings are the bane of all developers. I know many developers who have stymied their natural progression to management so that they could continue coding.</summary></entry></feed>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.png?">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Simplify CORS for me, please</title>
+  <meta name="description" content="CORS: Simplified">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/2018/09/09/cors.html">
+  <link rel="alternate" type="application/rss+xml" title="Writings" href="/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">Writings</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/whoami/">whoami</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/resume/">Resume</a>
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Simplify CORS for me, please</h1>
+
+        <p class="post-meta">
+
+            
+            
+            
+            
+
+            
+
+            
+            <span class="reading-time">2 min read</span>
+
+            <time datetime="2018-09-09T20:49:00-05:00" itemprop="datePublished">
+                
+                Sep 9, 2018
+            </time>
+            
+        </p>
+        <div class="post-divider"></div>
+    </header>
+
+    <div class="post-content" itemprop="articleBody">
+        <h1 id="cors-simplified">CORS: Simplified</h1>
+
+<p><img src="https://dkv97bqrmxzll.cloudfront.net/img/conversations-api/cors/chrome-cors-error.png" alt="img" /></p>
+
+<p>Ah, the infamous <code class="highlighter-rouge">Origin is therefore not allowed access </code>error. If you’ve ever programmed for the web you have most likely run into the situation pictured above. I ran into this a few years ago but didn’t take the time out to understand what it meant. Shamefully, I carried around a vague understanding of CORS for several years. I lay the blame on these terrible [answers][https://stackoverflow.com/questions/10143093/origin-is-not-allowed-by-access-control-allow-origin].</p>
+
+<p>A google search reveals some intriguing results. Most solutions are too specific and come with half-baked explanations as to why they work. To make matters worse, these answers are littered with incorrect assumptions about what CORS is.</p>
+
+<p>Some of the accepted or top-voted answers I found:</p>
+
+<ul>
+  <li>
+    <p>The easy way is to just add the extension in google chrome to allow access using CORS.</p>
+  </li>
+  <li>
+    <p>Try using <a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a> (note the <strong>P</strong> at the end) for speaking between domains</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">chrome.exe —user-data-dir="C:/Chrome dev session" --disable-web-security</code></p>
+  </li>
+  <li>
+    <p>It’s very simple to solve if you are using <a href="http://en.wikipedia.org/wiki/PHP">PHP</a>. Just add the following script in the beginning of your PHP page which handles the request:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="nb">header</span><span class="p">(</span><span class="s1">'Access-Control-Allow-Origin: *'</span><span class="p">);</span> <span class="cp">?&gt;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>To add insult to injury, one of the comments to an answer above:</p>
+
+<blockquote>
+  <p>I think this is a really great answer <strong>if you don’t need a permanent fix or if you only need CORS disabled temporarily.</strong></p>
+</blockquote>
+
+<p><img src="https://media0.giphy.com/media/3oEjI5P7RD2we6odZC/giphy.gif" alt="donald trump no GIF by Election 2016" /></p>
+
+<p>###What is CORS?</p>
+
+<blockquote>
+  <p><strong>C</strong>ross-<strong>O</strong>rigin <strong>R</strong>esource <strong>S</strong>haring</p>
+</blockquote>
+
+<p>CORS is a <strong>relaxation mechanism</strong> for the <a href="https://en.wikipedia.org/wiki/Same-origin_policy">same-origin security policy</a> implemented in most modern browsers. In super-simple terms, CORS relaxes security restrictions in browsers.</p>
+
+<blockquote>
+  <p><strong>CORS</strong> is</p>
+
+  <ul>
+    <li><strong>not</strong> a security policy, and thus, cannot be toggled off and/or disabled</li>
+    <li><strong>not</strong> a restriction on browsers</li>
+  </ul>
+</blockquote>
+
+<p>Before we continue about CORS, we must first learn about the <a href="https://en.wikipedia.org/wiki/Same-origin_policy">same-origin policy</a></p>
+
+<h3 id="same-origin-policy">Same-origin policy</h3>
+
+<p>The <strong>same-origin policy</strong> is a <strong>security mechanism</strong> that defines how resources from one <a href="https://developer.mozilla.org/en-US/docs/Glossary/origin">origin</a> cannot interact with another origin. It helps isolate malicious documents, reducing possible attack vectors.</p>
+
+<blockquote>
+  <p>A <strong>browser</strong> permits scripts contained in a first web page to access data in a second web page, but only if both web pages have the <strong>same origin</strong>.</p>
+
+</blockquote>
+
+<p>###Back to CORS</p>
+
+<p>“Cross-Origin Resource Sharing (<a href="https://developer.mozilla.org/en-US/docs/Glossary/CORS">CORS</a>) is a <strong>mechanism</strong> that uses additional <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTTP">HTTP</a> headers to <strong>tell a browser</strong> to let a web application running at one origin (domain) have <strong>permission</strong> to access selected resources from a server at a different origin.” - Mozilla</p>
+
+<blockquote>
+  <p><strong>Q: What is a cross-origin request?</strong></p>
+
+  <p>A. A request that ‘<strong>cross</strong>es’ one origin to another. This means it has a different domain or protocol or port to the originating request.</p>
+
+</blockquote>
+
+<blockquote>
+  <p><strong>Q: What is an origin?</strong></p>
+
+  <p>A. An origin is defined by the set of domain, protocol and port. In other words, two pages have the same origin if the protocol, port (if specified), and host are the same for both pages.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">URL</th>
+        <th style="text-align: center">Domain</th>
+        <th style="text-align: center">Protocol</th>
+        <th style="text-align: center">Port</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center"><code class="highlighter-rouge">http://localhost:8080</code></td>
+        <td style="text-align: center"><code class="highlighter-rouge">localhost</code></td>
+        <td style="text-align: center">HTTP</td>
+        <td style="text-align: center">8080</td>
+      </tr>
+      <tr>
+        <td style="text-align: center"><code class="highlighter-rouge">https://192.168.3.10:2181</code></td>
+        <td style="text-align: center"><code class="highlighter-rouge">192.168.3.10</code></td>
+        <td style="text-align: center">HTTPS</td>
+        <td style="text-align: center">2181</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>Origin URL: “<strong>http://www.example.com/dir/page.html</strong>”.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th>Outcome</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>http://www.example.com</strong>/dir/page2.html</td>
+      <td><span style="color:green">Success</span></td>
+      <td>Same protocol, host and port</td>
+    </tr>
+    <tr>
+      <td><strong>http://www.example.com</strong>/dir2/other.html</td>
+      <td><span style="color:green">Success</span></td>
+      <td>Same protocol, host and port</td>
+    </tr>
+    <tr>
+      <td><strong>http://</strong>username:password@<strong>www.example.com</strong>/dir2/other.html</td>
+      <td><span style="color:green">Success</span></td>
+      <td>Same protocol, host and port</td>
+    </tr>
+    <tr>
+      <td>http://www.example.com:<strong>81</strong>/dir/other.html</td>
+      <td><span style="color:red">Failure</span></td>
+      <td>Same protocol and host but different port</td>
+    </tr>
+    <tr>
+      <td><strong>https</strong>://www.example.com/dir/other.html</td>
+      <td><span style="color:red">Failure</span></td>
+      <td>Different protocol</td>
+    </tr>
+    <tr>
+      <td>http://<strong>en.example.com</strong>/dir/other.html</td>
+      <td><span style="color:red">Failure</span></td>
+      <td>Different host</td>
+    </tr>
+    <tr>
+      <td>http://<strong>example.com</strong>/dir/other.html</td>
+      <td><span style="color:red">Failure</span></td>
+      <td>Different host (exact match required)</td>
+    </tr>
+    <tr>
+      <td>http://<strong>v2.www.example.com</strong>/dir/other.html</td>
+      <td><span style="color:red">Failure</span></td>
+      <td>Different host (exact match required)</td>
+    </tr>
+    <tr>
+      <td>http://www.example.com:<strong>80</strong>/dir/other.html</td>
+      <td>Depends</td>
+      <td>Port explicit. Depends on implementation in browser.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+    </div>
+
+    
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Writings</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Zeshan Anwar
+            
+            </li>
+            
+            <li><a href="mailto:m.zeshan.a93@gmail.com">m.zeshan.a93@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/mzanwar"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">mzanwar</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple explanations one post at a time
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Enough sed!</title>
-  <meta name="description" content="Late one night I needed to shove several thousand json documents into my local Elasticsearch cluster. I was setting up a demo for work and why I had left the...">
+  <title>Have I sed enough!</title>
+  <meta name="description" content="While preparing for a work-demo late one night, I needed to export several thousand json documents into a local Elasticsearch cluster. I am not sure why I ha...">
 
   <link rel="stylesheet" href="/assets/main.css">
   <link rel="canonical" href="http://localhost:4000/2017/09/07/sed.html">
-  <link rel="alternate" type="application/rss+xml" title="Stubborn Programmer" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Writings" href="/feed.xml">
   
   
 </head>
@@ -25,7 +25,7 @@
   <div class="wrapper">
     
     
-    <a class="site-title" href="/">Stubborn Programmer</a>
+    <a class="site-title" href="/">Writings</a>
   
     
       <nav class="site-nav">
@@ -58,7 +58,7 @@
           
             
             
-            <a class="page-link" href="/resume/">resume</a>
+            <a class="page-link" href="/resume/">Resume</a>
             
           
             
@@ -76,7 +76,7 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Enough sed!</h1>
+        <h1 class="post-title" itemprop="name headline">Have I sed enough!</h1>
 
         <p class="post-meta">
 
@@ -102,19 +102,19 @@
     </header>
 
     <div class="post-content" itemprop="articleBody">
-        <p>Late one night I needed to shove several thousand <code class="highlighter-rouge">json</code> documents into my local Elasticsearch cluster. I was setting up a demo for work and why I had left the most demo-worthy part of it till the end, I don’t know. Nevertheless, I was able to accomplish that with just two lines of bash! Lets take a look here:</p>
+        <p>While preparing for a work-demo late one night, I needed to export several thousand <code class="highlighter-rouge">json</code> documents into a local Elasticsearch cluster. I am not sure why I had left the only demo-worthy part of my presentation to the last minute. Nevertheless, I was able to accomplish this in two lines! Lets take a look here:</p>
 
 <figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="c"># A.</span>
-sed <span class="s1">'s/^/{ "index" : {} }\
-/'</span> jsonFile &gt; bulkReady.json
+<span class="nb">sed</span> <span class="s1">'s/^/{ "index" : {} }\
+/'</span> jsonFile <span class="o">&gt;</span> bulkReady.json
 
 <span class="c"># B.</span>
-curl -s -XPOST http://localhost:9200/index/type/_bulk --data-binary @bulkReady.json</code></pre></figure>
+curl <span class="nt">-s</span> <span class="nt">-XPOST</span> http://localhost:9200/index/type/_bulk <span class="nt">--data-binary</span> @bulkReady.json</code></pre></figure>
 
 <h3 id="explanation">Explanation:</h3>
 
-<p>Time to break this down! My file had a bunch of json documents, i.e.</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>  <span class="o">{</span>
+<p>Time to break this down! My file had a bunch of json documents:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">{</span>
   <span class="s2">"document"</span>: <span class="s2">"one"</span>
   <span class="s2">"title"</span>:<span class="o">{}</span>
   <span class="o">}</span>
@@ -130,49 +130,45 @@ curl -s -XPOST http://localhost:9200/index/type/_bulk --data-binary @bulkReady.j
   <span class="s2">"document"</span>: <span class="s2">"four"</span>
   <span class="s2">"title"</span>:<span class="o">{}</span>
   <span class="o">}</span>
-.
-.
-.
+<span class="nb">.</span>
+<span class="nb">.</span>
+<span class="nb">.</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>I needed a way to index all of these into my node Elasticsearch node. I knew Elasticsearch offered a basic <code class="highlighter-rouge">Index API</code> which would solve my problem, but I’d have to send each document one by one.</p>
 
 <p>For example:</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># First document</span>
-curl -XPUT <span class="s1">'localhost:9200/index/type/1?pretty'</span> -H <span class="s1">'Content-Type: application/json'</span> -d<span class="s1">'
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># First document</span>
+curl <span class="nt">-XPUT</span> <span class="s1">'localhost:9200/index/type/1?pretty'</span> <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="nt">-d</span><span class="s1">'
 {
 "document": "one"
 "title":{}
 }
 '</span>
 <span class="c"># Second document</span>
-curl -XPUT <span class="s1">'localhost:9200/index/type/1?pretty'</span> -H <span class="s1">'Content-Type: application/json'</span> -d<span class="s1">'
+curl <span class="nt">-XPUT</span> <span class="s1">'localhost:9200/index/type/1?pretty'</span> <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="nt">-d</span><span class="s1">'
 {
 "document": "two"
 "title":{}
 }
 '</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>I thought I’d put together a simple bash script that would run through my documents and <code class="highlighter-rouge">curl</code> them to my ES node. But, I knew there had to be a better way. I had heard about the <code class="highlighter-rouge">Bulk API</code> interface that ES offered but I hadn’t had a chance to use it - until now.</p>
 
 <p>After looking into the <code class="highlighter-rouge">Bulk API</code> interface, I realized that it was actually pretty simple to use. I could simple use the command:</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>curl -s -XPOST http://localhost:9200/_bulk --data-binary @bulkReady.json
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-s</span> <span class="nt">-XPOST</span> http://localhost:9200/_bulk <span class="nt">--data-binary</span> @bulkReady.json
+</code></pre></div></div>
 
 <p>But my <code class="highlighter-rouge">json</code> file needed to be in a special format! Every json document needed to have a some metadata associated with it. So I needed to massage my file into something like this:</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="o">{</span> <span class="s2">"index"</span> : <span class="o">{</span> <span class="s2">"_index"</span> : <span class="s2">"test"</span>, <span class="s2">"_type"</span> : <span class="s2">"type1"</span>, <span class="s2">"_id"</span> : <span class="s2">"1"</span> <span class="o">}</span> <span class="o">}</span>
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span> <span class="s2">"index"</span> : <span class="o">{</span> <span class="s2">"_index"</span> : <span class="s2">"test"</span>, <span class="s2">"_type"</span> : <span class="s2">"type1"</span>, <span class="s2">"_id"</span> : <span class="s2">"1"</span> <span class="o">}</span> <span class="o">}</span>
+</code></pre></div></div>
 
-<p>Since I already knew the index and type of my documents, I could remove them from the metadata. I also wanted Elasticsearch to automatically assign an id. Thus, I needed a document looking like thus:</p>
+<p>Since I already knew the index and type of my documents, I could remove them from the metadata. I also wanted Elasticsearch to automatically assign an id. Thus, I needed a document looking like this:</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>  <span class="o">{</span> <span class="s2">"index"</span> : <span class="o">{}</span> <span class="o">}</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">{</span> <span class="s2">"index"</span> : <span class="o">{}</span> <span class="o">}</span>
   <span class="o">{</span>
   <span class="s2">"document"</span>: <span class="s2">"one"</span>
   <span class="s2">"title"</span>:<span class="o">{}</span>
@@ -192,45 +188,41 @@ curl -XPUT <span class="s1">'localhost:9200/index/type/1?pretty'</span> -H <span
   <span class="s2">"document"</span>: <span class="s2">"four"</span>
   <span class="s2">"title"</span>:<span class="o">{}</span>
   <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>I was back to where I started. Damn, I was so close but now I’ll need to add some metadata to each document anyways so why not just use my initial approach of writing that bash script. That is when I discovered the substitution capability of <code class="highlighter-rouge">sed</code>; an extremely powerful command line Stream EDitor.</p>
+<p>Damn, I was so close but now I’ll need to add some metadata to each document anyways so why not just use my initial approach of writing that bash script. That is when I discovered the substitution capability of <code class="highlighter-rouge">sed</code>; an extremely powerful command line Stream EDitor.</p>
 
 <h3 id="sed-substitution">sed substitution</h3>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="c"># sed processes each line of a file and applies some substitution if it matches a regex</span>
 <span class="c"># the syntax is sed 's/regex/replacement/'</span>
 <span class="c"># s - substitution</span>
 <span class="c"># / are delimiters - you need three after s/a/b/ - replaces a with b</span>
 
-<span class="nb">echo </span>sunday | sed <span class="s1">'s/day/night/'</span>
+<span class="nb">echo </span>sunday | <span class="nb">sed</span> <span class="s1">'s/day/night/'</span>
 <span class="c"># =&gt; sunnight</span>
 
-<span class="nb">echo </span>Monday Sunday | sed <span class="s1">'s/day/night/'</span>
+<span class="nb">echo </span>Monday Sunday | <span class="nb">sed</span> <span class="s1">'s/day/night/'</span>
 <span class="c"># =&gt; Monnight Sunday - only processes first match</span>
 
-<span class="nb">echo </span>Monday Sunday | sed <span class="s1">'s/day/night/g'</span>
+<span class="nb">echo </span>Monday Sunday | <span class="nb">sed</span> <span class="s1">'s/day/night/g'</span>
 <span class="c"># =&gt; Monnight Sunnight - a g parameter at the end tell sed to act globally</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This is all I needed to solve my bulk format problem. I needed to add some metadata before every document. <code class="highlighter-rouge">^</code> is regex for start of the line. I had some problems adding a new line because \n does not seem to work on my <a href="http://sed.sourceforge.net/sedfaq4.html">version</a> of sed. I had to actually add a physical new line to get it to work.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sed <span class="s1">'s/^/{ "index" : {} }\
-/'</span> jsonFile &gt; bulkReady.json
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="s1">'s/^/{ "index" : {} }\
+/'</span> jsonFile <span class="o">&gt;</span> bulkReady.json
+</code></pre></div></div>
 
 <p>Once I had my file in the correct format, one simple curl was all I needed:</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>curl -s -XPOST http://localhost:9200/index/type/_bulk --data-binary @bulkReady.json
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-s</span> <span class="nt">-XPOST</span> http://localhost:9200/index/type/_bulk <span class="nt">--data-binary</span> @bulkReady.json
+</code></pre></div></div>
 
-<p>And that is how I was able to upload several thousand json docs in two lines. Makes me wonder how much more productive I’d be if had command of the command line!</p>
+<p>And that is how I was able to upload several thousand json docs in two lines. Makes me wonder how much more productive I’d be if was well-versed in all the command line tools!</p>
 
 
     </div>
@@ -245,7 +237,7 @@ curl -XPUT <span class="s1">'localhost:9200/index/type/1?pretty'</span> -H <span
 
   <div class="wrapper">
 
-    <h2 class="footer-heading">Stubborn Programmer</h2>
+    <h2 class="footer-heading">Writings</h2>
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
@@ -256,7 +248,7 @@ curl -XPUT <span class="s1">'localhost:9200/index/type/1?pretty'</span> -H <span
             
             </li>
             
-            <li><a href="mailto:mzanwar@edu.uwaterloo.ca">mzanwar@edu.uwaterloo.ca</a></li>
+            <li><a href="mailto:m.zeshan.a93@gmail.com">m.zeshan.a93@gmail.com</a></li>
             
         </ul>
       </div>
@@ -271,12 +263,6 @@ curl -XPUT <span class="s1">'localhost:9200/index/type/1?pretty'</span> -H <span
           </li>
           
 
-          
-          <li>
-            <a href="https://twitter.com/ZeshanAnwar93"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
-</span><span class="username">ZeshanAnwar93</span></a>
-
-          </li>
           
         </ul>
       </div>

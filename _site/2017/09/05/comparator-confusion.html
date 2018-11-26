@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Comparator Confusion?</title>
-  <meta name="description" content="The comparator compare method is bad design! There I said it. It is non-intuitive and absurd. Unless I’m missing some really big insight here, I don’t think ...">
+  <title>Confounded Comparator</title>
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="/assets/main.css">
   <link rel="canonical" href="http://localhost:4000/2017/09/05/comparator-confusion.html">
-  <link rel="alternate" type="application/rss+xml" title="Stubborn Programmer" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Writings" href="/feed.xml">
   
   
 </head>
@@ -25,7 +25,7 @@
   <div class="wrapper">
     
     
-    <a class="site-title" href="/">Stubborn Programmer</a>
+    <a class="site-title" href="/">Writings</a>
   
     
       <nav class="site-nav">
@@ -58,7 +58,7 @@
           
             
             
-            <a class="page-link" href="/resume/">resume</a>
+            <a class="page-link" href="/resume/">Resume</a>
             
           
             
@@ -76,7 +76,7 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Comparator Confusion?</h1>
+        <h1 class="post-title" itemprop="name headline">Confounded Comparator</h1>
 
         <p class="post-meta">
 
@@ -88,7 +88,7 @@
             
 
             
-            <span class="reading-time">5 min read</span>
+            <span class="reading-time">6 min read</span>
 
             <time datetime="2017-09-05T00:00:15-05:00" itemprop="datePublished">
                 
@@ -102,29 +102,28 @@
     </header>
 
     <div class="post-content" itemprop="articleBody">
-        <p>The comparator compare method is bad design! There I said it. It is
-non-intuitive and absurd. Unless I’m missing some really big insight here, I
-don’t think I’m the only one confused.</p>
+        <p><img src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif" alt="confused" /></p>
 
-<p>I searched the web for an explanation and could not find anything that satisfied my curiosity. I found pages and pages of example of how to use it - but nothing describing the mechanism behind it. Someone even posted an enticing <a href="https://stackoverflow.com/questions/26107921/what-determines-ascending-or-descending-order-in-comparator-comparable-collect">question</a>; and sadly was given a less than ideal answer.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">sort</span> <span class="o">=</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>How many times have we seen something the comparator compare method defined as the subtraction of two arbitrary entities? <strong>This is bad code</strong>! It is non-intuitive and absurd. Unless I’m missing some really big insight here, I firmly believe I’m not the only one this has confused.</p>
+
+<p>After searching the searched the web for an explanation and could not find anything that satisfied my curiosity. I found pages and pages of example of how to use it - but nothing describing the mechanism behind it. Someone even posted an enticing <a href="https://stackoverflow.com/questions/26107921/what-determines-ascending-or-descending-order-in-comparator-comparable-collect">question</a>; and sadly was given a less than ideal answer.</p>
 
 <p>Let me explain - here is a simple comparator implemented as a lambda function:</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ascending</span> <span class="o">=</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ascending</span> <span class="o">=</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="o">;</span>
 <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">descending</span> <span class="o">=</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="o">;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Can you see where the confusion lies? Why does the subtraction of <code class="highlighter-rouge">a - b</code> result in a sort of ascending order?
-<code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code> are simply parameters to the function; they don’t inherently provide any insight into what they are.</p>
+<code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code> are simply parameters to the function; they don’t inherently provide any insight into what they are. To add to the confusion, by simple swapping the subtraction, namely <code class="highlighter-rouge">b - a</code>, we end up with a descending order.</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Integer</span><span class="o">[]</span> <span class="n">numbers</span> <span class="o">=</span> <span class="o">{</span><span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">1</span><span class="o">};</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Integer</span><span class="o">[]</span> <span class="n">numbers</span> <span class="o">=</span> <span class="o">{</span><span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">1</span><span class="o">};</span>
 <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">numbers</span><span class="o">,</span> <span class="n">ascending</span><span class="o">);</span> <span class="c1">// {1, 2, 4, 5, 9}</span>
 <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">numbers</span><span class="o">,</span> <span class="n">descending</span><span class="o">);</span> <span class="c1">// {9, 5, 4, 2, 1}</span>
-</code></pre>
-</div>
-
-<p>To add to the confusion, by simple swapping the subtraction, namely <code class="highlighter-rouge">b - a</code>, we end up with a descending order.</p>
+</code></pre></div></div>
 
 <p>Weird right!</p>
 
@@ -132,7 +131,7 @@ don’t think I’m the only one confused.</p>
 
 <p>The key to understanding this is understanding:</p>
 <ol>
-  <li>How the return value of <code class="highlighter-rouge">compare</code> affect final ordering?</li>
+  <li>The return value of <code class="highlighter-rouge">compare</code> affects the final ordering.</li>
   <li>Which order are the parameters passed into the compare method - namely what are <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code>?</li>
 </ol>
 
@@ -146,25 +145,23 @@ don’t think I’m the only one confused.</p>
 
 <h4 id="a-natural-order">A natural order</h4>
 
-<p>Numbers have a natural order to them. 7 is bigger than 5. Likewise, 5 is less than 6. Subtract a bigger number from a smaller one and you end up with a positive value.</p>
+<p>Numbers have a natural order to them. 7 is bigger than 5. Likewise, 5 is smaller than 6. Subtract a smaller number from a bigger one and you end up with a positive value.  A smaller number minus a bigger one results in a negative value. This beckons the question: how do we know if a number is bigger or smaller than another? Instinctively, we picture a number line and plot the two points on it. The number that is furthest to the right is the bigger one. This is exactly what we are testing when we subtract the two inside our comparator function.</p>
 
 <p>Let me illustrate with some examples: <code class="highlighter-rouge">Notation (a, b) -&gt; (a - b)</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>a = 7, b = 3
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = 7, b = 3
 compare(a, b) -&gt; (a - b)
 (7, 3) -&gt; (7 - 3)
 7 - 3 = 4
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>4 is a positive value meaning <code class="highlighter-rouge">3</code> precedes <code class="highlighter-rouge">7</code> in the final sorted order; or put in other words: <code class="highlighter-rouge">b</code> comes before <code class="highlighter-rouge">a</code>.</p>
 
 <p>Let’s flip our parameters:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>a = 3, b = 7
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = 3, b = 7
 compare(a, b) -&gt; (a - b)
 (3, 7) -&gt; (3 - 7)
 3 - 7 = -4
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>-4 is a negative number, and thus <code class="highlighter-rouge">3</code> will come before <code class="highlighter-rouge">7</code> again. Put in other words: <code class="highlighter-rouge">b</code> comes before <code class="highlighter-rouge">a</code>.</p>
 
@@ -172,11 +169,10 @@ compare(a, b) -&gt; (a - b)
 
 <p>Lets try our first example again: <code class="highlighter-rouge">Notation (a, b) -&gt; (b - a)</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>a = 7, b = 3
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = 7, b = 3
 compare(a, b) -&gt; (b - a)
 (7, 3) -&gt; (3 - 7) =&gt; negative value;`7` comes before `3`
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>-4 is a negative number so <code class="highlighter-rouge">7</code> precedes <code class="highlighter-rouge">3</code> in final order. But hold on, what just happened here. I thought we just concluded above that the order we passed the numbers into the comparator function didn’t matter.</p>
 
 <p>By swapping the input parameters <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code>, we’ve flipped our choice and this reverses the sort order. If a negative result would’ve selected <code class="highlighter-rouge">a</code> the first time, now we’re gonna select <code class="highlighter-rouge">b</code>.</p>
@@ -187,14 +183,13 @@ compare(a, b) -&gt; (b - a)
   <p>What we need to realize is that the <code class="highlighter-rouge">(b - a)</code> or <code class="highlighter-rouge">(a - b)</code> part doesn’t really matter. What matters is the return value of the <code class="highlighter-rouge">compare</code> method.</p>
 </blockquote>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="n">compare</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">pick</span> <span class="n">a</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">compare</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">pick</span> <span class="n">a</span><span class="o">;</span>
 <span class="k">if</span> <span class="nf">compare</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">pick</span> <span class="n">b</span><span class="o">;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This means we can do all sorts of crazy stuff like this:</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Integer</span><span class="o">[]</span> <span class="n">numbers</span> <span class="o">=</span> <span class="o">{</span><span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">1</span><span class="o">};</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Integer</span><span class="o">[]</span> <span class="n">numbers</span> <span class="o">=</span> <span class="o">{</span><span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">1</span><span class="o">};</span>
 <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">crazySort</span> <span class="o">=</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
        <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">5</span><span class="o">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
        <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="c1">// pick a</span>
@@ -202,28 +197,46 @@ compare(a, b) -&gt; (b - a)
        <span class="o">};</span>
 
 <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">numbers</span><span class="o">,</span> <span class="n">crazySort</span><span class="o">);</span>  <span class="c1">// [1, 9, 2, 5, 4]</span>
-</code></pre>
-</div>
+</code></pre></div></div>
+
+<h4 id="why-is-comparatorinteger-sort--ab---a---b-problematic">Why is <code class="highlighter-rouge">Comparator&lt;Integer&gt; sort = (a,b) -&gt; a - b;</code> problematic?</h4>
+
+<p><code class="highlighter-rouge">a-b</code> and <code class="highlighter-rouge">b-a</code> is a terrible hack. It’s a bad abstraction and someone trying to be too clever. As is the case with clever solutions, they catch on and permeate throughout the web. For some odd reason, people are inexplicably drawn to these solutions.</p>
+
+<p>You will find several accepted solution on StackOverflow implementing the comparator as <code class="highlighter-rouge">a - b</code>. This will work in 98% of scenarios, but why implement a flawed solution to begin with. The 2% of the time it does fail will be extremely hard to debug.</p>
+
+<p>Other than being non-intuitive and confusing on first glance, this approach actually has a flaw. It fails when the values of <code class="highlighter-rouge">a</code> or <code class="highlighter-rouge">b</code> approach <code class="highlighter-rouge">Integer.MIN_VALUE</code> / <code class="highlighter-rouge">Integer.MIN_VALUE</code>. The better way to write this is the following:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Better way
+</span><span class="k">def</span> <span class="n">ascendingSort</span> <span class="k">=</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="c1">// order a before b
+</span>    <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">a</span> <span class="k">return</span> <span class="mi">1</span> <span class="c1">// order b before a
+</span>    <span class="k">return</span> <span class="mi">0</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Some more problems:</strong></p>
+
+<ol>
+  <li>How do we sort objects that don’t have a natural order to them like numbers?</li>
+  <li>What if the definition of inequality is not transitive - if a &lt; b, b &lt; c BUT a &gt; c? Most sort algorithms assume that sort order is transitive by optimizing away the unnecessary checks.</li>
+</ol>
 
 <h4 id="summary">Summary</h4>
 
 <p>To surmise, there are three things going on here:</p>
 
 <ol>
-  <li>The return functions <code class="highlighter-rouge">(a - b)</code> or <code class="highlighter-rouge">(b - a)</code> don’t mean anything</li>
+  <li>The subtractions <code class="highlighter-rouge">(a - b)</code> or <code class="highlighter-rouge">(b - a)</code> don’t mean anything in isolation</li>
   <li>The order in which <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code> are passed do not matter.</li>
-  <li>The result of <code class="highlighter-rouge">compare(a, b)</code> determines the final output</li>
+  <li>The result of <code class="highlighter-rouge">compare(a, b)</code> determines the final output.</li>
 </ol>
 
-<p>The confusion lies when the programmer assigns some sort of importance to the parameters <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code>, the order they are passed in, or the result of their values. Thinking of <code class="highlighter-rouge">compare(a,b)</code> as a black box is a good strategy here.</p>
-
-<p>As is the case with all explanations, this only leads us down a path of more questions. For example, how do we sort objects that don’t have a natural order to them like numbers? Pushing further, what if the definition of inequality is not transitive - if a &lt; b, b &lt; c BUT a &gt; c? What about if values approach Integer.MAX_VALUE and Integer.MIN_VALUE?</p>
-
-<p>These will be answered in future posts.</p>
+<p>The confusion lies when the programmer assigns some sort of importance to the parameters <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code>, the order they are passed in, or the result of their values. Thinking of <code class="highlighter-rouge">compare(a, b)</code> as a black box is a good strategy here.</p>
 
 <h2 id="misc">Misc</h2>
 
-<p>In my research for this; I came across the sorting algorithm that Java uses for its sorting. It’s called <a href="http://svn.python.org/projects/python/trunk/Objects/listsort.txt">Tims Sort</a> and is a hybridized form of Merge sort. Check it out, its pretty cool.</p>
+<p>In my research for this; I came across the sorting algorithm that Java uses for its default sorting. It’s called <a href="http://svn.python.org/projects/python/trunk/Objects/listsort.txt">Tims Sort</a> and is a hybridized form of Merge sort. Check it out, its pretty cool.</p>
 
 <blockquote>
   <p>A stable, adaptive, iterative mergesort that requires far fewer than n lg(n) comparisons when running on partially sorted arrays - Tims Sort</p>
@@ -242,7 +255,7 @@ compare(a, b) -&gt; (b - a)
 
   <div class="wrapper">
 
-    <h2 class="footer-heading">Stubborn Programmer</h2>
+    <h2 class="footer-heading">Writings</h2>
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
@@ -253,7 +266,7 @@ compare(a, b) -&gt; (b - a)
             
             </li>
             
-            <li><a href="mailto:mzanwar@edu.uwaterloo.ca">mzanwar@edu.uwaterloo.ca</a></li>
+            <li><a href="mailto:m.zeshan.a93@gmail.com">m.zeshan.a93@gmail.com</a></li>
             
         </ul>
       </div>
@@ -268,12 +281,6 @@ compare(a, b) -&gt; (b - a)
           </li>
           
 
-          
-          <li>
-            <a href="https://twitter.com/ZeshanAnwar93"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
-</span><span class="username">ZeshanAnwar93</span></a>
-
-          </li>
           
         </ul>
       </div>

@@ -9,11 +9,11 @@ author: "Zeshan Anwar"
 
 ![](https://media.giphy.com/media/fxeeuml8GaESfmuE4z/giphy.gif)
 
-In early 2015, my brother and our two best friends decide to start an app-development agency. We name it `BearStacks Development`. All of us are in school at the time, and ‘co-founder' seems like a good thing to put on our resumes. After we barely cover the $99 developer fee; we decide to brainstorm for ideas. Unlike all first-time app developers, we decide on a game. 
+In early 2015, my best friends and I start an app-development agency. We name it `BearStacks Development`. All of us are in school at the time, and ‘co-founder' seems like a good thing to put on our resumes. After barely covering the $99 developer fee, we decide to brainstorm for ideas. Like all first-time app developers, we decide on a game.
 
-We term it Memory Swipe.  It was my brothers idea: show a pattern on the screen and ask the player to mimic it. If the redrawing was close enough, the player would win the round and progress to a harder level. The game was designed with no end so a player could potentially play forever.
+It was a simple idea: show a pattern on the screen and ask the player to mimic it. If the redrawing was close enough, the player would win the round and progress to a harder level. The game was designed with no end so a player could potentially play forever. We name it `Memory Swipe`. 
 
-Development took place over a several semesters - in-between lectures, missed assignments, botched midterms and exams. We were making slow and steady progress. The coolest part of the app was the algorithm we devised to calculate how close a redrawing was to the original.
+Development took place over a several semesters - in-between lectures, missed assignments, midterms and exams. We were making slow and steady progress. The coolest part of the app was the algorithm we devised to calculate how close a redrawing was to the original.
 
 One early morning, before leaving for our 8:30 am classes (damn UWaterloo) one of us enters the name "Memory Swipe" into the App Store search bar and presses enter. It was a mindless search, made without the expectation of seeing anything but it did. There was an app on the App Store with our name on it. Not only was the name the same, but the icon, company logo, screenshots were all the same. Everything was exactly as we had designed it.
 

@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>First Steps in Scala</title>
-  <meta name="description" content="A. Defining variables Scala has two kinds of variables, val and var. A val is similar to a final variable in java: once assigned, it cannot be reassigned. A ...">
+  <title>Scala Baby Steps</title>
+  <meta name="description" content="A. Defining variables">
 
   <link rel="stylesheet" href="/assets/main.css">
   <link rel="canonical" href="http://localhost:4000/books/scala/chapter/2018/02/26/Scala-10.html">
-  <link rel="alternate" type="application/rss+xml" title="Stubborn Programmer" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Writings" href="/feed.xml">
   
   
 </head>
@@ -25,7 +25,7 @@
   <div class="wrapper">
     
     
-    <a class="site-title" href="/">Stubborn Programmer</a>
+    <a class="site-title" href="/">Writings</a>
   
     
       <nav class="site-nav">
@@ -58,7 +58,7 @@
           
             
             
-            <a class="page-link" href="/resume/">resume</a>
+            <a class="page-link" href="/resume/">Resume</a>
             
           
             
@@ -76,7 +76,7 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">First Steps in Scala</h1>
+        <h1 class="post-title" itemprop="name headline">Scala Baby Steps</h1>
 
         <p class="post-meta">
 
@@ -100,29 +100,28 @@
     </header>
 
     <div class="post-content" itemprop="articleBody">
-        <p>A. Defining variables
-Scala has two kinds of variables, <code class="highlighter-rouge">val</code> and <code class="highlighter-rouge">var</code>. A <code class="highlighter-rouge">val</code> is similar to a final variable
+        <h4 id="a-defining-variables">A. Defining variables</h4>
+
+<p>Scala has two kinds of variables, <code class="highlighter-rouge">val</code> and <code class="highlighter-rouge">var</code>. A <code class="highlighter-rouge">val</code> is similar to a final variable
 in java: once assigned, it cannot be reassigned. A <code class="highlighter-rouge">var</code> on the other hand, can be.</p>
 
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">val</span> <span class="n">msg</span> <span class="o">=</span> <span class="s">"Hello, my name is Scala"</span> <span class="c1">// msg: String - type inferred</span>
-<span class="n">var</span> <span class="nl">msg2:</span> <span class="n">String</span> <span class="o">=</span> <span class="s">"Hi!"</span> <span class="c1">// type explicitly given</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">val</span> <span class="n">msg</span> <span class="o">=</span> <span class="s">"Hello, my name is Scala"</span> <span class="c1">// msg: String - type inferred</span>
+<span class="kt">var</span> <span class="nl">msg2:</span> <span class="n">String</span> <span class="o">=</span> <span class="s">"Hi!"</span> <span class="c1">// type explicitly given</span>
 
 
 <span class="c1">// reassignment</span>
 <span class="n">msg</span> <span class="o">=</span> <span class="s">"New message"</span> <span class="c1">// will give an error</span>
 <span class="n">msg2</span> <span class="o">=</span> <span class="s">"Bye Bye"</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>B. Defining functions</p>
+<h4 id="b-defining-functions">B. Defining functions</h4>
 
 <p>Let write a simple min function in Scala</p>
-<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">def</span> <span class="nf">min</span><span class="o">(</span><span class="nl">x:</span> <span class="n">Int</span><span class="o">,</span> <span class="nl">y:</span> <span class="n">Int</span><span class="o">):</span> <span class="n">Int</span> <span class="o">=</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">def</span> <span class="nf">min</span><span class="o">(</span><span class="nl">x:</span> <span class="n">Int</span><span class="o">,</span> <span class="nl">y:</span> <span class="n">Int</span><span class="o">):</span> <span class="n">Int</span> <span class="o">=</span> <span class="o">{</span>
   <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span>
   <span class="k">else</span> <span class="n">y</span>
 <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>A few things to note here:</p>
 <ol>
   <li>Functions start with <code class="highlighter-rouge">def</code></li>
@@ -145,7 +144,7 @@ in java: once assigned, it cannot be reassigned. A <code class="highlighter-roug
 
   <div class="wrapper">
 
-    <h2 class="footer-heading">Stubborn Programmer</h2>
+    <h2 class="footer-heading">Writings</h2>
 
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
@@ -156,7 +155,7 @@ in java: once assigned, it cannot be reassigned. A <code class="highlighter-roug
             
             </li>
             
-            <li><a href="mailto:mzanwar@edu.uwaterloo.ca">mzanwar@edu.uwaterloo.ca</a></li>
+            <li><a href="mailto:m.zeshan.a93@gmail.com">m.zeshan.a93@gmail.com</a></li>
             
         </ul>
       </div>
@@ -171,12 +170,6 @@ in java: once assigned, it cannot be reassigned. A <code class="highlighter-roug
           </li>
           
 
-          
-          <li>
-            <a href="https://twitter.com/ZeshanAnwar93"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
-</span><span class="username">ZeshanAnwar93</span></a>
-
-          </li>
           
         </ul>
       </div>
