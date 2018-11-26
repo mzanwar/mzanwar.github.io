@@ -7,7 +7,7 @@ permalink: /whoami/
 $ whoami
 {% endhighlight %}
 
-Hello there! My name is Zeshan and I’m currently employed as a Software Engineer.
+Hello there! My name is Zeshan and I’m currently employed as a Software Engineer. I am building a revolutionary real-time streaming data denormalization engine in Kafka.
 
 I prefer simple explanations. I believe anything of complexity can be broken down into simpler [components][1]. I'm also a big proponent on reasoning from first principles; removing facades to expose bare fundamental truths. Listen to [Elon Musk][2] talk about that.
 

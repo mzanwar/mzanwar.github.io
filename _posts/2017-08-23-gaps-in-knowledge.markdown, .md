@@ -40,4 +40,4 @@ As you progress with your learning you'll move up a category, sometimes even lea
 
 
 
-In our next post we will discuss how we can discover these gaps and how to plug them.
+In our next post we will discuss how to uncover these gaps and how to plug them.

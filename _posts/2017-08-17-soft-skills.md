@@ -22,9 +22,7 @@ Programmers don't have this hindrance. I can do all this, and do it with minimum
 Many of them are *common sense* (whatever that means) but when has common sense truly been common.
 I write this without hesitation; this is one of my most recommended books to everyone regardless of their technical ability. The chapters laid out in this book are worth their weight in gold - literally. (Add a nice popup quote here, If you were to take the weight of that many pages in gold and sell it, would you make that much more over your life? 1.8 pounds => $32781.56)
 
-John organically splits the book into seven chapters; starting with career and ending with emotional intelligence.
-
-He lays out all the tools needed
+John organically splits the book into seven chapters; starting with career and ending with emotional intelligence. It is basic stuff, but I recommend everyone to give it a read.
 
 [john-blog]: https://simpleprogrammer.com
 [soft-skills-book]: https://www.amazon.com/Soft-Skills-software-developers-manual/dp/1617292397
