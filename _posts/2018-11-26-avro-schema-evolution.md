@@ -4,11 +4,9 @@ title: Avro Schema Evolution
 date: 2018-11-26 13:52 -0600
 ---
 
-# Confluent Schema Registry
-
 **Summary**: 
 
-1. Auto-schema resolution **breaks** evolution safety-guarantees.
+1. SR auto-schema resolution **breaks** Avro evolution safety-guarantees.
 2. Do we really need evolution safety-guarantees?
 
 I highly recommend you read the rest of this post to understand why.
@@ -17,7 +15,7 @@ This document hopes to illustrate the benefits of schema evolution, and why they
 
 ## 1. Schema Evolution Explained
 
-We must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place **will not** break any other part of a graph. Put another way, downstream consumers <u>**do not need to be updated**</u> to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.
+We must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place **will not** break any other part of our system (graph). Put another way, downstream consumers <u>**do not need to be updated**</u> to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.
 
 > There are **three** main schema evolution patterns:
 >
@@ -113,7 +111,6 @@ We may pick this setting for the following reasons:
 - <u>Mutated name</u>: Essentially two operations: a remove and then an add. Same restrictions apply.
 - <u>Mutated type</u>: Not allowed except for [Avro promotion](#AvroPromotion) but reversed. `long => int`
 
-![Blank Diagram](/Users/zeshan.anwar/Desktop/ForwardEvolution.png)
 
 ```scala
 // Weather - Forward evolution
@@ -259,75 +256,6 @@ Notice how the value of humidity is `null` and not `0L` which was the default va
 The **backbone** of evolution is the ability to replace a <u>missing</u> field with a default value. So far we’ve assumed that the priority of our system is to continue operating even if fields are missing. What if this is not what we want? Worse yet, what if by ‘papering’ over a missing field by replacing it with a default value, we run the risk of **incorrect computations** and **polluted streams**.
 
 An important question to answer: **Where, in the application, do we actually need default values?**
-
-**<u>Definitions:</u>**
-
-**Used** - Used inside the application in any capacity
-
-**Required** - Required by the final document
-
-- **Input Node (Specific Record, schema is compiled in, Emodb -> Input -> Rule/Joiner/Filter):** 
-
-  - <u>Unused, not required fields</u> - We have fields that are not used by the application, and do not need to show up in the final document. We filter them out at the input. The schema does not define them. (~ fields)
-
-  - <u><span style="color:green">Unused, occasionally missing fields</span></u>: These are optional fields that exist in some documents and not in others. These are fields that tag along and need to show up in the final document. These need a <u>**default**</u> value in the transformer.
-
-  - <u>Unused, required fields</u> - We have fields that are not used by the application, but need to show up in the final document. These **cannot** have a default defined. We need to fail-fast when these fields disappear.
-
-  - <u>Used, not required fields</u> - We shouldn’t have any of these.
-
-  - <u><span style="color:green">Used, occasionally missing fields</span></u>: These fields will be used inside the application in a rule/filter/join capacity. These need to be evaluated on a case to case basis. Almost always, we should throw an exception if they are missing, but we may have cases that will require us to specify a default value (0, “” etc.) Newly added and removed fields fall into this category.
-
-  - <u>Used, required fields</u> - These are used within the application and are required. These cannot have a **default** value. We need to fail-fast when these fields disappear.
-
-    |      Input Node      |                   Used                   |                  Unused                  |
-    | :------------------: | :--------------------------------------: | :--------------------------------------: |
-    |     Not required     |     <span style="color:red">X</span>     | <span style="color:green">Default</span> |
-    | Occasionally missing | <span style="color:green">Default</span> |     <span style="color:red">X</span>     |
-    |       Required       |     <span style="color:red">X</span>     |     <span style="color:red">X</span>     |
-
-- **the application-the application nodes (Generic Record, KSQL, Rule -> Joiner, Filter -> Joiner):**
-
-  - <u>Unused, not required fields</u> - These are extraneous fields that accompany the output of another the application node (Rule, Filter etc.) These accompany used, required fields, thus **cannot** be missing nor set to a default value. **Must fail-fast**.
-
-  - <u>Unused, occasionally missing fields</u>: We shouldn’t have occasionally missing fields for the application-the application nodes. **Fail-fast if this happens.**
-
-  - <u>Unused, required fields</u> - We have fields that are not used in a filter/rule/join capacity but need to show up in the output document. These **cannot** have a default defined. We need to fail-fast when these fields disappear.
-
-  - <u>Used, not required fields</u> - We shouldn’t have any of these.
-
-  - <u>Used, occasionally missing fields</u>: These fields will be used inside the application in a rule/filter/join capacity. We shall never have these for the application-the application nodes. **Fail-fast if this happens.**
-
-  - <u>Used, required fields</u> - These are used within the application and are required. These **cannot** have a **default** value. We need to fail-fast when these fields disappear.
-
-    | the application-the application Node | Used                               | Unused                           |
-    | ------------------------------------ | ---------------------------------- | -------------------------------- |
-    | Not required                         | <span style="color:red">N/A</span> | <span style="color:red">X</span> |
-    | Occasionally missing                 | <span style="color:red">X</span>   | <span style="color:red">X</span> |
-    | Required                             | <span style="color:red">X</span>   | <span style="color:red">X</span> |
-
-
-
-Th interesting tidbit here is we **<u>never want</u>** default values to replace missing fields for the application to the application nodes. We always want to fail fast if we’re missing a value or a field. The only place where the application needs support for default values is at the Input node for **<span style="color:green">Unused, occasionally missing fields</span>**, and **<span style="color:green">Used, occasionally missing fields</span>**. We can evolve input node schemas in a compatible way, but this will be a manual process since they are compiled-in and not part of the Schema Registry auto-select process. We can leverage SR to validate.
-
-Since schema evolution is backed by default values, we don’t actually need evolution inside of the application. We always want to fail-fast. A good example to illustrate this is a **fat-rule**. A **fat-rule** computes several similar fields and <u>batches</u> them together in its output. A fat-rule is a good example because some of its extraneous fields **may not be used** by all the downstream consumers.  An example:
-
-```scala
-// example fat-rule for avgRating; it also emits the numOfReviews and sumOfRatings
-{
-    "avgRating": 4.53,
-    "numOfReviews": 100,
-    "sumOfRatings": 453
-}
-```
-
-Say we want to deprecate all unused fields. We start by looking at our **fat-rules** (because they be fat) to determine if all the emitted fields are being used downstream. How do we determine if a field, say `sumOfRating`, is unused by all its downstream consumers? **We cannot determine this without some serious overhead!** If we ever do remove it, accidentally or intentionally, a downstream consumer of that field should **break** immediately, and **<u>not</u>** continue running with a default value. In other words, we **never** want an internal `the application - the application` to compute/join/filter on a default value. There should **never** be a sane use-case for default values within the application. <u>An interesting axiom of the application: if we add a new a field and start publishing, we cannot remove it.</u> To handle a removal, we need to build a separate branch.
-
-
-
-> **Fat-rules** should generally be avoided. Batching together computations might seem to be more efficient but determining who uses a specific internal field may be very difficult. With **single-field-rules** the graph definition is sufficient to determine use. We can always run multiple **single-field-rules** on a single node (EC2 instance) for cost-saving.
-
-
 
 #### What value, then, does evolution provide the application?
 

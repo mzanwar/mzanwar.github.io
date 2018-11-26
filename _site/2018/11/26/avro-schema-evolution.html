@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Avro Schema Evolution</title>
-  <meta name="description" content="Confluent Schema Registry">
+  <meta name="description" content="Summary:">
 
   <link rel="stylesheet" href="/assets/main.css">
   <link rel="canonical" href="http://localhost:4000/2018/11/26/avro-schema-evolution.html">
@@ -88,7 +88,7 @@
             
 
             
-            <span class="reading-time">20 min read</span>
+            <span class="reading-time">16 min read</span>
 
             <time datetime="2018-11-26T13:52:00-06:00" itemprop="datePublished">
                 
@@ -100,12 +100,10 @@
     </header>
 
     <div class="post-content" itemprop="articleBody">
-        <h1 id="confluent-schema-registry">Confluent Schema Registry</h1>
-
-<p><strong>Summary</strong>:</p>
+        <p><strong>Summary</strong>:</p>
 
 <ol>
-  <li>Auto-schema resolution <strong>breaks</strong> evolution safety-guarantees.</li>
+  <li>SR auto-schema resolution <strong>breaks</strong> Avro evolution safety-guarantees.</li>
   <li>Do we really need evolution safety-guarantees?</li>
 </ol>
 
@@ -115,7 +113,7 @@
 
 <h2 id="1-schema-evolution-explained">1. Schema Evolution Explained</h2>
 
-<p>We must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place <strong>will not</strong> break any other part of a graph. Put another way, downstream consumers <u>**do not need to be updated**</u> to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.</p>
+<p>We must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place <strong>will not</strong> break any other part of our system (graph). Put another way, downstream consumers <u>**do not need to be updated**</u> to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.</p>
 
 <blockquote>
   <p>There are <strong>three</strong> main schema evolution patterns:</p>
@@ -213,8 +211,6 @@
   <li><u>Mutated name</u>: Essentially two operations: a remove and then an add. Same restrictions apply.</li>
   <li><u>Mutated type</u>: Not allowed except for <a href="#AvroPromotion">Avro promotion</a> but reversed. <code class="highlighter-rouge">long =&gt; int</code></li>
 </ul>
-
-<p><img src="/Users/zeshan.anwar/Desktop/ForwardEvolution.png" alt="Blank Diagram" /></p>
 
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Weather - Forward evolution
 </span>
@@ -351,135 +347,6 @@ Caused by: java.lang.NullPointerException: null of long in field humidity of sch
 <p>The <strong>backbone</strong> of evolution is the ability to replace a <u>missing</u> field with a default value. So far we’ve assumed that the priority of our system is to continue operating even if fields are missing. What if this is not what we want? Worse yet, what if by ‘papering’ over a missing field by replacing it with a default value, we run the risk of <strong>incorrect computations</strong> and <strong>polluted streams</strong>.</p>
 
 <p>An important question to answer: <strong>Where, in the application, do we actually need default values?</strong></p>
-
-<p><strong><u>Definitions:</u></strong></p>
-
-<p><strong>Used</strong> - Used inside the application in any capacity</p>
-
-<p><strong>Required</strong> - Required by the final document</p>
-
-<ul>
-  <li>
-    <p><strong>Input Node (Specific Record, schema is compiled in, Emodb -&gt; Input -&gt; Rule/Joiner/Filter):</strong></p>
-
-    <ul>
-      <li>
-        <p><u>Unused, not required fields</u> - We have fields that are not used by the application, and do not need to show up in the final document. We filter them out at the input. The schema does not define them. (~ fields)</p>
-      </li>
-      <li>
-        <p><u><span style="color:green">Unused, occasionally missing fields</span></u>: These are optional fields that exist in some documents and not in others. These are fields that tag along and need to show up in the final document. These need a <u>**default**</u> value in the transformer.</p>
-      </li>
-      <li>
-        <p><u>Unused, required fields</u> - We have fields that are not used by the application, but need to show up in the final document. These <strong>cannot</strong> have a default defined. We need to fail-fast when these fields disappear.</p>
-      </li>
-      <li>
-        <p><u>Used, not required fields</u> - We shouldn’t have any of these.</p>
-      </li>
-      <li>
-        <p><u><span style="color:green">Used, occasionally missing fields</span></u>: These fields will be used inside the application in a rule/filter/join capacity. These need to be evaluated on a case to case basis. Almost always, we should throw an exception if they are missing, but we may have cases that will require us to specify a default value (0, “” etc.) Newly added and removed fields fall into this category.</p>
-      </li>
-      <li>
-        <p><u>Used, required fields</u> - These are used within the application and are required. These cannot have a <strong>default</strong> value. We need to fail-fast when these fields disappear.</p>
-
-        <table>
-          <thead>
-            <tr>
-              <th style="text-align: center">Input Node</th>
-              <th style="text-align: center">Used</th>
-              <th style="text-align: center">Unused</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="text-align: center">Not required</td>
-              <td style="text-align: center"><span style="color:red">X</span></td>
-              <td style="text-align: center"><span style="color:green">Default</span></td>
-            </tr>
-            <tr>
-              <td style="text-align: center">Occasionally missing</td>
-              <td style="text-align: center"><span style="color:green">Default</span></td>
-              <td style="text-align: center"><span style="color:red">X</span></td>
-            </tr>
-            <tr>
-              <td style="text-align: center">Required</td>
-              <td style="text-align: center"><span style="color:red">X</span></td>
-              <td style="text-align: center"><span style="color:red">X</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p><strong>the application-the application nodes (Generic Record, KSQL, Rule -&gt; Joiner, Filter -&gt; Joiner):</strong></p>
-
-    <ul>
-      <li>
-        <p><u>Unused, not required fields</u> - These are extraneous fields that accompany the output of another the application node (Rule, Filter etc.) These accompany used, required fields, thus <strong>cannot</strong> be missing nor set to a default value. <strong>Must fail-fast</strong>.</p>
-      </li>
-      <li>
-        <p><u>Unused, occasionally missing fields</u>: We shouldn’t have occasionally missing fields for the application-the application nodes. <strong>Fail-fast if this happens.</strong></p>
-      </li>
-      <li>
-        <p><u>Unused, required fields</u> - We have fields that are not used in a filter/rule/join capacity but need to show up in the output document. These <strong>cannot</strong> have a default defined. We need to fail-fast when these fields disappear.</p>
-      </li>
-      <li>
-        <p><u>Used, not required fields</u> - We shouldn’t have any of these.</p>
-      </li>
-      <li>
-        <p><u>Used, occasionally missing fields</u>: These fields will be used inside the application in a rule/filter/join capacity. We shall never have these for the application-the application nodes. <strong>Fail-fast if this happens.</strong></p>
-      </li>
-      <li>
-        <p><u>Used, required fields</u> - These are used within the application and are required. These <strong>cannot</strong> have a <strong>default</strong> value. We need to fail-fast when these fields disappear.</p>
-
-        <table>
-          <thead>
-            <tr>
-              <th>the application-the application Node</th>
-              <th>Used</th>
-              <th>Unused</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Not required</td>
-              <td><span style="color:red">N/A</span></td>
-              <td><span style="color:red">X</span></td>
-            </tr>
-            <tr>
-              <td>Occasionally missing</td>
-              <td><span style="color:red">X</span></td>
-              <td><span style="color:red">X</span></td>
-            </tr>
-            <tr>
-              <td>Required</td>
-              <td><span style="color:red">X</span></td>
-              <td><span style="color:red">X</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p>Th interesting tidbit here is we <strong><u>never want</u></strong> default values to replace missing fields for the application to the application nodes. We always want to fail fast if we’re missing a value or a field. The only place where the application needs support for default values is at the Input node for <strong><span style="color:green">Unused, occasionally missing fields</span></strong>, and <strong><span style="color:green">Used, occasionally missing fields</span></strong>. We can evolve input node schemas in a compatible way, but this will be a manual process since they are compiled-in and not part of the Schema Registry auto-select process. We can leverage SR to validate.</p>
-
-<p>Since schema evolution is backed by default values, we don’t actually need evolution inside of the application. We always want to fail-fast. A good example to illustrate this is a <strong>fat-rule</strong>. A <strong>fat-rule</strong> computes several similar fields and <u>batches</u> them together in its output. A fat-rule is a good example because some of its extraneous fields <strong>may not be used</strong> by all the downstream consumers.  An example:</p>
-
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// example fat-rule for avgRating; it also emits the numOfReviews and sumOfRatings
-</span><span class="o">{</span>
-    <span class="s">"avgRating"</span><span class="k">:</span> <span class="err">4</span><span class="kt">.</span><span class="err">53</span><span class="o">,</span>
-    <span class="s">"numOfReviews"</span><span class="k">:</span> <span class="err">100</span><span class="o">,</span>
-    <span class="s">"sumOfRatings"</span><span class="k">:</span> <span class="err">453</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>Say we want to deprecate all unused fields. We start by looking at our <strong>fat-rules</strong> (because they be fat) to determine if all the emitted fields are being used downstream. How do we determine if a field, say <code class="highlighter-rouge">sumOfRating</code>, is unused by all its downstream consumers? <strong>We cannot determine this without some serious overhead!</strong> If we ever do remove it, accidentally or intentionally, a downstream consumer of that field should <strong>break</strong> immediately, and <strong><u>not</u></strong> continue running with a default value. In other words, we <strong>never</strong> want an internal <code class="highlighter-rouge">the application - the application</code> to compute/join/filter on a default value. There should <strong>never</strong> be a sane use-case for default values within the application. <u>An interesting axiom of the application: if we add a new a field and start publishing, we cannot remove it.</u> To handle a removal, we need to build a separate branch.</p>
-
-<blockquote>
-  <p><strong>Fat-rules</strong> should generally be avoided. Batching together computations might seem to be more efficient but determining who uses a specific internal field may be very difficult. With <strong>single-field-rules</strong> the graph definition is sufficient to determine use. We can always run multiple <strong>single-field-rules</strong> on a single node (EC2 instance) for cost-saving.</p>
-</blockquote>
 
 <h4 id="what-value-then-does-evolution-provide-the-application">What value, then, does evolution provide the application?</h4>
 

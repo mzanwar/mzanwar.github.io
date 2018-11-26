@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-11-26T13:56:35-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Writings</title><subtitle>Simple explanations one post at a time
-</subtitle><author><name>Zeshan Anwar</name></author><entry><title type="html">Avro Schema Evolution</title><link href="http://localhost:4000/2018/11/26/avro-schema-evolution.html" rel="alternate" type="text/html" title="Avro Schema Evolution" /><published>2018-11-26T13:52:00-06:00</published><updated>2018-11-26T13:52:00-06:00</updated><id>http://localhost:4000/2018/11/26/avro-schema-evolution</id><content type="html" xml:base="http://localhost:4000/2018/11/26/avro-schema-evolution.html">&lt;h1 id=&quot;confluent-schema-registry&quot;&gt;Confluent Schema Registry&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;Summary&lt;/strong&gt;:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-11-26T15:31:54-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Writings</title><subtitle>Simple explanations one post at a time
+</subtitle><author><name>Zeshan Anwar</name></author><entry><title type="html">Avro Schema Evolution</title><link href="http://localhost:4000/2018/11/26/avro-schema-evolution.html" rel="alternate" type="text/html" title="Avro Schema Evolution" /><published>2018-11-26T13:52:00-06:00</published><updated>2018-11-26T13:52:00-06:00</updated><id>http://localhost:4000/2018/11/26/avro-schema-evolution</id><content type="html" xml:base="http://localhost:4000/2018/11/26/avro-schema-evolution.html">&lt;p&gt;&lt;strong&gt;Summary&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Auto-schema resolution &lt;strong&gt;breaks&lt;/strong&gt; evolution safety-guarantees.&lt;/li&gt;
+  &lt;li&gt;SR auto-schema resolution &lt;strong&gt;breaks&lt;/strong&gt; Avro evolution safety-guarantees.&lt;/li&gt;
   &lt;li&gt;Do we really need evolution safety-guarantees?&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -14,7 +12,7 @@
 
 &lt;h2 id=&quot;1-schema-evolution-explained&quot;&gt;1. Schema Evolution Explained&lt;/h2&gt;
 
-&lt;p&gt;We must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place &lt;strong&gt;will not&lt;/strong&gt; break any other part of a graph. Put another way, downstream consumers &lt;u&gt;**do not need to be updated**&lt;/u&gt; to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.&lt;/p&gt;
+&lt;p&gt;We must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place &lt;strong&gt;will not&lt;/strong&gt; break any other part of our system (graph). Put another way, downstream consumers &lt;u&gt;**do not need to be updated**&lt;/u&gt; to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;There are &lt;strong&gt;three&lt;/strong&gt; main schema evolution patterns:&lt;/p&gt;
@@ -112,8 +110,6 @@
   &lt;li&gt;&lt;u&gt;Mutated name&lt;/u&gt;: Essentially two operations: a remove and then an add. Same restrictions apply.&lt;/li&gt;
   &lt;li&gt;&lt;u&gt;Mutated type&lt;/u&gt;: Not allowed except for &lt;a href=&quot;#AvroPromotion&quot;&gt;Avro promotion&lt;/a&gt; but reversed. &lt;code class=&quot;highlighter-rouge&quot;&gt;long =&amp;gt; int&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/Users/zeshan.anwar/Desktop/ForwardEvolution.png&quot; alt=&quot;Blank Diagram&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Weather - Forward evolution
 &lt;/span&gt;
@@ -250,135 +246,6 @@ Caused by: java.lang.NullPointerException: null of long in field humidity of sch
 &lt;p&gt;The &lt;strong&gt;backbone&lt;/strong&gt; of evolution is the ability to replace a &lt;u&gt;missing&lt;/u&gt; field with a default value. So far we’ve assumed that the priority of our system is to continue operating even if fields are missing. What if this is not what we want? Worse yet, what if by ‘papering’ over a missing field by replacing it with a default value, we run the risk of &lt;strong&gt;incorrect computations&lt;/strong&gt; and &lt;strong&gt;polluted streams&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;An important question to answer: &lt;strong&gt;Where, in the application, do we actually need default values?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;u&gt;Definitions:&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Used&lt;/strong&gt; - Used inside the application in any capacity&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Required&lt;/strong&gt; - Required by the final document&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Input Node (Specific Record, schema is compiled in, Emodb -&amp;gt; Input -&amp;gt; Rule/Joiner/Filter):&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;Unused, not required fields&lt;/u&gt; - We have fields that are not used by the application, and do not need to show up in the final document. We filter them out at the input. The schema does not define them. (~ fields)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;&lt;span style=&quot;color:green&quot;&gt;Unused, occasionally missing fields&lt;/span&gt;&lt;/u&gt;: These are optional fields that exist in some documents and not in others. These are fields that tag along and need to show up in the final document. These need a &lt;u&gt;**default**&lt;/u&gt; value in the transformer.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;Unused, required fields&lt;/u&gt; - We have fields that are not used by the application, but need to show up in the final document. These &lt;strong&gt;cannot&lt;/strong&gt; have a default defined. We need to fail-fast when these fields disappear.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;Used, not required fields&lt;/u&gt; - We shouldn’t have any of these.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;&lt;span style=&quot;color:green&quot;&gt;Used, occasionally missing fields&lt;/span&gt;&lt;/u&gt;: These fields will be used inside the application in a rule/filter/join capacity. These need to be evaluated on a case to case basis. Almost always, we should throw an exception if they are missing, but we may have cases that will require us to specify a default value (0, “” etc.) Newly added and removed fields fall into this category.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;Used, required fields&lt;/u&gt; - These are used within the application and are required. These cannot have a &lt;strong&gt;default&lt;/strong&gt; value. We need to fail-fast when these fields disappear.&lt;/p&gt;
-
-        &lt;table&gt;
-          &lt;thead&gt;
-            &lt;tr&gt;
-              &lt;th style=&quot;text-align: center&quot;&gt;Input Node&lt;/th&gt;
-              &lt;th style=&quot;text-align: center&quot;&gt;Used&lt;/th&gt;
-              &lt;th style=&quot;text-align: center&quot;&gt;Unused&lt;/th&gt;
-            &lt;/tr&gt;
-          &lt;/thead&gt;
-          &lt;tbody&gt;
-            &lt;tr&gt;
-              &lt;td style=&quot;text-align: center&quot;&gt;Not required&lt;/td&gt;
-              &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-              &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;Default&lt;/span&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td style=&quot;text-align: center&quot;&gt;Occasionally missing&lt;/td&gt;
-              &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:green&quot;&gt;Default&lt;/span&gt;&lt;/td&gt;
-              &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td style=&quot;text-align: center&quot;&gt;Required&lt;/td&gt;
-              &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-              &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-          &lt;/tbody&gt;
-        &lt;/table&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;the application-the application nodes (Generic Record, KSQL, Rule -&amp;gt; Joiner, Filter -&amp;gt; Joiner):&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;Unused, not required fields&lt;/u&gt; - These are extraneous fields that accompany the output of another the application node (Rule, Filter etc.) These accompany used, required fields, thus &lt;strong&gt;cannot&lt;/strong&gt; be missing nor set to a default value. &lt;strong&gt;Must fail-fast&lt;/strong&gt;.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;Unused, occasionally missing fields&lt;/u&gt;: We shouldn’t have occasionally missing fields for the application-the application nodes. &lt;strong&gt;Fail-fast if this happens.&lt;/strong&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;Unused, required fields&lt;/u&gt; - We have fields that are not used in a filter/rule/join capacity but need to show up in the output document. These &lt;strong&gt;cannot&lt;/strong&gt; have a default defined. We need to fail-fast when these fields disappear.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;Used, not required fields&lt;/u&gt; - We shouldn’t have any of these.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;Used, occasionally missing fields&lt;/u&gt;: These fields will be used inside the application in a rule/filter/join capacity. We shall never have these for the application-the application nodes. &lt;strong&gt;Fail-fast if this happens.&lt;/strong&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;&lt;u&gt;Used, required fields&lt;/u&gt; - These are used within the application and are required. These &lt;strong&gt;cannot&lt;/strong&gt; have a &lt;strong&gt;default&lt;/strong&gt; value. We need to fail-fast when these fields disappear.&lt;/p&gt;
-
-        &lt;table&gt;
-          &lt;thead&gt;
-            &lt;tr&gt;
-              &lt;th&gt;the application-the application Node&lt;/th&gt;
-              &lt;th&gt;Used&lt;/th&gt;
-              &lt;th&gt;Unused&lt;/th&gt;
-            &lt;/tr&gt;
-          &lt;/thead&gt;
-          &lt;tbody&gt;
-            &lt;tr&gt;
-              &lt;td&gt;Not required&lt;/td&gt;
-              &lt;td&gt;&lt;span style=&quot;color:red&quot;&gt;N/A&lt;/span&gt;&lt;/td&gt;
-              &lt;td&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;Occasionally missing&lt;/td&gt;
-              &lt;td&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-              &lt;td&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td&gt;Required&lt;/td&gt;
-              &lt;td&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-              &lt;td&gt;&lt;span style=&quot;color:red&quot;&gt;X&lt;/span&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-          &lt;/tbody&gt;
-        &lt;/table&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Th interesting tidbit here is we &lt;strong&gt;&lt;u&gt;never want&lt;/u&gt;&lt;/strong&gt; default values to replace missing fields for the application to the application nodes. We always want to fail fast if we’re missing a value or a field. The only place where the application needs support for default values is at the Input node for &lt;strong&gt;&lt;span style=&quot;color:green&quot;&gt;Unused, occasionally missing fields&lt;/span&gt;&lt;/strong&gt;, and &lt;strong&gt;&lt;span style=&quot;color:green&quot;&gt;Used, occasionally missing fields&lt;/span&gt;&lt;/strong&gt;. We can evolve input node schemas in a compatible way, but this will be a manual process since they are compiled-in and not part of the Schema Registry auto-select process. We can leverage SR to validate.&lt;/p&gt;
-
-&lt;p&gt;Since schema evolution is backed by default values, we don’t actually need evolution inside of the application. We always want to fail-fast. A good example to illustrate this is a &lt;strong&gt;fat-rule&lt;/strong&gt;. A &lt;strong&gt;fat-rule&lt;/strong&gt; computes several similar fields and &lt;u&gt;batches&lt;/u&gt; them together in its output. A fat-rule is a good example because some of its extraneous fields &lt;strong&gt;may not be used&lt;/strong&gt; by all the downstream consumers.  An example:&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// example fat-rule for avgRating; it also emits the numOfReviews and sumOfRatings
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;avgRating&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;53&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;numOfReviews&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;sumOfRatings&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;453&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Say we want to deprecate all unused fields. We start by looking at our &lt;strong&gt;fat-rules&lt;/strong&gt; (because they be fat) to determine if all the emitted fields are being used downstream. How do we determine if a field, say &lt;code class=&quot;highlighter-rouge&quot;&gt;sumOfRating&lt;/code&gt;, is unused by all its downstream consumers? &lt;strong&gt;We cannot determine this without some serious overhead!&lt;/strong&gt; If we ever do remove it, accidentally or intentionally, a downstream consumer of that field should &lt;strong&gt;break&lt;/strong&gt; immediately, and &lt;strong&gt;&lt;u&gt;not&lt;/u&gt;&lt;/strong&gt; continue running with a default value. In other words, we &lt;strong&gt;never&lt;/strong&gt; want an internal &lt;code class=&quot;highlighter-rouge&quot;&gt;the application - the application&lt;/code&gt; to compute/join/filter on a default value. There should &lt;strong&gt;never&lt;/strong&gt; be a sane use-case for default values within the application. &lt;u&gt;An interesting axiom of the application: if we add a new a field and start publishing, we cannot remove it.&lt;/u&gt; To handle a removal, we need to build a separate branch.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Fat-rules&lt;/strong&gt; should generally be avoided. Batching together computations might seem to be more efficient but determining who uses a specific internal field may be very difficult. With &lt;strong&gt;single-field-rules&lt;/strong&gt; the graph definition is sufficient to determine use. We can always run multiple &lt;strong&gt;single-field-rules&lt;/strong&gt; on a single node (EC2 instance) for cost-saving.&lt;/p&gt;
-&lt;/blockquote&gt;
 
 &lt;h4 id=&quot;what-value-then-does-evolution-provide-the-application&quot;&gt;What value, then, does evolution provide the application?&lt;/h4&gt;
 
@@ -621,7 +488,7 @@ Caused by: java.lang.NullPointerException: null of long in field humidity of sch
     &lt;li&gt;string is promotable to bytes&lt;/li&gt;
     &lt;li&gt;bytes is promotable to string&lt;/li&gt;
   &lt;/ul&gt;
-&lt;/blockquote&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">Confluent Schema Registry</summary></entry><entry><title type="html">Scala lets me do that!</title><link href="http://localhost:4000/2018/09/10/scala-custom-control-structures.html" rel="alternate" type="text/html" title="Scala lets me do that!" /><published>2018-09-10T00:09:00-05:00</published><updated>2018-09-10T00:09:00-05:00</updated><id>http://localhost:4000/2018/09/10/scala-custom-control-structures</id><content type="html" xml:base="http://localhost:4000/2018/09/10/scala-custom-control-structures.html">&lt;p&gt;&lt;img src=&quot;https://media.giphy.com/media/SJX3gbZ2dbaEhU92Pu/giphy.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Zeshan Anwar</name></author><summary type="html">Summary:</summary></entry><entry><title type="html">Scala lets me do that!</title><link href="http://localhost:4000/2018/09/10/scala-custom-control-structures.html" rel="alternate" type="text/html" title="Scala lets me do that!" /><published>2018-09-10T00:09:00-05:00</published><updated>2018-09-10T00:09:00-05:00</updated><id>http://localhost:4000/2018/09/10/scala-custom-control-structures</id><content type="html" xml:base="http://localhost:4000/2018/09/10/scala-custom-control-structures.html">&lt;p&gt;&lt;img src=&quot;https://media.giphy.com/media/SJX3gbZ2dbaEhU92Pu/giphy.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I kid you not, this feature of Scala totally blew my mind and I had to write a little post about it. I come from a non-functional, functions need to be treated differently from variables, background so thinking like this was really mind-mending.&lt;/p&gt;
 
