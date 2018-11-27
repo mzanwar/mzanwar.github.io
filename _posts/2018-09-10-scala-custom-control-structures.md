@@ -80,4 +80,4 @@ scala> whenForFunc(1 == 1, println("foo"), println("bar"))
 foo
 ```
 
-Apparently `whenTrue: A` is different from `whenTrue: A` when the parameter is a function. This is really intriguing I'm planning on devoting a whole post on it. Nevertheless, I hope you can appreciate the power of writing your own custom control structures as library functions.
+Apparently `whenTrue: A` is different from `whenTrue: => A` when the parameter is a function. This is really intriguing I'm planning on devoting a whole post on it. Nevertheless, I hope you can appreciate the power of writing your own custom control structures as library functions.

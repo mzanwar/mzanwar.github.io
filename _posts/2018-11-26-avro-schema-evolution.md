@@ -5,11 +5,11 @@ date: 2018-11-26 13:52 -0600
 ---
 
 
-This blog post hopes to illustrate the benefits of schema evolution, and why they may not be *not* needed within most types of applications.
+This blog post hopes to illustrate the benefits of schema evolution, and why it may *not* be needed within most types of applications.
 
 ## 1. Schema Evolution Explained
 
-In any complex system, we must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place *will not* break any other part of a system (graph). Put another way, downstream consumers <u>*do not need to be updated*</u> to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.
+In any complex system, a schema change must be handled seamlessly. Schema evolution guarantees that a compatible change in one place *will not* break any other part of a system (graph). Put another way, downstream consumers <u>*do not need to be updated*</u> to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.
 
 There are *three* main schema evolution patterns:
 

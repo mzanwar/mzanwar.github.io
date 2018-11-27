@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Schema Evolution Explained</title>
-  <meta name="description" content="This blog post hopes to illustrate the benefits of schema evolution, and why they may not be not needed within most types of applications.">
+  <meta name="description" content="This blog post hopes to illustrate the benefits of schema evolution, and why it may not be needed within most types of applications.">
 
   <link rel="stylesheet" href="/assets/main.css">
   <link rel="canonical" href="http://localhost:4000/2018/11/26/avro-schema-evolution.html">
@@ -100,11 +100,11 @@
     </header>
 
     <div class="post-content" itemprop="articleBody">
-        <p>This blog post hopes to illustrate the benefits of schema evolution, and why they may not be <em>not</em> needed within most types of applications.</p>
+        <p>This blog post hopes to illustrate the benefits of schema evolution, and why it may <em>not</em> be needed within most types of applications.</p>
 
 <h2 id="1-schema-evolution-explained">1. Schema Evolution Explained</h2>
 
-<p>In any complex system, we must be able to handle schema changes seamlessly. Schema evolution guarantees that a compatible change in one place <em>will not</em> break any other part of a system (graph). Put another way, downstream consumers <u>*do not need to be updated*</u> to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.</p>
+<p>In any complex system, a schema change must be handled seamlessly. Schema evolution guarantees that a compatible change in one place <em>will not</em> break any other part of a system (graph). Put another way, downstream consumers <u>*do not need to be updated*</u> to handle any compatible changes upstream. This is valuable because it allows us to perturb the graph without worry of breaking something downstream.</p>
 
 <p>There are <em>three</em> main schema evolution patterns:</p>
 
