@@ -4,16 +4,15 @@ title:  "Soft Skills"
 date:   2017-08-17 21:45:45 -0500
 categories: books productivity growth
 ---
-Coding is often the easiest, most enjoyable part of a developers day. The hard part is dealing with everything else. This is what we're good at; where we thrive. Meetings are the bane of all developers. I know many developers who have stymied their natural progression to management so that they could continue coding.
+Coding is the easiest, most enjoyable part of a Software Engineers day. There is something so appealing about sitting down and hacking away at a problem for a few hours - architecting a solution that existed purely in your head. Taking those crazy ideas swimming in your head, and putting them into practice has a real kick to it. How many other professions can *profess* the same? Very few!
 
-There is just something so appealing about sitting down and hacking away at a problem or laying out a solution that existed purely in your head. Taking those crazy ideas swimming in your head, and putting them into practice has a real kick to it. How many other professions can *profess* the same? Very few!
+The hard part is dealing with everything else. Meetings are the bane of all developers. I know many developers who have stymied their natural progression to management so that they could continue coding.
 
-Imagine a Toyota engineer, Phil, has an incredible idea one night in the shower. The idea: lets design the hood of our cars to mimic the [pointed beak of a Kingfisher][biomimicry]. Phil believes that a more aerodynamic shape would reduce drag at high speeds. How difficult is it for Phil to take this crazy idea and see it through to production? What are the costs associated? How much resistance or push-back will they feel? How long would it take? Several months to several years indeed. Unless Phil was the CEO of Toyota, there is little hope his idea would even get traction.
+Imagine a Toyota engineer, Phil, has an incredible idea one night in the shower. The idea: lets design the hood of our cars to mimic the [pointed beak of a Kingfisher][biomimicry]. Phil believes that a more aerodynamic shape would reduce drag at high speeds. How difficult is it for Phil to take this crazy idea and see it through to production? What are the costs associated? How much resistance will Phil get? How long would it take? Unless Phil was the CEO of Toyota, there is little hope his idea would even get traction.
 
-How about if an architect wants to change the concrete-mixture they poured into their 100-story building? As the British say - not bloody likely.
+I get it, Toyota runs a tight ship but lets change the example. How about if an architect (founder mind you) wants to change the concrete mixture concentration she poured into her 100-story building? As the British say - not bloody likely.
 
-Programmers don't have this hindrance. I can do all this, and do it with minimum overhead. I don't need anything but my brain and the internet; and my brain is optional. All kidding aside, programmers can put together a completely new setup, pull away the foundations of a project, push in a completely new paradigm in as little time as it takes to write lines of code.
-
+A Software Engineer doesn't have this hindrance. I can do all this, meaning change my design to be more aerodynamic (performant) or change the underlying concrete concetration, and do it with minimum overhead. I don't need anything but my brain and the internet; and my brain is optional. All kidding aside, programmers can put together a completely new setup, pull away the foundations of a project, push in a completely new paradigm in as little time as it takes to fly across the Atlantic.
 
  [John Sonmez's][john-blog] book, [Soft Skills][soft-skills-book], outlines all the skills
 
