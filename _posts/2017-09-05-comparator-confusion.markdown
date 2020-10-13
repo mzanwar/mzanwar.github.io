@@ -11,9 +11,13 @@ author: "Zeshan Anwar"
 Comparator<Integer> sort = (a,b) -> a - b;
 ```
 
-How many times have we seen something the comparator compare method defined as the subtraction of two arbitrary entities? **This is bad code**! It is non-intuitive and absurd. Unless I'm missing some really big insight here, I firmly believe I’m not the only one this has confused.
+How many times have we seen the comparator function  defined as the subtraction of two arbitrary entities? **This is bad code**! It is non-intuitive and absurd. Unless I'm missing some really big insight here, I firmly believe this is a really confusing way to write a sort abstraction. 
 
-After searching the searched the web for an explanation and could not find anything that satisfied my curiosity. I found pages and pages of example of how to use it - but nothing describing the mechanism behind it. Someone even posted an enticing [question][1]; and sadly was given a less than ideal answer.  
+There is nothing explicit about what any of the variables mean. `a` and `b` are nebulous terms and the `-` subtraction symbol adds to the confusion.
+
+Spending several minutes (hours?) searching the web for an explanation, I found nothing that satisfied my curiosity. I found pages of examples - but nothing describing the mechanism behind it. Someone even posted an enticing [question][1]; and sadly was given a less than ideal answer. This is all too common and extremely frustrating when trying to understand how something works.  
+
+To alleviate the pain, I decided to write down how this magic works.
 
 Let me explain - here is a simple comparator implemented as a lambda function:
 
@@ -37,7 +41,7 @@ Weird right!
 
 The key to understanding this is understanding:
   1. The return value of `compare` affects the final ordering.
-  2. Which order are the parameters passed into the compare method - namely what are `a` and `b`?
+  2. The order in which the parameters are passed into the compare method - namely what are `a` and `b`.
 
 The official [javadocs][2] do a reasonable job explaining the first point but they fall short on explaining what `a` and `b` are.
 
@@ -45,11 +49,11 @@ In short, if the `compare` method returns a negative number, `a` will always pre
 
 A thing to note is the `compare` method does not know or care about what the words ascending or descending mean. All it wants to do is place two elements in some order. More precisely, it just wants to *pick* one element over the other.
 
-Now we still don't know why `a - b` gives us ascending order; and `b - a` gives us descending. To add to the confusion, the switching of parameters `a- b` to `b - a` to reverse the sort, seems to imply that the order in which `a` and `b` are passed seems to affect final order. What we will discover shortly, however, is that this is **not** the case.
+Now we still don't know why `a - b` gives us ascending order; and `b - a` gives us descending. To add to the confusion, the switching of parameters `a - b` to `b - a` to reverse the sort, seems to imply that the order in which `a` and `b` are passed seems to affect final order. What we will discover shortly, however, is that this is **not** the case.
 
-#### A natural order
+#### Natural order
 
-Numbers have a natural order to them. 7 is bigger than 5. Likewise, 5 is smaller than 6. Subtract a smaller number from a bigger one and you end up with a positive value.  A smaller number minus a bigger one results in a negative value. This beckons the question: how do we know if a number is bigger or smaller than another? Instinctively, we picture a number line and plot the two points on it. The number that is furthest to the right is the bigger one. This is exactly what we are testing when we subtract the two inside our comparator function.
+Numbers have a natural order to them. 7 is bigger than 5. Likewise, 5 is smaller than 6. Subtract a smaller number from a bigger one and you end up with a positive value.  A smaller number minus a bigger one results in a negative value. This beckons the question: how do we know if a number is bigger or smaller than another? Instinctively, we picture a number line and plot the two points on it. The number that is further to the right is the bigger one. This is exactly what we are testing when we subtract the two inside our comparator function.
 
 Let me illustrate with some examples: `Notation (a, b) -> (a - b)`
 
@@ -111,7 +115,7 @@ Arrays.sort(numbers, crazySort);  // [1, 9, 2, 5, 4]
 
 #### Why is `Comparator<Integer> sort = (a,b) -> a - b;` problematic?
 
-`a-b` and `b-a` is a terrible hack. It's a bad abstraction and someone trying to be too clever. As is the case with clever solutions, they catch on and permeate throughout the web. For some odd reason, people are inexplicably drawn to these solutions.
+`a - b` and `b - a` is a terrible hack. It's a bad abstraction and someone trying to be too clever. As is the case with clever solutions, they catch on and permeate throughout the web. For some odd reason, people are inexplicably drawn to these solutions.
 
 You will find several accepted solution on StackOverflow implementing the comparator as `a - b`. This will work in 98% of scenarios, but why implement a flawed solution to begin with. The 2% of the time it does fail will be extremely hard to debug.
 
