@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Simplify CORS for me, please"
+title: "Logstash prune nested fields"
 date: 2021-03-05 20:49 -0500
 ---
 
